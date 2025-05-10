@@ -6,9 +6,10 @@ build-backend = "poetry.core.masonry.api"
 name = "pc-build-ai"
 version = "0.1.0"
 description = "Advanced multi-agent application designed to automate and optimize the process of custom PC building"
-authors = ["Erik Warapaeff <erik@example.com>"]
+authors = ["Erik Warapaeff <warpaeff@mail.ru>"]
 readme = "README.md"
 repository = "https://github.com/ErikWarapaeff/pc_build_ml_ops"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"

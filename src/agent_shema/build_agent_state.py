@@ -3,7 +3,6 @@ from typing_extensions import TypedDict
 from langgraph.graph.message import AnyMessage, add_messages
 
 
-
 def update_dialog_stack(left: list[str], right: Optional[str]) -> list[str]:
     """
     Push or pop the state: Updates the dialog stack by either adding a new state or removing the last state.
@@ -11,7 +10,7 @@ def update_dialog_stack(left: list[str], right: Optional[str]) -> list[str]:
     Args:
         left (list[str]): The current state of the dialog stack, represented as a list of strings.
         right (Optional[str]): The operation to perform. If `right` is None, the function returns the current state.
-                               If `right` is "pop", the last element of the stack is removed. Otherwise, `right` is 
+                               If `right` is "pop", the last element of the stack is removed. Otherwise, `right` is
                                appended to the stack.
 
     Returns:
@@ -20,7 +19,7 @@ def update_dialog_stack(left: list[str], right: Optional[str]) -> list[str]:
     if right is None:
         return left
     if right == "pop" and left:
-        return left[:-1]  
+        return left[:-1]
     if right not in ["assistant", "build_pc", "validate_price"]:
         raise ValueError(f"Invalid state transition: {right}")
     return left + [right]
@@ -38,8 +37,9 @@ class State(TypedDict):
                                   - "build_pc": Агент баз данных (SQLAgent) для поиска информации о компонентах.
                                   - "price_validation_checker": Агент для поиска актуальных цен и валидации сборки.
     """
+
     messages: Annotated[list[AnyMessage], add_messages]
-    user_info: Optional[str]  
+    user_info: Optional[str]
     dialog_state: Annotated[
         list[Literal["assistant", "build_pc", "validate_price"]],
         update_dialog_stack,

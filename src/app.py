@@ -10,7 +10,12 @@ with gr.Blocks() as demo:
             ##############
             with gr.Row() as row_one:
                 chatbot = gr.Chatbot(
-                    value=[{"role": "system", "content": "Привет! Я твой проводник в мир компьютерной техники. Чем сегодня могу тебе помочь?"}],
+                    value=[
+                        {
+                            "role": "system",
+                            "content": "Привет! Я твой проводник в мир компьютерной техники. Чем сегодня могу тебе помочь?",
+                        }
+                    ],
                     type="messages",
                     elem_id="chatbot",
                     bubble_full_width=False,
@@ -40,13 +45,13 @@ with gr.Blocks() as demo:
             ##############
             # Обработка:
             ##############
-            txt_msg = input_txt.submit(fn=ChatBot.respond,
-                                       inputs=[chatbot, input_txt],
-                                       outputs=[input_txt, chatbot])
+            txt_msg = input_txt.submit(
+                fn=ChatBot.respond, inputs=[chatbot, input_txt], outputs=[input_txt, chatbot]
+            )
 
-            txt_msg = text_submit_btn.click(fn=ChatBot.respond,
-                                            inputs=[chatbot, input_txt],
-                                            outputs=[input_txt, chatbot])
+            txt_msg = text_submit_btn.click(
+                fn=ChatBot.respond, inputs=[chatbot, input_txt], outputs=[input_txt, chatbot]
+            )
 
 if __name__ == "__main__":
     demo.launch()

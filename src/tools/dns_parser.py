@@ -6,9 +6,11 @@ from bs4 import BeautifulSoup
 from pydantic import BaseModel
 from langchain.tools import tool
 
+
 class ComponentInput(BaseModel):
-    type: str  
-    name: str  
+    type: str
+    name: str
+
 
 class ComponentOutput(BaseModel):
     type: str
@@ -16,15 +18,18 @@ class ComponentOutput(BaseModel):
     price: int
     url: str
 
+
 class ExtremeProductsOutput(BaseModel):
     type: str
     cheapest: Optional[ComponentOutput]
     most_expensive: Optional[ComponentOutput]
 
+
 class Product(BaseModel):
     url: str
     name: str
     price: int
+
 
 # ------------------- Функции -------------------
 def generate_url(component_type: str, name: str, page: int) -> str:
@@ -40,7 +45,7 @@ def generate_url(component_type: str, name: str, page: int) -> str:
     }
     if component_type not in base_urls:
         raise ValueError(f"Неизвестный компонент: {component_type}")
-    
+
     return base_urls[component_type].format(name=name.replace(" ", "+"), page=page)
 
 
@@ -48,38 +53,45 @@ def get_products_from_page(page) -> List[Product]:
     """Собирает все товары на текущей странице."""
     try:
         html = page.content()
-        soup = BeautifulSoup(html, 'html.parser')
+        soup = BeautifulSoup(html, "html.parser")
 
-        elements = soup.find_all('a', class_="catalog-product__name ui-link ui-link_black")
+        elements = soup.find_all("a", class_="catalog-product__name ui-link ui-link_black")
         if not elements:
             print("⚠️ Товары не найдены на странице!")
             return []
 
         names = [element.text.strip() for element in elements]
-        
-        price_elements = soup.find_all('div', class_="product-buy__price")
+
+        price_elements = soup.find_all("div", class_="product-buy__price")
         prices = []
         for price in price_elements:
             try:
-                prices.append(int(price.text.strip().replace(' ', '')[:-3]))
+                prices.append(int(price.text.strip().replace(" ", "")[:-3]))
             except ValueError:
                 prices.append(None)
 
-        urls = ['https://www.dns-shop.ru' + element.get("href") + 'characteristics/' for element in elements]
+        urls = [
+            "https://www.dns-shop.ru" + element.get("href") + "characteristics/"
+            for element in elements
+        ]
 
-        return [Product(url=url, name=name, price=price) for url, name, price in zip(urls, names, prices) if price]
+        return [
+            Product(url=url, name=name, price=price)
+            for url, name, price in zip(urls, names, prices)
+            if price
+        ]
 
     except Exception as e:
         print(f"❌ Ошибка при парсинге страницы: {e}")
         return []
 
 
-def get_all_products(playwright, component: ComponentInput, user_agent: str) -> List[ComponentOutput]:
+def get_all_products(
+    playwright, component: ComponentInput, user_agent: str
+) -> List[ComponentOutput]:
     """Получает все товары из категории с указанным User-Agent."""
-    browser = playwright.chromium.launch(headless=False, slow_mo=100)  
-    context = browser.new_context(
-        user_agent=user_agent  
-    )
+    browser = playwright.chromium.launch(headless=False, slow_mo=100)
+    context = browser.new_context(user_agent=user_agent)
     page = context.new_page()
 
     products = []
@@ -92,41 +104,44 @@ def get_all_products(playwright, component: ComponentInput, user_agent: str) -> 
         page.goto(url, timeout=60000)
 
         try:
-            page.wait_for_selector('.catalog-product__name', timeout=20000)  
+            page.wait_for_selector(".catalog-product__name", timeout=20000)
         except Exception as e:
             print(f"⚠️ Проблема с загрузкой страницы: {e}")
             break
 
-        time.sleep(2)  
+        time.sleep(2)
 
-        page.pause()  
+        page.pause()
 
         page_products = get_products_from_page(page)
         if not page_products:
-            break  
-        
+            break
+
         products.extend(page_products)
         page_number += 1
-    
+
     browser.close()
-    
-    return [ComponentOutput(type=component.type, name=product.name, price=product.price, url=product.url)
-            for product in products]
+
+    return [
+        ComponentOutput(
+            type=component.type, name=product.name, price=product.price, url=product.url
+        )
+        for product in products
+    ]
 
 
 def find_extreme_products(products: List[ComponentOutput]) -> ExtremeProductsOutput:
     """Находит самый дешевый и самый дорогой товар."""
     if not products:
         return ExtremeProductsOutput(type="", cheapest=None, most_expensive=None)
-    
+
     cheapest = min(products, key=lambda x: x.price, default=None)
     most_expensive = max(products, key=lambda x: x.price, default=None)
-    
+
     return ExtremeProductsOutput(
-        type=products[0].type if products else "",
-        cheapest=cheapest,
-        most_expensive=most_expensive
+        type=products[0].type if products else "", cheapest=cheapest, most_expensive=most_expensive
     )
+
 
 # ------------------- Инструмент-парсер DNS -------------------
 @tool
@@ -156,24 +171,29 @@ def dns_parser_tool(input_json: str) -> str:
     results = []
     # Пример User-Agent для Mozilla Firefox
     user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101 Firefox/91.0"
-    
+
     with sync_playwright() as playwright:
         for component in components:
             print(f"Обработка: {component.type} - {component.name}")
             try:
                 products = get_all_products(playwright, component, user_agent)
                 extreme_products = find_extreme_products(products)
-                results.append(extreme_products.model_dump())  
+                results.append(extreme_products.model_dump())
 
                 if extreme_products.cheapest:
-                    print(f"{component.type}: Самый дешевый: {extreme_products.cheapest.name} - {extreme_products.cheapest.price} ₽")
+                    print(
+                        f"{component.type}: Самый дешевый: {extreme_products.cheapest.name} - {extreme_products.cheapest.price} ₽"
+                    )
                 if extreme_products.most_expensive:
-                    print(f"Самый дорогой: {extreme_products.most_expensive.name} - {extreme_products.most_expensive.price} ₽")
+                    print(
+                        f"Самый дорогой: {extreme_products.most_expensive.name} - {extreme_products.most_expensive.price} ₽"
+                    )
 
             except Exception as e:
                 print(f"Ошибка для {component.type}: {e}")
 
     return json.dumps(results, ensure_ascii=False, indent=2)
+
 
 # ------------------- Пример использования -------------------
 # if __name__ == '__main__':

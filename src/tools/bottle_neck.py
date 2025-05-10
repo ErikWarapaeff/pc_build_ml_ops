@@ -62,7 +62,7 @@ def calculate_bottleneck(input_json: json) -> dict:
         input_data = json.loads(input_json)
         processor = input_data.get("cpu")
         gpu = input_data.get("gpu")
-        resolution = input_data.get("resolution", "1080p")  
+        resolution = input_data.get("resolution", "1080p")
     except Exception as e:
         return json.dumps({"error": str(e)})
 
@@ -87,7 +87,12 @@ def calculate_bottleneck(input_json: json) -> dict:
         processor_input = wait.until(EC.presence_of_element_located((By.ID, "processor")))
 
         processor_input.send_keys(processor)
-        processor_list = [element.text for element in wait.until(EC.presence_of_all_elements_located((By.XPATH, "//div[@class='p-2']//span")))]
+        processor_list = [
+            element.text
+            for element in wait.until(
+                EC.presence_of_all_elements_located((By.XPATH, "//div[@class='p-2']//span"))
+            )
+        ]
         processor_input.clear()
         processor_input.send_keys(get_best_match(processor, processor_list))
 
@@ -95,34 +100,64 @@ def calculate_bottleneck(input_json: json) -> dict:
         gpu_input = wait.until(EC.presence_of_element_located((By.ID, "graphics")))
 
         gpu_input.send_keys(gpu)
-        gpu_list = [element.text for element in wait.until(EC.presence_of_all_elements_located((By.XPATH, "//div[@class='p-2']//span")))]
+        gpu_list = [
+            element.text
+            for element in wait.until(
+                EC.presence_of_all_elements_located((By.XPATH, "//div[@class='p-2']//span"))
+            )
+        ]
         gpu_input.clear()
         gpu_input.send_keys(get_best_match(gpu, gpu_list))
 
         try:
-            calculate_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[text()='Calculate Bottleneck']")))
+            calculate_button = wait.until(
+                EC.element_to_be_clickable((By.XPATH, "//button[text()='Calculate Bottleneck']"))
+            )
             driver.execute_script("arguments[0].scrollIntoView();", calculate_button)
             calculate_button.click()
         except Exception as e:
             driver.execute_script("arguments[0].click();", calculate_button)
 
         # Извлечение информации
-        cpu_performance = wait.until(EC.presence_of_element_located((By.XPATH, "//span[text()='CPU Performance']/following-sibling::span"))).text
-        gpu_performance = wait.until(EC.presence_of_element_located((By.XPATH, "//span[text()='GPU Performance']/following-sibling::span"))).text
-        bottleneck_percentage = wait.until(EC.presence_of_element_located((By.XPATH, "//h3[text()='Bottleneck Percentage']/following-sibling::p"))).text
+        cpu_performance = wait.until(
+            EC.presence_of_element_located(
+                (By.XPATH, "//span[text()='CPU Performance']/following-sibling::span")
+            )
+        ).text
+        gpu_performance = wait.until(
+            EC.presence_of_element_located(
+                (By.XPATH, "//span[text()='GPU Performance']/following-sibling::span")
+            )
+        ).text
+        bottleneck_percentage = wait.until(
+            EC.presence_of_element_located(
+                (By.XPATH, "//h3[text()='Bottleneck Percentage']/following-sibling::p")
+            )
+        ).text
 
         # 4. Получение производительности в разных сценариях
-        performance_scenarios = {scenario.find_element(By.XPATH, ".//h6").text: scenario.find_element(By.XPATH, ".//p").text
-                                 for scenario in driver.find_elements(By.XPATH, "//div[contains(@class, 'flex flex-col items-center text-center')]")
-                                 if scenario.find_element(By.XPATH, ".//h6").text in ["Gaming", "Content Creation", "Streaming"]}
+        performance_scenarios = {
+            scenario.find_element(By.XPATH, ".//h6")
+            .text: scenario.find_element(By.XPATH, ".//p")
+            .text
+            for scenario in driver.find_elements(
+                By.XPATH, "//div[contains(@class, 'flex flex-col items-center text-center')]"
+            )
+            if scenario.find_element(By.XPATH, ".//h6").text
+            in ["Gaming", "Content Creation", "Streaming"]
+        }
 
         # 5. Парсим екомендации
         recommendations = []
 
         # Собираем все возможные рекомендации
-        performance_recommendations = driver.find_elements(By.XPATH, "//p[contains(text(), 'limiting')]")
+        performance_recommendations = driver.find_elements(
+            By.XPATH, "//p[contains(text(), 'limiting')]"
+        )
         recommendations.extend([rec.text for rec in performance_recommendations])
-        other_recommendations = driver.find_elements(By.XPATH, "//ul[@class='list-disc list-inside space-y-2 text-gray-700 ml-0']//li")
+        other_recommendations = driver.find_elements(
+            By.XPATH, "//ul[@class='list-disc list-inside space-y-2 text-gray-700 ml-0']//li"
+        )
         recommendations.extend([rec.text for rec in other_recommendations])
 
         # Формирование ответа с использованием Pydantic
@@ -131,13 +166,13 @@ def calculate_bottleneck(input_json: json) -> dict:
             gpu=gpu,
             resolution=resolution,
             best_processor_match=get_best_match(processor, processor_list),
-            best_gpu_match=get_best_match(gpu, gpu_list)
+            best_gpu_match=get_best_match(gpu, gpu_list),
         )
 
         performance_scenarios_data = PerformanceScenarios(
             gaming=performance_scenarios.get("Gaming"),
             content_creation=performance_scenarios.get("Content Creation"),
-            streaming=performance_scenarios.get("Streaming")
+            streaming=performance_scenarios.get("Streaming"),
         )
 
         results = Results(
@@ -145,13 +180,10 @@ def calculate_bottleneck(input_json: json) -> dict:
             gpu_performance=gpu_performance,
             bottleneck_percentage=bottleneck_percentage,
             performance_scenarios=performance_scenarios_data,
-            recommendations=recommendations
+            recommendations=recommendations,
         )
 
-        bottleneck_response = BottleneckResponse(
-            input_parameters=input_params,
-            results=results
-        )
+        bottleneck_response = BottleneckResponse(input_parameters=input_params, results=results)
 
         # Возвращаем результаты в формате JSON
         return bottleneck_response.model_dump_json(indent=4)

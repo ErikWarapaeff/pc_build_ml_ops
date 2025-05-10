@@ -22,7 +22,7 @@ from langchain_community.tools import (
     QuerySQLDatabaseTool,
     InfoSQLDatabaseTool,
     ListSQLDatabaseTool,
-    QuerySQLCheckerTool
+    QuerySQLCheckerTool,
 )
 from langchain.schema import HumanMessage, SystemMessage
 from langchain_core.runnables import RunnablePassthrough
@@ -42,8 +42,11 @@ db = SQLDatabase(engine)
 
 
 class SQLAgentRequest(BaseModel):
-    question: str = Field(..., description="Вопрос пользователя, на основе которого нужно сформировать SQL-запрос")
+    question: str = Field(
+        ..., description="Вопрос пользователя, на основе которого нужно сформировать SQL-запрос"
+    )
     top_k: int = Field(1, description="Количество примеров для генерации SQL-запроса")
+
 
 # ------------------- Класс SQLAgent с цепочкой Runnables  -------------------
 class SQLAgent:
@@ -52,7 +55,7 @@ class SQLAgent:
         Инициализация SQL-агента.
           - engine: SQLAlchemy engine для подключения к базе.
           - llm: языковая модель (ChatOpenAI). Если не передана, создаётся по умолчанию.
-          
+
         Все необходимые инструменты создаются внутри агента:
           - QuerySQLDatabaseTool
           - InfoSQLDatabaseTool
@@ -70,27 +73,31 @@ class SQLAgent:
         self.tools = self.toolkit.get_tools()
 
         # Извлекаем нужные инструменты
-        self.query_tool = next(tool for tool in self.tools if isinstance(tool, QuerySQLDatabaseTool))
+        self.query_tool = next(
+            tool for tool in self.tools if isinstance(tool, QuerySQLDatabaseTool)
+        )
         self.info_tool = next(tool for tool in self.tools if isinstance(tool, InfoSQLDatabaseTool))
         self.list_tool = next(tool for tool in self.tools if isinstance(tool, ListSQLDatabaseTool))
-        self.checker_tool = next(tool for tool in self.tools if isinstance(tool, QuerySQLCheckerTool))
+        self.checker_tool = next(
+            tool for tool in self.tools if isinstance(tool, QuerySQLCheckerTool)
+        )
 
-        
-        self.final_prompt = ChatPromptTemplate.from_messages([
-            (
-                "system",
-                "You are a MySQL expert. Given an input question, create a syntactically correct MySQL query "
-                "to run with {top_k} examples (use LIMIT {top_k}). Unless otherwise specified.\n\n"
-                "Here is the relevant table info: {table_info}\n\n"
-                "**Key Rules:**\n"
-                "For abstract/fuzzy requests (e.g. 'найти что-то связанное с X', 'показать всё похожее на Y'):\n"
-                "   - Use `LIKE '%value%'` for text searches\n"
-                "   - Return all matches when no specific filters provided\n\n"
-                "Below are a number of examples of questions and their corresponding SQL queries."
-                
-            ),
-            ("human", "{input}"),
-        ])
+        self.final_prompt = ChatPromptTemplate.from_messages(
+            [
+                (
+                    "system",
+                    "You are a MySQL expert. Given an input question, create a syntactically correct MySQL query "
+                    "to run with {top_k} examples (use LIMIT {top_k}). Unless otherwise specified.\n\n"
+                    "Here is the relevant table info: {table_info}\n\n"
+                    "**Key Rules:**\n"
+                    "For abstract/fuzzy requests (e.g. 'найти что-то связанное с X', 'показать всё похожее на Y'):\n"
+                    "   - Use `LIKE '%value%'` for text searches\n"
+                    "   - Return all matches when no specific filters provided\n\n"
+                    "Below are a number of examples of questions and their corresponding SQL queries.",
+                ),
+                ("human", "{input}"),
+            ]
+        )
 
         self.generate_query = create_sql_query_chain(self.llm, self.db, self.final_prompt)
 
@@ -101,18 +108,15 @@ class SQLAgent:
                 question=lambda inp: inp["question"],
                 top_k=lambda inp: inp["top_k"],
             )
-            .assign(
-                query=lambda x: self.clean_sql_query(x["query"])
-            )
-            .assign(
-                result=lambda x: self.execute_query_with_retry(x["query"], x["question"])
-            )
+            .assign(query=lambda x: self.clean_sql_query(x["query"]))
+            .assign(result=lambda x: self.execute_query_with_retry(x["query"], x["question"]))
         )
 
     @staticmethod
     def clean_sql_query(query: str) -> str:
         query = query.strip()
         import re
+
         pattern = r"^```(?:sql)?\s*([\s\S]+?)\s*```$"
         match = re.search(pattern, query, flags=re.IGNORECASE)
         if match:
@@ -157,19 +161,17 @@ class SQLAgent:
             # Очищаем запрос перед валидацией
             clean_query = self.clean_sql_query(query)
             validated_query = self.checker_tool.run(clean_query)
-            
+
             # Дополнительная очистка результата
             return self.clean_sql_query(validated_query)
-            
+
         except Exception as e:
             print(f"Проверка запроса не удалась: {e}")
             table_info = self.info_tool.run("Get all table and column information")
-            new_query = self.generate_query.invoke({
-                "question": question,
-                "table_info": table_info,
-                "top_k": 1
-            })
-            
+            new_query = self.generate_query.invoke(
+                {"question": question, "table_info": table_info, "top_k": 1}
+            )
+
         # Принудительная очистка сгенерированного запроса
         return self.clean_sql_query(str(new_query))
 
@@ -181,11 +183,11 @@ class SQLAgent:
         if isinstance(request, dict):
             input_dict = request
         else:
-            input_dict = request.model_dump()  
+            input_dict = request.model_dump()
         output = self.chain.invoke(input_dict)
         return output
-    
-    
+
+
 def parse_user_request(user_input: str) -> str:
     """Парсит пользовательский запрос в структурированный JSON с валидацией"""
 
@@ -195,18 +197,18 @@ def parse_user_request(user_input: str) -> str:
         build_type: Literal["игровая", "офисная"]
         additional_info: Dict[str, str] = {}
 
-        @field_validator('build_type')
+        @field_validator("build_type")
         def normalize_build_type(cls, v):
             build_mapping = {
                 "игр": "игровая",
                 "гейм": "игровая",
-                "стрим": "игровая", 
+                "стрим": "игровая",
                 "монтаж": "игровая",
                 "рендер": "игровая",
                 "офис": "офисная",
                 "работ": "офисная",
                 "программ": "офисная",
-                "веб": "офисная"
+                "веб": "офисная",
             }
             lower_v = v.lower()
             return next((val for key, val in build_mapping.items() if key in lower_v), "офисная")
@@ -278,21 +280,22 @@ def parse_user_request(user_input: str) -> str:
 
     # Получение ответа от LLM
     client = ChatOpenAI(openai_api_key=openai_api_key, model="gpt-4o-mini")
-    response = client.invoke([SystemMessage(content=SYSTEM_PROMPT), HumanMessage(content=user_input)])
-
+    response = client.invoke(
+        [SystemMessage(content=SYSTEM_PROMPT), HumanMessage(content=user_input)]
+    )
 
     try:
-        raw_data = json.loads(response.content) 
+        raw_data = json.loads(response.content)
         validated = BuildRequest(**raw_data).model_dump()
 
         # Возвращаем строку JSON
         return json.dumps(validated, ensure_ascii=False)
 
     except (json.JSONDecodeError, ValidationError) as e:
-        default_data = BuildRequest(budget=50000, build_type="офисная", additional_info={}).model_dump()
+        default_data = BuildRequest(
+            budget=50000, build_type="офисная", additional_info={}
+        ).model_dump()
         return json.dumps(default_data, ensure_ascii=False)
-
-
 
 
 @tool
@@ -310,7 +313,7 @@ def question_answer_tool(user_input: str) -> str:
     Вход: "Какая цена у Intel Core i9-12900K?"
     Выход: "Цена процессора Intel Core i9-12900K составляет 600 долларов."
     """
-    sql_agent = SQLAgent(engine,llm = CFG.llm)  # Создаем экземпляр SQL-агента
+    sql_agent = SQLAgent(engine, llm=CFG.llm)  # Создаем экземпляр SQL-агента
     request = SQLAgentRequest(question=user_input, top_k=5)
 
     sql_response = sql_agent.run(request)
@@ -321,10 +324,11 @@ def question_answer_tool(user_input: str) -> str:
         "Перефразируй этот SQL-ответ, чтобы он звучал естественно для пользователя."
     )
     rephrase_chain = answer_prompt | CFG.llm | StrOutputParser()
-    
-    final_answer = rephrase_chain.invoke({"user_question": user_input,"answer_prompt":answer_prompt, "sql_response": sql_response})
-    return final_answer
 
+    final_answer = rephrase_chain.invoke(
+        {"user_question": user_input, "answer_prompt": answer_prompt, "sql_response": sql_response}
+    )
+    return final_answer
 
 
 class BuildRequest(BaseModel):
@@ -332,14 +336,16 @@ class BuildRequest(BaseModel):
     build_type: str  # например, "игровая" или "офисная"
     additional_info: Optional[Dict[str, Any]] = None
 
-def calculate_component_budgets(budget: int, build_type: str, 
-                                components_percentages: Dict[str, Dict[str, float]]
-                               ) -> Dict[str, int]:
+
+def calculate_component_budgets(
+    budget: int, build_type: str, components_percentages: Dict[str, Dict[str, float]]
+) -> Dict[str, int]:
     """
     Распределяет общий бюджет между компонентами в зависимости от типа сборки.
     """
     percentages = components_percentages.get(build_type, {})
     return {component: int(budget * percentage) for component, percentage in percentages.items()}
+
 
 # --- Заданные проценты для распределения бюджета ---
 components_percentages = {
@@ -349,26 +355,20 @@ components_percentages = {
         "memory": 0.1,
         "motherboard": 0.1,
         "power_supply": 0.05,
-        "corpus": 0.05
+        "corpus": 0.05,
     },
-    "офисная": {
-        "cpu": 0.4,
-        "memory": 0.3,
-        "motherboard": 0.2,
-        "power_supply": 0.1
-    }
+    "офисная": {"cpu": 0.4, "memory": 0.3, "motherboard": 0.2, "power_supply": 0.1},
 }
+
 
 # --- Основной класс для построения промптов ---
 class DynamicPCBuilderPrompter:
     def __init__(self):
         self.selected_components: Dict[str, Any] = {}
         # для сборки пк мы последовательно выбираем компоненты, так как необходимо учитывать совместимость
-        self.component_order = [
-            "gpu", "cpu", "motherboard", 
-            "memory", "corpus", "power_supply"
-        ]
+        self.component_order = ["gpu", "cpu", "motherboard", "memory", "corpus", "power_supply"]
         self.component_config = self._init_config()
+
     # Создание промптов с динамическими полями
     def _init_config(self) -> Dict[str, Dict]:
         return {
@@ -377,14 +377,21 @@ class DynamicPCBuilderPrompter:
                 "main_table": "gpu_full_info",
                 "dynamic_rules": [
                     lambda p: f"Таблица: gpu_full_info выбирать только dustinct gpu в запросе",
-                    lambda p: f"JOIN gpu_hierarchy ON gpu_hierarchy.gpu = gpu_full_info.gpu" ,
-                    lambda p: f"Разрешение: {p.get('resolution')} (проверить в gpu_hierarchy.{p.get('resolution', '')} Ultra)" 
-                        if "resolution" in p else None,
-                    lambda p: f"Бюджет: <= {p['budget']} руб. Колонка average_price" if "budget" in p else None,
-                    lambda p: self._gen_dynamic_conditions(p, "gpu_full_info") ,
+                    lambda p: f"JOIN gpu_hierarchy ON gpu_hierarchy.gpu = gpu_full_info.gpu",
+                    lambda p: (
+                        f"Разрешение: {p.get('resolution')} (проверить в gpu_hierarchy.{p.get('resolution', '')} Ultra)"
+                        if "resolution" in p
+                        else None
+                    ),
+                    lambda p: (
+                        f"Бюджет: <= {p['budget']} руб. Колонка average_price"
+                        if "budget" in p
+                        else None
+                    ),
+                    lambda p: self._gen_dynamic_conditions(p, "gpu_full_info"),
                     "Сортировка: рейтинг (по убыванию), average_price (по убыванию)",
-                    "Вывести все поля"
-                ]
+                    "Вывести все поля",
+                ],
             },
             "cpu": {
                 "description": "Подбор процессора:",
@@ -394,8 +401,8 @@ class DynamicPCBuilderPrompter:
                     lambda p: f"Бюджет: <= {p['budget']} руб." if "budget" in p else None,
                     lambda p: self._gen_dynamic_conditions(p, "cpu_merged"),
                     "Сортировка: рейтинг (по убыванию)",
-                    "Вывести все поля"
-                ]
+                    "Вывести все поля",
+                ],
             },
             "motherboard": {
                 "description": "Подбор материнской платы:",
@@ -407,8 +414,8 @@ class DynamicPCBuilderPrompter:
                     lambda p: f"Бюджет: <= {p['budget']} руб." if "budget" in p else None,
                     lambda p: self._gen_dynamic_conditions(p, "motherboard"),
                     "Сортировка: price (по убыванию)",
-                    "Вывести все поля"
-                ]
+                    "Вывести все поля",
+                ],
             },
             "memory": {
                 "description": "Подбор оперативной памяти:",
@@ -420,8 +427,8 @@ class DynamicPCBuilderPrompter:
                     lambda p: f"Бюджет: <= {p['budget']} руб." if "budget" in p else None,
                     lambda p: self._gen_dynamic_conditions(p, "memory"),
                     "Сортировка: speed_num (по убыванию)",
-                    "Вывести все поля"
-                ]
+                    "Вывести все поля",
+                ],
             },
             "corpus": {
                 "description": "Подбор корпуса:",
@@ -433,8 +440,8 @@ class DynamicPCBuilderPrompter:
                     lambda p: f"Бюджет: <= {p['budget']} руб." if "budget" in p else None,
                     lambda p: self._gen_dynamic_conditions(p, "corpus"),
                     "Сортировка: цена (по возрастанию)",
-                    "Вывести все поля"
-                ]
+                    "Вывести все поля",
+                ],
             },
             "power_supply": {
                 "description": "Подбор блока питания:",
@@ -445,10 +452,10 @@ class DynamicPCBuilderPrompter:
                     lambda p: f"Бюджет: <= {p['budget']} руб." if "budget" in p else None,
                     lambda p: self._gen_dynamic_conditions(p, "power-supply"),
                     "Сортировка: цена (по убыванию)",
-                    "Вывести все поля"
+                    "Вывести все поля",
                 ],
-                "dependencies": ["gpu", "cpu"]
-            }
+                "dependencies": ["gpu", "cpu"],
+            },
         }
 
     def _table_reference(self, component: str) -> str:
@@ -462,7 +469,7 @@ class DynamicPCBuilderPrompter:
         return total_power if total_power else 500
 
     def _gen_dynamic_conditions(self, params: Dict, table: str) -> Optional[str]:
-        ignore = {'budget'}
+        ignore = {"budget"}
         conditions = []
         for key, value in params.items():
             if key in ignore:
@@ -504,16 +511,13 @@ class DynamicPCBuilderPrompter:
             prompt = "\n".join(prompt_lines)
             prompts[component] = prompt
             print(prompt)
-            
-            
-            agent = SQLAgent(engine = engine,llm = CFG.llm)
-            response = agent.run({
-                "question": prompt,
-                "table_info": db.get_table_info(),
-                "top_k": 1
-            })
+
+            agent = SQLAgent(engine=engine, llm=CFG.llm)
+            response = agent.run(
+                {"question": prompt, "table_info": db.get_table_info(), "top_k": 1}
+            )
             components[component] = response.get("result")
-            
+
             raw_result = response.get("result", [])
             if isinstance(raw_result, str):
                 try:
@@ -534,7 +538,7 @@ class DynamicPCBuilderPrompter:
                 comp_info = {
                     "memory_slots": selected.get("memory_slots"),
                     "max_memory": selected.get("max_memory"),
-                    "form_factor": selected.get("form_factor")
+                    "form_factor": selected.get("form_factor"),
                 }
             else:
                 comp_info = selected
@@ -542,6 +546,7 @@ class DynamicPCBuilderPrompter:
             self.selected_components[component] = comp_info
 
         return components
+
 
 @tool
 def pc_builder_tool(user_input: str) -> dict:
@@ -561,18 +566,18 @@ def pc_builder_tool(user_input: str) -> dict:
         build_req = BuildRequest.model_validate_json(input_json)
     except ValidationError as e:
         return json.dumps({"error": e.errors()}, ensure_ascii=False, indent=2)
-    
+
     component_budgets = calculate_component_budgets(
         build_req.budget, build_req.build_type, components_percentages
     )
-    
+
     components = {}
     for comp, comp_budget in component_budgets.items():
         comp_params = {"budget": comp_budget}
         if build_req.additional_info and comp in build_req.additional_info:
             comp_params["additional_info"] = build_req.additional_info[comp]
         components[comp] = comp_params
-    
+
     request_dict = {"components": components}
     builder = DynamicPCBuilderPrompter()
     components_results = builder.build_prompts(request_dict)

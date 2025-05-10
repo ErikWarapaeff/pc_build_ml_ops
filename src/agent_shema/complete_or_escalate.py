@@ -27,5 +27,5 @@ class CompleteOrEscalate(BaseModel):
             "example 4": {
                 "cancel": True,
                 "reason": "Это задача не относится к моей",
-            }
+            },
         }

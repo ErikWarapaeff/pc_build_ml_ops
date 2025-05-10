@@ -5,6 +5,7 @@ class UISettings:
     """
     Utility class for managing UI settings.
     """
+
     @staticmethod
     def feedback(data: gr.LikeData):
         """

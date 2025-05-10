@@ -18,12 +18,8 @@ print("=======================")
 print("thread_id:", thread_id)
 print("=======================")
 
-config = {
-    "configurable": {
-        "thread_id": thread_id,
-        "recursion_limit": 50
-    }
-}
+config = {"configurable": {"thread_id": thread_id, "recursion_limit": 50}}
+
 
 class ChatBot:
     @staticmethod
@@ -38,10 +34,6 @@ class ChatBot:
         while snapshot.next:
             result = graph.invoke(None, config)
             snapshot = graph.get_state(config)
-        chatbot.append(
-            {"role": "user", "content": message}
-        )
-        chatbot.append(
-            {"role": "assistant", "content": snapshot[0]["messages"][-1].content}
-        )
+        chatbot.append({"role": "user", "content": message})
+        chatbot.append({"role": "assistant", "content": snapshot[0]["messages"][-1].content})
         return "", chatbot, None

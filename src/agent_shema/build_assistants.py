@@ -1,6 +1,6 @@
 from langchain_core.runnables import Runnable, RunnableConfig
 from agent_shema.build_agent_state import State
-from tools.regard_parser import  RegardInput
+from tools.regard_parser import RegardInput
 from pydantic import BaseModel, Field
 from typing import Dict, List, Any, Optional, Union
 from langchain_core.messages import ToolMessage
@@ -56,17 +56,15 @@ class Assistant:
             # добавляем сообщение с просьбой дать реальный ответ.
             if not result.tool_calls and (
                 not result.content
-                or (isinstance(result.content, list)
-                    and not result.content[0].get("text"))
+                or (isinstance(result.content, list) and not result.content[0].get("text"))
             ):
                 messages = state["messages"] + [("user", "Дайте, пожалуйста, реальный ответ.")]
                 state = {**state, "messages": messages}
             else:
                 break
         return {"messages": result}
-    
 
-    
+
 class ToPCBuildAssistant(BaseModel):
     """
     Передает задачу специализированному ассистенту, который занимается сборкой ПК
@@ -76,12 +74,12 @@ class ToPCBuildAssistant(BaseModel):
         user_input (Optional[str]): Вопрос или запрос пользователя, касающийся выбора компонентов,
                                       совместимости или сборки ПК.
     """
+
     user_input: Optional[str] = Field(
         default=None,
         description="Вопрос о конкретных компонентах, их совместимости или сборке ПК.",
-        example="Собери мне компьютер за 200000 с поддержкой 4K."
+        example="Собери мне компьютер за 200000 с поддержкой 4K.",
     )
-
 
 
 class GameRunInput(BaseModel):
@@ -94,7 +92,10 @@ class GameRunInput(BaseModel):
         gpu (str): Модель видеокарты пользователя.
         ram (int): Объем оперативной памяти в гигабайтах.
     """
-    game_name: str = Field(description="Название игры, которую нужно проверить.", example="Cyberpunk 2077")
+
+    game_name: str = Field(
+        description="Название игры, которую нужно проверить.", example="Cyberpunk 2077"
+    )
     cpu: str = Field(description="Модель процессора пользователя.", example="Intel Core i7-12700")
     gpu: str = Field(description="Модель видеокарты пользователя.", example="RTX 3070")
     ram: int = Field(description="Объем оперативной памяти (в ГБ).", example=16)
@@ -109,8 +110,13 @@ class BottleNeckInput(BaseModel):
         gpu (str): Модель видеокарты для проверки узкого горлышка.
         resolution (str): Разрешение экрана (например, '1440p').
     """
-    cpu: str = Field(description="Модель процессора для проверки узкого горлышка.", example="Intel Core i7-12700")
-    gpu: str = Field(description="Модель видеокарты для проверки узкого горлышка.", example="RTX 3070")
+
+    cpu: str = Field(
+        description="Модель процессора для проверки узкого горлышка.", example="Intel Core i7-12700"
+    )
+    gpu: str = Field(
+        description="Модель видеокарты для проверки узкого горлышка.", example="RTX 3070"
+    )
     resolution: str = Field(description="Разрешение экрана (например, '1440p').", example="1440p")
 
 
@@ -124,6 +130,7 @@ class ToPriceValidationCheckerAssistant(BaseModel):
             совместимости или поиска компонентов. В зависимости от запроса могут использоваться данные
             для проверки запуска игры, анализа узкого горлышка или анализа компонентов.
     """
+
     input_data: Union[GameRunInput, BottleNeckInput, RegardInput] = Field(
         ...,
         description="Входные данные для проверки совместимости или поиска компонентов.",
@@ -138,16 +145,16 @@ class ToPriceValidationCheckerAssistant(BaseModel):
                         "game_name": "Cyberpunk 2077",
                         "cpu": "Intel Core i7-12700",
                         "gpu": "RTX 3070",
-                        "ram": 16
-                    }
+                        "ram": 16,
+                    },
                 },
                 {
                     "description": "Проверка узкого горлышка (calculate_bottleneck)",
                     "input_data": {
                         "cpu": "Ryzen 9 5950X",
                         "gpu": "GeForce RTX 4070",
-                        "resolution": "1440p"
-                    }
+                        "resolution": "1440p",
+                    },
                 },
                 {
                     "description": "Анализ компонентов для сборки ПК (regard_parser_tool)",
@@ -155,9 +162,9 @@ class ToPriceValidationCheckerAssistant(BaseModel):
                         "components": [
                             {"cpu": "Intel Core i7-12700"},
                             {"gpu": "RTX 3070"},
-                            {"name": "Corsair Vengeance 16 GB"}
+                            {"name": "Corsair Vengeance 16 GB"},
                         ]
-                    }
-                }
+                    },
+                },
             ]
         }

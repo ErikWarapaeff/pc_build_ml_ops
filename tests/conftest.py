@@ -1,6 +1,7 @@
 """
 Конфигурационный файл для pytest с общими фикстурами.
 """
+
 import os
 import sys
 import pytest
@@ -10,6 +11,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
+
 @pytest.fixture
 def test_config():
     """
@@ -18,4 +20,4 @@ def test_config():
     return {
         "test_mode": True,
         "db_path": ":memory:",
-    } 
+    }

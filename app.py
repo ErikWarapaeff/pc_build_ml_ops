@@ -15,7 +15,6 @@ with gr.Blocks() as demo:
                     elem_id="chatbot",
                     bubble_full_width=False,
                     height=500,
-                    
                     # render=False
                 )
                 # **Adding like/dislike icons
@@ -40,19 +39,19 @@ with gr.Blocks() as demo:
             ##############
             # Process:
             ##############
-            txt_msg = input_txt.submit(fn=ChatBot.respond,
-                                       inputs=[chatbot, input_txt],
-                                       outputs=[input_txt,
-                                                chatbot],
-                                       queue=False).then(lambda: gr.Textbox(interactive=True),
-                                                         None, [input_txt], queue=False)
+            txt_msg = input_txt.submit(
+                fn=ChatBot.respond,
+                inputs=[chatbot, input_txt],
+                outputs=[input_txt, chatbot],
+                queue=False,
+            ).then(lambda: gr.Textbox(interactive=True), None, [input_txt], queue=False)
 
-            txt_msg = text_submit_btn.click(fn=ChatBot.respond,
-                                            inputs=[chatbot, input_txt],
-                                            outputs=[input_txt,
-                                                     chatbot],
-                                            queue=False).then(lambda: gr.Textbox(interactive=True),
-                                                              None, [input_txt], queue=False)
+            txt_msg = text_submit_btn.click(
+                fn=ChatBot.respond,
+                inputs=[chatbot, input_txt],
+                outputs=[input_txt, chatbot],
+                queue=False,
+            ).then(lambda: gr.Textbox(interactive=True), None, [input_txt], queue=False)
 
 
 if __name__ == "__main__":

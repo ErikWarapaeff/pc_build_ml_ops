@@ -17,6 +17,7 @@ variables:
     - pip install poetry==${POETRY_VERSION}
     - poetry --version
     - poetry config virtualenvs.in-project true
+    - poetry lock --no-update
     - poetry install --with dev
 
 lint:

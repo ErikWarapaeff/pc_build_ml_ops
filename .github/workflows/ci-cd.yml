@@ -35,6 +35,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          poetry lock --no-update
           poetry install --with dev
 
       - name: Run black
@@ -74,6 +75,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          poetry lock --no-update
           poetry install --with dev
 
       - name: Run tests
@@ -107,6 +109,7 @@ jobs:
 
       - name: Build package
         run: |
+          poetry lock --no-update
           poetry build
 
       - name: Store version
@@ -254,6 +257,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          poetry lock --no-update
           poetry install --with dev
           poetry add mkdocs-material mike
 

@@ -1,0 +1,49 @@
+# Автоматическое определение типа текстовых файлов
+* text=auto
+
+# Явно определяем текстовые файлы и нормализуем их окончания строк
+*.py text
+*.md text
+*.yml text
+*.yaml text
+*.toml text
+*.json text
+*.ipynb text
+*.txt text
+*.html text
+*.css text
+*.js text
+*.sql text
+*.ini text
+*.cfg text
+
+# Явно определяем бинарные файлы
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.db binary
+*.sqlite3 binary
+*.exe binary
+*.dll binary
+
+# Файлы Python
+*.pyi text
+*.pyc binary
+*.pyd binary
+*.pyo binary
+*.pyz binary
+*.pyw text
+
+# Файлы Shell script должны использовать LF, даже на Windows
+*.sh text eol=lf
+*.bash text eol=lf
+
+# Файлы Batch должны использовать CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Файлы Docker должны использовать LF
+Dockerfile text eol=lf
+.dockerignore text eol=lf 

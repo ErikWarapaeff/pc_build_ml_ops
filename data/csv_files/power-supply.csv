@@ -1,0 +1,612 @@
+,name,price,type,efficiency,wattage,modular,color
+0,Corsair RM750e (2023),9999.0,ATX,gold,750,Full,Black
+1,Corsair RM850x (2021),14999.0,ATX,gold,850,Full,Black
+2,Corsair RM1000x (2021),16999.0,ATX,gold,1000,Full,Black
+3,Thermaltake Toughpower GX2,6698.0,ATX,gold,600,False,Black
+4,Corsair RM750x (2021),11999.0,ATX,gold,750,Full,Black
+5,Corsair RM850,13999.0,ATX,gold,850,Full,White / Black
+6,Thermaltake Smart,3999.0,ATX,plus,500,False,
+7,Corsair SF750,16349.0,SFX,platinum,750,Full,
+8,Corsair RM850e (2023),11999.0,ATX,gold,850,Full,Black
+9,Corsair CX650M (2021),7998.0,ATX,bronze,650,Semi,Black
+10,Corsair HX1200 Platinum,34699.0,ATX,platinum,1200,Full,
+11,Corsair CX750M (2021),8995.0,ATX,bronze,750,Semi,Black
+12,Corsair RM1000e (2023),15999.0,ATX,gold,1000,Full,Black
+14,Gigabyte UD750GM,9098.0,ATX,gold,750,Full,Black
+15,Corsair RM650x (2021),10999.0,ATX,gold,650,Full,Black
+16,Cooler Master V850 SFX GOLD,13599.0,SFX,gold,850,Full,Black
+17,Corsair RM750,11599.0,ATX,gold,750,Full,White / Black
+19,Corsair AX1600i,54999.0,ATX,titanium,1600,Full,
+20,NZXT C850 (2022),13899.0,ATX,gold,850,Full,Black
+21,MSI A1000G PCIE5,19999.0,ATX,gold,1000,Full,Black
+22,EVGA 600 W1,6298.0,ATX,plus,600,False,
+23,Thermaltake Smart,4798.0,ATX,plus,600,False,
+24,MSI MPG A850G PCIE5,13999.0,ATX,gold,850,Full,Black
+25,EVGA SuperNOVA 1000 GT,16999.0,ATX,gold,1000,Full,Black
+27,EVGA 500 BR,8488.0,ATX,bronze,500,False,
+28,Thermaltake Toughpower GF1 PE,13699.0,ATX,gold,850,Full,Black
+29,EVGA SuperNOVA 850 GT,12999.0,ATX,gold,850,Full,Black
+30,Thermaltake Toughpower Grand RGB,11299.0,ATX,gold,650,Full,
+31,Thermaltake Smart,5495.0,ATX,plus,700,False,
+32,Thermaltake Smart,3399.0,ATX,plus,430,False,Black / White
+33,EVGA SuperNOVA 750 GT,11999.0,ATX,gold,750,Full,Black
+35,EVGA 700 GD,7998.0,ATX,gold,700,False,Black
+36,EVGA 600 GD,7998.0,ATX,gold,600,False,Black
+37,SeaSonic S12III,6900.0,ATX,bronze,650,False,Black
+38,Asus ROG THOR 1600T Gaming,66599.0,ATX,titanium,1600,Full,Silver / Black
+39,Lian Li SP,11499.0,SFX,gold,750,Full,Black
+40,Apevia Prestige,5199.0,ATX,gold,600,False,Black
+41,Corsair SF1000L,17999.0,SFX,gold,1000,Full,Black
+42,Cooler Master MWE Gold 850 - V2,11999.0,ATX,gold,850,Full,Black
+43,MSI MPG A650GF,10699.0,ATX,gold,650,Full,Black
+44,SeaSonic FOCUS Plus 650 Gold,12999.0,ATX,gold,650,Full,
+45,EVGA 500 W1,5359.0,ATX,plus,500,False,
+46,Silverstone HELA,70700.0,ATX,,2050,Full,Black / White
+47,MSI MPG A750GF,12999.0,ATX,gold,750,Full,Black
+48,SeaSonic FOCUS PLUS 850 Gold,15999.0,ATX,gold,850,Full,
+50,NZXT C750 (2022),12999.0,ATX,gold,750,Full,Black
+51,Gigabyte UD850GM,10999.0,ATX,gold,850,Full,Black
+52,Corsair HX1500i (2022),34999.0,ATX,platinum,1500,Full,Black
+53,EVGA SuperNOVA 750 GM,14900.0,SFX,gold,750,Full,Black
+55,EVGA 700 BR,7998.0,ATX,bronze,700,False,
+56,Corsair RM750e (2022),18029.0,ATX,gold,750,Full,Black
+57,Gigabyte UD1000GM,13499.0,ATX,gold,1000,Full,Black
+59,Cooler Master MWE GOLD 750 V2 FULL MODULAR,17100.0,ATX,gold,750,Full,Black
+60,Asus TUF Gaming 1000G,16999.0,ATX,gold,1000,Full,Black
+61,EVGA SuperNOVA 650 GT,9999.0,ATX,gold,650,Full,Black
+63,Cooler Master V550 V2,12599.0,ATX,gold,550,Full,White
+64,SeaSonic PRIME TX-1000,33898.0,ATX,titanium,1000,Full,Black
+65,be quiet! Straight Power 11,20990.0,ATX,platinum,1000,Full,Black
+66,Lian Li SP850,14465.0,SFX,gold,850,Full,White
+67,Asus ROG STRIX G,19999.0,ATX,gold,1000,Full,Black
+68,MSI MEG Ai1300P PCIE5,32999.0,ATX,platinum,1300,Full,Black / Copper
+69,Cooler Master MasterWatt,9999.0,ATX,bronze,750,Semi,Black
+70,Corsair HX1000 Platinum,38998.0,ATX,platinum,1000,Full,
+71,Apevia Prestige,6698.0,ATX,gold,800,False,Black
+72,Phanteks Revolt Pro,12999.0,ATX,gold,850,Full,Silver / Black
+73,EVGA SuperNOVA 650 G5,10999.0,ATX,gold,650,Full,Black / Green
+74,EVGA SuperNOVA 850 GM,14899.0,SFX,gold,850,Full,Black
+75,Cooler Master V750 SFX GOLD,10999.0,SFX,gold,750,Full,Black
+76,be quiet! Pure Power 12 M,12850.0,ATX,gold,750,Full,Black
+77,Thermaltake Toughpower GF1 PE,10999.0,ATX,gold,750,Full,Black
+78,SeaSonic FOCUS Plus 750 Gold,13999.0,ATX,gold,750,Full,
+79,Corsair RM850e (2022),32348.0,ATX,gold,850,Full,Black
+81,Corsair RM1000e (2022),24999.0,ATX,gold,1000,Full,Black
+82,be quiet! Straight Power 11,17490.0,ATX,platinum,850,Full,Black
+83,EVGA SuperNOVA 650 GM,12000.0,SFX,gold,650,Full,Black
+84,EVGA 600 BR,9378.0,ATX,bronze,600,False,
+85,Apevia CAPTAIN,3199.0,ATX,,550,False,Black
+86,Asus ROG LOKI,24999.0,SFX,platinum,1000,Full,Silver / Black
+87,Asus ROG Strix,37500.0,ATX,gold,850,Full,White
+88,Raidmax Cobra,4999.0,ATX,bronze,700,False,
+90,be quiet! Straight Power 11,24990.0,ATX,platinum,1200,Full,Black
+93,SeaSonic PRIME TX,52999.0,ATX,titanium,1600,Full,Black / Silver
+94,EVGA SuperNOVA 1600 G2,67421.0,ATX,gold,1600,Full,
+95,be quiet! Pure Power 12 M,16490.0,ATX,gold,1000,Full,Black
+96,Corsair RM650,21598.0,ATX,gold,650,Full,Black
+97,Cooler Master MasterWatt,8999.0,ATX,bronze,650,Semi,
+98,ADATA XPG CORE Reactor 850,11999.0,ATX,gold,850,Full,Black
+100,SeaSonic FOCUS Plus Platinum,18499.0,ATX,platinum,850,Full,
+101,Phanteks Revolt SFX,9499.0,SFX,gold,650,Full,Black
+102,EVGA GE,8999.0,ATX,gold,800,False,Black
+103,Super Flower Leadex III Gold,13868.0,ATX,gold,750,Full,Black
+104,be quiet! Pure Power 12 M,9900.0,ATX,gold,650,Full,Black
+105,Corsair RM750 (2019),24995.0,ATX,gold,750,Full,Black
+106,Corsair RM1000x,24689.0,ATX,gold,1000,Full,
+107,Asus ROG THOR P2 Gaming,37999.0,ATX,platinum,1200,Full,Silver / Black
+108,Logisys PS480D2,1698.0,ATX,,480,False,
+109,Enermax REVOLUTION D.F. 2,10999.0,ATX,gold,850,Full,Black
+111,EVGA 400 N1,4945.0,ATX,,400,False,
+112,EVGA GE,7998.0,ATX,gold,700,False,Black
+114,SeaSonic PRIME PX-1300,33000.0,ATX,platinum,1300,Full,Black
+115,NZXT C1200,21999.0,ATX,gold,1200,Full,Black
+116,be quiet! Dark Power 13,28989.0,ATX,titanium,1000,Full,Black
+118,SeaSonic VERTEX GX-1200,28999.0,ATX,gold,1200,Full,Black / Silver
+119,SeaSonic FOCUS Plus Platinum,15999.0,ATX,platinum,750,Full,
+120,Corsair RM750x White (2018),24800.0,ATX,gold,750,Full,White / Black
+121,SeaSonic FOCUS GX,16698.0,ATX,gold,850,Full,Black
+122,Asus TUF Gaming 850G,12999.0,ATX,gold,850,Full,Black
+123,Corsair HX1000i (2022),35799.0,ATX,platinum,1000,Full,Black
+124,Corsair SF600,23900.0,SFX,platinum,600,Full,Black
+125,Thermaltake TOUGHPOWER GF A3,8999.0,ATX,gold,750,Full,Black
+126,be quiet! Dark Power Pro 13,45990.0,ATX,titanium,1600,Full,Black
+127,be quiet! Pure Power 12 M,13490.0,ATX,gold,850,Full,Black
+128,SeaSonic FOCUS GX,14597.999999999998,ATX,gold,750,Full,Black
+129,EVGA 850 BQ,11814.0,ATX,bronze,850,Semi,
+130,Cooler Master V850 SFX GOLD,12999.0,SFX,gold,850,Full,White
+131,EVGA 550 BP,5999.0,ATX,bronze,550,False,Black
+132,EVGA SuperNOVA 1300 GT,21999.0,ATX,gold,1300,Full,Black
+133,Asus ROG-STRIX-850G,17863.0,ATX,gold,850,Full,Black
+134,Thermaltake Toughpower GF3 TT Premium,26999.0,ATX,gold,1650,Full,Black
+135,EVGA GE,6998.0,ATX,gold,500,False,Black
+136,Thermaltake Toughpower GF1 PE,11998.0,ATX,gold,650,Full,
+137,Thermaltake Smart BX1,7980.0,ATX,bronze,750,False,Black
+138,EVGA SuperNOVA 750 G5,14497.999999999998,ATX,gold,750,Full,Black / Green
+139,EVGA SuperNOVA 1600 T2,49999.0,ATX,titanium,1600,Full,
+140,Silverstone SFX,11299.0,SFX,gold,500,Full,
+141,Super Flower Leadex V Pro,29999.0,ATX,platinum,1000,Full,White
+143,SeaSonic FOCUS GX,25348.0,ATX,gold,1000,Full,Black
+144,Corsair SF850L,15999.0,SFX,gold,850,Full,Black
+145,be quiet! System Power 10,18181.0,ATX,gold,850,False,Black
+146,Silverstone SX1000-LPT,25021.0,SFX,platinum,1000,Full,Black
+148,be quiet! System Power 10,10148.0,ATX,bronze,450,False,Black
+149,be quiet! Straight Power 11 750W,13599.0,ATX,gold,750,Full,
+150,be quiet! Dark Power 13,24990.0,ATX,titanium,850,Full,Black
+152,Asus ROG Strix,29200.0,ATX,gold,750,Full,Black / Red
+153,Thermaltake Smart Pro RGB,11957.0,ATX,bronze,750,Full,
+155,Apevia Signature,7198.0,ATX,bronze,1050,Semi,Black
+156,Gigabyte P450B,8998.0,ATX,bronze,450,False,Black
+157,Deepcool PM750D,9799.0,ATX,gold,750,False,Black
+160,CoolMax I-500,2411.0,ATX,,500,False,
+163,Fractal Design Ion Gold,20900.0,ATX,gold,550,Full,Black
+165,EVGA SuperNOVA 1600 P+,30499.0,ATX,platinum,1600,Full,Black
+166,Phanteks AMP v2,17999.0,ATX,gold,1000,Full,White
+167,Corsair CX450M (2015),13679.0,ATX,bronze,450,Semi,
+168,EVGA SuperNOVA 850 P6,18863.0,ATX,platinum,850,Full,Black / Silver
+169,EVGA SuperNOVA 850 T2,23400.0,ATX,titanium,850,Full,
+171,Super Flower Leadex Titanium,79999.0,ATX,titanium,1600,Full,Black
+172,Corsair HX750 Platinum,29499.0,ATX,platinum,750,Full,
+174,Silverstone SFX,22398.0,SFX,titanium,800,Full,
+175,Thermaltake Toughpower GF3 TT Premium,16999.0,ATX,gold,1000,Full,Black
+176,be quiet! Pure Power 11,8929.0,ATX,gold,400,False,Black
+177,Corsair CX750F,15999.0,ATX,bronze,750,Full,White / Black
+178,Corsair RM850x (2018),18799.0,ATX,gold,850,Full,Black
+179,SeaSonic FOCUS GX,13297.999999999998,ATX,gold,650,Full,Black
+180,Corsair RM750x (2018),18695.0,ATX,gold,750,Full,Black
+182,EVGA 550 B5,7998.0,ATX,bronze,550,Full,Black
+183,Deepcool PM850D,9898.0,ATX,gold,850,False,Black
+184,EVGA 850 GQ,14500.0,ATX,gold,850,Semi,
+185,GameMax RGB Rainbow,9999.0,ATX,gold,850,Full,Black
+186,Thermaltake Toughpower GF1 ARGB,9599.0,ATX,gold,650,Full,
+187,Gigabyte P550B,6998.999999999999,ATX,bronze,550,False,Black
+188,Phanteks Revolt SFX,10499.0,SFX,gold,750,Full,Black
+189,Cooler Master V750 V2,15999.0,ATX,gold,750,Full,White
+191,be quiet! System Power 10,9809.0,ATX,bronze,650,False,Black
+193,SeaSonic S12III,7198.0,ATX,bronze,500,False,Black
+194,Corsair CX650M,22495.0,ATX,bronze,650,Semi,
+195,SeaSonic VERTEX GX-1000,24443.0,ATX,gold,1000,Full,Black / Silver
+196,NZXT C1000 (2022),21967.0,ATX,gold,1000,Full,Black
+197,Corsair CX550F,13679.0,ATX,bronze,550,Full,Black
+198,Deepcool PQ750M,10999.0,ATX,gold,750,Full,Black
+199,Thermaltake Toughpower GF3 TT Premium,12799.0,ATX,gold,850,Full,Black
+201,MSI MEG Ai1000P PCIE5,27999.0,ATX,platinum,1000,Full,Black / Copper
+202,Gigabyte P650G (US),6998.0,ATX,gold,650,False,Black
+203,EVGA SuperNOVA 1000 G6,23199.0,ATX,gold,1000,Full,Black
+206,Super Flower Leadex V Platinum Pro,30868.0,ATX,platinum,1000,Full,White
+207,EVGA 850 B5,13888.0,ATX,bronze,850,Full,Black
+208,be quiet! Dark Power Pro 13,41990.0,ATX,titanium,1300,Full,Black
+209,be quiet! Straight Power 11,14990.0,ATX,platinum,750,Full,Black
+210,Thermaltake Toughpower GF3 TT Premium,19999.0,ATX,gold,1200,Full,Black
+211,Corsair RM750,24495.0,ATX,gold,750,Full,Black
+212,be quiet! System Power 10,18800.0,ATX,bronze,750,False,Black
+214,Thermaltake Toughpower GF1 Snow - TT Premium,12299.0,ATX,gold,750,Full,White
+216,be quiet! System Power 10,8539.0,ATX,bronze,550,False,Black
+217,EVGA GE,6998.0,ATX,gold,600,False,Black
+218,Silverstone Essential,10592.0,ATX,bronze,550,False,Black
+219,SeaSonic FOCUS PX,19098.0,ATX,platinum,850,Full,Black
+220,Corsair CX550 (2017),9999.0,ATX,bronze,550,False,
+221,EVGA SuperNOVA 850 G6,15999.0,ATX,gold,850,Full,Black
+222,Deepcool PQ1000M,15999.0,ATX,gold,1000,Full,Black
+224,Corsair RM650 (2019),23424.0,ATX,gold,650,Full,Black
+225,Lian Li SP850,14096.0,SFX,gold,850,Full,Black
+226,Asus ROG LOKI,21099.0,SFX,platinum,850,Full,Black / Silver
+227,Super Flower Leadex III ARGB,16868.0,ATX,gold,650,Full,White
+229,EVGA 750 GQ,14826.0,ATX,gold,750,Semi,
+231,ADATA XPG CORE Reactor 650,9999.0,ATX,gold,650,Full,Black
+232,EVGA 600 BQ,15999.0,ATX,bronze,600,Semi,
+233,Asus TUF Gaming 750G,12399.0,ATX,gold,750,Full,Black
+235,be quiet! System Power 9 500 CM,9829.0,ATX,bronze,500,Semi,Black
+236,Corsair AX1200i,65773.0,ATX,platinum,1200,Full,
+237,Thermaltake TOUGHPOWER GF A3,12999.0,ATX,gold,850,Full,Black
+238,SeaSonic PRIME Ultra Titanium,33898.0,ATX,titanium,1000,Full,
+239,be quiet! Pure Power 11,7859.0,ATX,gold,500,False,Black
+240,Thermaltake TOUGHPOWER GF A3,15999.0,ATX,gold,1050,Full,Black
+242,Super Flower Leadex III ARGB,19999.0,ATX,gold,850,Full,White
+243,ADATA XPG CORE Reactor 750,10999.0,ATX,gold,750,Full,Black
+244,Cooler Master Elite V3,6768.000000000001,ATX,plus,600,False,Black
+245,be quiet! Pure Power 12 M,9490.0,ATX,gold,550,Full,Black
+247,Gigabyte AORUS P GM,16409.0,ATX,gold,750,Full,Black / Silver
+248,Thermaltake Smart RGB 230V,16800.0,ATX,plus,500,False,Black
+252,Cooler Master V650 V2,13499.0,ATX,gold,650,Full,White
+253,Thermaltake Toughpower GX1,8036.0,ATX,gold,600,False,Black
+254,SeaSonic FOCUS GX,17661.0,ATX,gold,550,Full,Black
+255,Thermaltake Toughpower GF3 TT Premium,12699.0,ATX,gold,750,Full,Black
+257,Corsair RM850,22699.0,ATX,gold,850,Full,Black
+258,Corsair RM650x (2018),17500.0,ATX,gold,650,Full,Black / Silver
+259,SeaSonic FOCUS,14699.0,ATX,gold,850,Semi,Black
+261,Super Flower Leadex V Platinum Pro,24999.0,ATX,platinum,850,Full,White
+262,SeaSonic G12 GM,12582.0,ATX,gold,650,Semi,Black / Blue
+263,EVGA SuperNOVA 850 G2,35599.0,ATX,gold,850,Full,
+264,Thermaltake Toughpower GF3 TT Premium,24121.0,ATX,gold,1350,Full,Black
+265,Thermaltake TOUGHPOWER GF A3,17999.0,ATX,gold,1200,Full,Black
+267,Cooler Master MasterWatt 550,8499.0,ATX,bronze,550,Semi,
+270,EVGA SuperNOVA 1000 G5,20750.0,ATX,gold,1000,Full,Black / Green
+272,FSP Group Hydro GE,10999.0,ATX,gold,650,Full,
+274,be quiet! Pure Power 11 600,12400.0,ATX,gold,600,Semi,Black
+275,EVGA SuperNOVA 1000 G+,31700.0,ATX,gold,1000,Full,Black
+276,EVGA SuperNOVA 750 G6,13928.0,ATX,gold,750,Full,Black
+278,FSP Group Hydro GE,8999.0,ATX,gold,550,Full,
+279,EVGA SuperNOVA 650 P2,14499.0,ATX,platinum,650,Full,
+280,Fractal Design Ion Gold,15429.0,ATX,gold,850,Full,Black
+282,be quiet! Dark Power 13,20990.0,ATX,titanium,750,Full,Black
+283,Apevia Prestige,7498.0,ATX,gold,1000,False,Black
+284,Silverstone HELA 1200R,23829.0,ATX,platinum,1200,Full,Black
+288,Raidmax RX-530SS,4999.0,ATX,,530,Semi,
+290,EVGA 650BP,7498.999999999999,ATX,bronze,650,False,Black
+293,EVGA 500 BQ,11499.0,ATX,bronze,500,Semi,
+294,Corsair HX1000i,44900.0,ATX,platinum,1000,Full,
+295,Super Flower Leadex Platinum SE,16999.0,ATX,platinum,1200,Full,Black
+298,EVGA SuperNOVA 1000 P6,28999.0,ATX,platinum,1000,Full,Black / Silver
+299,Corsair RM850x,18887.0,ATX,gold,850,Full,
+303,SeaSonic PRIME Ultra Titanium,20999.0,ATX,titanium,750,Full,
+304,Corsair HX1200i,63900.0,ATX,platinum,1200,Full,
+305,EVGA SuperNOVA 850 G5,19885.0,ATX,gold,850,Full,Black / Green
+306,Cooler Master MWE Gold 1250 - V2,19999.0,ATX,gold,1250,Full,Black
+307,Corsair RM850x (2018),28500.0,ATX,gold,850,Full,White / Black
+309,Phanteks Revolt SFX,18399.0,SFX,platinum,850,Full,Black
+310,Enermax REVOLUTION D.F. 2,12999.0,ATX,gold,1050,Full,Black
+312,Cooler Master Elite 400 V3,5321.0,ATX,plus,400,False,Black
+313,be quiet! SFX L Power,14238.0,SFX,gold,500,Full,
+315,EVGA 750 BP,8999.0,ATX,bronze,750,False,Black
+316,Corsair CX650F,16999.0,ATX,bronze,650,Full,Black
+317,Corsair CX600,17841.0,ATX,bronze,600,False,
+319,MSI MPG A750G PCIE5,13999.0,ATX,gold,750,Full,Black
+320,Corsair SF450,22999.0,SFX,gold,450,Full,
+321,be quiet! Straight Power 11 850W,15899.0,ATX,gold,850,Full,
+323,SeaSonic PRIME TX,69600.0,ATX,titanium,1300,Full,Black / Silver
+324,SeaSonic FOCUS Gold,9999.0,ATX,gold,550,Semi,
+326,EVGA SuperNOVA 1600 G+,24900.0,ATX,gold,1600,Full,Black
+327,FSP Group Hydro G Pro,22372.0,ATX,gold,1000,Full,Black
+328,EVGA SuperNOVA 650 G6,11000.0,ATX,gold,650,Full,Black
+329,EVGA SuperNOVA 650 P5,12799.0,ATX,platinum,650,Full,Black / Teal
+331,Silverstone Strider Platinum S,21663.0,ATX,platinum,1200,Full,Black
+333,ADATA XPG PYLON,12649.0,ATX,bronze,650,False,Black
+334,GAMDIAS KRATOS M1 B,7998.0,ATX,bronze,750,False,Black
+336,Gigabyte AORUS P1200W,29298.0,ATX,platinum,1200,Full,Black
+338,Corsair RM750x,18653.0,ATX,gold,750,Full,
+340,Corsair RM750,21681.0,ATX,gold,750,Full,
+343,Enermax REVOLUTION D.F. 2,14999.0,ATX,gold,1200,Full,Black
+344,Fractal Design Ion+ 2 Platinum,32600.0,ATX,platinum,860,Full,Black
+345,SeaSonic FOCUS SGX (2021),16999.0,SFX,gold,750,Full,Black
+349,SeaSonic G12 GM,13101.0,ATX,gold,750,Semi,Black / Blue
+350,Corsair VS550 (2018),13665.0,ATX,plus,550,False,
+351,Thermaltake Toughpower TF1 - TT Premium,39995.0,ATX,titanium,1550,Full,Black
+353,Cougar POLAR,25478.0,ATX,platinum,1200,Full,White
+354,Asus ROG Strix,21482.0,ATX,gold,650,Full,Black / Red
+355,SeaSonic FOCUS SPX (2021),19499.0,SFX,platinum,750,Full,Black
+357,Deepcool DQ750-M-V2L,10999.0,ATX,gold,750,Full,Black / Green
+359,Silverstone Extreme 850R Platinum,23392.0,SFX,platinum,850,Full,Black
+361,SeaSonic PRIME TX-850,38780.0,ATX,titanium,850,Full,Black
+362,be quiet! System Power 9 700 CM,16341.0,ATX,bronze,700,Semi,Black
+363,Corsair CXM,17099.0,ATX,bronze,750,Semi,
+364,Cooler Master V750 Gold i,12999.0,ATX,gold,750,Full,Black / Gold
+365,be quiet! SFX L Power,12858.000000000002,SFX,gold,600,Full,
+370,SeaSonic FOCUS,16569.0,ATX,platinum,550,Full,Black
+374,Thermaltake Toughpower Grand RGB,14902.000000000002,ATX,gold,850,Full,
+375,Silverstone FX350-G,9136.0,Flex ATX,gold,350,False,Black
+377,be quiet! SFX Power 3 450,10129.0,SFX,bronze,450,False,Black
+381,Silverstone Essential,7498.0,ATX,gold,550,False,Black / Yellow
+382,Corsair SF450,21849.0,SFX,platinum,450,Full,Black
+383,Phanteks AMP v2,15999.0,ATX,gold,1000,Full,Black
+385,EVGA SuperNOVA 1600 P2,30499.0,ATX,platinum,1600,Full,
+386,Corsair CX550M,19783.0,ATX,bronze,550,Semi,
+387,Asus ROG Strix,15741.0,ATX,gold,550,Full,Black / Red
+389,SeaSonic FOCUS Plus Platinum,14997.999999999998,ATX,platinum,650,Full,
+390,Asus TUF Gaming B,7998.0,ATX,bronze,450,False,Black
+392,be quiet! Pure Power 11,8859.0,ATX,gold,600,False,Black
+393,Cooler Master V SFX Platinum,27999.0,SFX,platinum,1100,Full,Black
+394,Thermaltake Toughpower,10899.0,ATX,gold,750,Semi,
+395,Corsair CX600M,17999.0,ATX,bronze,600,Semi,
+396,Super Flower Leadex V Pro,24999.0,ATX,gold,1000,Full,White
+398,Corsair VS650 (2018),46499.0,ATX,plus,650,False,
+399,Cooler Master G700,10398.0,ATX,gold,700,False,Black
+401,EVGA SuperNOVA 1300 P+,35768.0,ATX,platinum,1300,Full,Black
+402,SeaSonic PRIME PX,33629.0,ATX,platinum,1000,Full,Black / Silver
+403,SeaSonic PRIME PX,41499.0,ATX,platinum,1600,Full,Black / Silver
+405,Corsair CX750M V2 (2017 Edition),19999.0,ATX,bronze,750,Semi,Black / White
+406,Vetroo GV1000,15999.0,ATX,gold,1000,Full,White
+407,SeaSonic VERTEX GX-850,21999.0,ATX,gold,850,Full,Black / Silver
+408,Thermaltake Toughpower Grand RGB,13099.0,ATX,gold,750,Full,
+412,Cooler Master G500,8999.0,ATX,gold,500,False,Black
+413,Enermax Revolution D.F.,12298.0,ATX,gold,650,Full,Black
+414,Corsair CX500,29999.0,ATX,bronze,500,False,
+418,Super Flower Leadex III Super Pro,8999.0,ATX,bronze,550,Full,Black
+419,Thermaltake Smart Pro RGB,10628.0,ATX,bronze,650,Full,
+422,be quiet! System Power 9 CM,14009.0,ATX,bronze,400,Semi,Black
+424,be quiet! Straight Power 11 550W,10900.0,ATX,gold,550,Full,
+425,Deepcool PQ850M,13097.999999999998,ATX,gold,850,Full,Black
+427,SeaSonic CORE GM,14499.0,ATX,gold,650,Semi,Black
+428,Super Flower Leadex III ARGB,17868.0,ATX,gold,750,Full,White
+431,Thermaltake Toughpower SFX,19499.0,SFX,gold,850,Full,Black
+432,EVGA SuperNOVA 850 P5,18499.0,ATX,platinum,850,Full,Black / Teal
+433,Cooler Master MWE Bronze,6875.0,ATX,bronze,500,False,Black
+437,SeaSonic PRIME 1300 Gold,28199.0,ATX,gold,1300,Full,Black
+439,be quiet! Pure Power 9 CM,10539.0,ATX,bronze,600,Semi,Black
+440,Thermaltake Toughpower SFX 600W Gold,12538.0,SFX,gold,600,Full,Black
+441,be quiet! System Power 9,11411.0,ATX,bronze,600,False,Black
+442,Corsair RM850 (2019),21900.0,ATX,gold,850,Full,Black
+444,FSP Group Hydro PTM PRO,26799.0,ATX,platinum,1200,Full,Black
+445,Asus ROG THOR P2 Gaming EVA Edition,48999.0,ATX,platinum,1000,Full,Black / Silver
+446,SeaSonic G12 GM,15937.0,ATX,gold,850,Semi,Black / Blue
+449,Corsair TX750M Gold,26243.0,ATX,gold,750,Semi,
+451,SeaSonic PRIME TX-750,21099.0,ATX,titanium,750,Full,Black
+456,Silverstone DA750 Gold,15588.0,ATX,gold,750,Full,Black / White
+457,Thermaltake Toughpower GF1 Snow - TT Premium,13999.0,ATX,gold,850,Full,White
+458,Corsair CX750F,21999.0,ATX,bronze,750,Full,Black
+459,Silverstone ST85F-GS-V2,12999.0,ATX,gold,850,Full,
+461,Silverstone HELA 850R,20808.0,ATX,platinum,850,Full,Black / Silver
+463,Silverstone FX600 Platinum,18398.0,Flex ATX,,600,False,Black
+467,Silverstone Strider Platinum,15000.0,ATX,platinum,850,Full,
+470,Corsair CX650F,17099.0,ATX,bronze,650,Full,White / Black
+474,Corsair RM850x White,33999.0,ATX,gold,850,Full,White / Black
+476,be quiet! Pure Power 11 CM,11489.0,ATX,gold,700,Semi,Black
+479,Deepcool DQ-M-V2L,15338.0,ATX,gold,850,Full,Black / Green
+480,EVGA SuperNOVA 550 GA,15380.000000000002,ATX,gold,550,Full,Black
+484,Deepcool PQ650M,10399.0,ATX,gold,650,Full,Black
+485,Montech TITAN GOLD 1200W,20999.0,ATX,gold,1200,Full,Black
+486,Athena Power AP-MTFX30,3699.0,TFX,,300,False,
+488,Vetroo GV1000,15599.0,ATX,gold,1000,Full,Black
+489,Corsair VS450,39999.0,ATX,plus,450,False,
+490,SeaSonic FOCUS,17817.0,ATX,platinum,750,Full,Black
+491,Phanteks Revolt X,21399.0,ATX,platinum,1000,Full,Black / Silver
+492,Asus ROG LOKI,19868.0,SFX,platinum,750,Full,Black / Silver
+495,Antec High Current Gamer Gold,16992.0,ATX,gold,750,Full,Black
+498,Thermaltake Toughpower SFX,15251.0,SFX,gold,750,Full,Black
+500,Gigabyte UD1000GM PG5,27039.0,ATX,gold,1000,Full,Black
+501,SHARKOON SilentStorm Cool Zero 650,14169.0,ATX,gold,650,Full,Black
+502,Corsair HX850i,45999.0,ATX,platinum,850,Full,
+503,Silverstone SX500-G,11499.0,SFX,gold,500,Full,
+506,Silverstone SX700-PT,16526.0,SFX,platinum,700,Full,Black
+507,Corsair CX500M,17999.0,ATX,bronze,500,Semi,
+508,Asus TUF Gaming B,14999.0,ATX,bronze,550,False,Black
+510,Deepcool DA600N,7698.999999999999,ATX,bronze,600,False,Black
+511,EVGA SuperNOVA 750 P2,22999.0,ATX,platinum,750,Full,
+512,Cougar GEX,8499.0,ATX,gold,650,Full,Black
+515,Cougar VTE,6998.0,ATX,bronze,600,False,Black
+516,Corsair CX650 (2017),15744.0,ATX,bronze,650,False,
+517,SeaSonic G12 GM,19700.0,ATX,gold,550,Semi,Black / Blue
+518,EVGA 1000 GQ,32598.0,ATX,gold,1000,Semi,
+519,Logisys PS480D,1698.0,ATX,,480,False,
+520,EVGA 750 B5,14499.0,ATX,bronze,750,Full,Black
+521,SeaSonic FOCUS,14997.999999999998,ATX,platinum,650,Full,Black
+522,Corsair RM650x,21320.0,ATX,gold,650,Full,
+523,SeaSonic SSP-300SFG,8999.0,SFX,gold,300,False,
+527,PowerSpec GFM,10999.0,ATX,gold,750,Full,Black
+528,SeaSonic PRIME,31500.0,ATX,gold,1000,Full,Black
+531,EVGA SuperNOVA 850 G+,24999.0,ATX,gold,850,Full,
+532,FSP Group Dagger Pro,13499.0,SFX,gold,650,Full,Black
+534,EVGA SuperNOVA 1300 G+,35998.0,ATX,gold,1300,Full,Black
+535,SeaSonic FOCUS,13797.999999999998,ATX,gold,750,Semi,Black
+536,EVGA SuperNOVA 650 G7,12999.0,ATX,gold,650,Full,Black / Blue
+537,Super Flower Leadex VI Platinum PRO,17999.0,ATX,platinum,850,Full,Black / Blue
+538,Thermaltake Toughpower GF1 ARGB,20761.0,ATX,gold,850,Full,
+541,GAMDIAS KRATOS P1 G,8999.0,ATX,gold,750,False,Black
+544,Xilence XP500R6,8640.0,ATX,,500,False,Black / Red
+545,Corsair TX850M Gold,31677.0,ATX,gold,850,Semi,
+546,SeaSonic PRIME Fanless,29898.0,ATX,titanium,700,Full,Black
+553,Cooler Master V850 Gold i,13499.0,ATX,gold,850,Full,Black / Gold
+555,SeaSonic PRIME,18999.0,ATX,gold,850,Full,Black
+560,Super Flower Leadex Platinum SE,14999.0,ATX,platinum,1000,Full,White
+561,NZXT E850,15999.0,ATX,gold,850,Full,Black
+562,Super Flower Leadex Titanium,31999.0,ATX,titanium,1000,Full,Black
+563,PowerSpec PS 650GSM,9499.0,ATX,gold,650,Semi,Black
+564,Silverstone SST-TX300,7498.0,TFX,bronze,300,False,Black
+565,Antec NeoECO Gold,22800.0,ATX,gold,750,Full,
+568,Montech TITAN GOLD 1000W,18992.0,ATX,gold,1000,Full,Black
+569,Thermaltake Smart RGB,9721.0,ATX,plus,600,False,
+571,Silverstone Strider Platinum S,26507.0,ATX,platinum,1000,Full,Black
+573,Silverstone Essential,9499.0,ATX,gold,750,False,Black / Yellow
+575,Corsair RM750x White,27900.0,ATX,gold,750,Full,White / Black
+576,SeaSonic FOCUS Gold,13797.999999999998,ATX,gold,750,Semi,
+577,Silverstone SFX,9416.0,SFX,bronze,450,False,Black
+580,EVGA SuperNOVA 1000 G3,37999.0,ATX,gold,1000,Full,
+582,Deepcool DA700N,8799.0,ATX,bronze,700,False,Black
+584,Xilence XP600R6,8098.0,ATX,,600,False,Black / Red
+585,Super Flower LEADEX VII XG,15499.0,ATX,gold,1000,Full,Black
+586,be quiet! Straight Power 11 1000W,30200.0,ATX,gold,1000,Full,
+589,Corsair HX750,26364.0,ATX,gold,750,Semi,
+592,Super Flower Leadex Platinum,13499.0,ATX,platinum,850,Full,Black
+593,EVGA SuperNOVA 650 G+,17494.0,ATX,gold,650,Full,Black
+596,CoolMax V-400,2563.0,ATX,,400,False,
+600,Razer Katana Chroma,38999.0,ATX,platinum,1200,Full,Black
+605,SeaSonic FOCUS Gold,12582.0,ATX,gold,650,Semi,
+606,SeaSonic CORE GM,20009.0,ATX,gold,500,Semi,Black
+610,SeaSonic PRIME PX,19798.0,ATX,platinum,750,Full,Black / Silver
+616,Corsair HX750i,45999.0,ATX,platinum,750,Full,
+617,Deepcool PX-G,20868.0,ATX,gold,1000,Full,Black
+618,SeaSonic PRIME,22119.0,ATX,gold,750,Full,Black
+619,Silverstone SFX,15359.0,SFX,platinum,700,Full,
+620,Corsair RM1000,44000.0,ATX,gold,1000,Full,
+622,SeaSonic FOCUS,12798.0,ATX,gold,650,Semi,Black
+623,Cooler Master XG850 Plus,20202.0,ATX,platinum,850,Full,Black
+624,Corsair CX450 (2017),11999.0,ATX,bronze,450,False,
+630,Corsair AX760,69999.0,ATX,platinum,760,Full,
+631,Super Flower Leadex III Gold,11499.0,ATX,gold,650,Full,Black
+633,Antec EARTHWATTS GOLD PRO 650,12001.0,ATX,gold,650,Semi,Black
+635,Silverstone SX650-G,13224.0,SFX,gold,650,Full,
+636,Deepcool DA500,8159.0,ATX,bronze,500,False,Black / Gold
+638,Corsair RM550x,22999.0,ATX,gold,550,Full,
+641,SeaSonic PRIME PX-1600 ATX 3.0,50999.0,ATX,platinum,1600,Full,Black / Silver
+642,Cougar VTE X2,8298.0,ATX,plus,750,False,Black
+647,Silverstone Strider Platinum,12999.0,ATX,platinum,650,Full,
+648,SHARKOON SilentStorm Cool Zero 750,15379.0,ATX,gold,750,Full,Black
+651,Corsair RM650,19341.0,ATX,gold,650,Full,
+652,Silverstone SX-G,14526.0,SFX,gold,700,Full,Black
+655,FSP Group Dagger Pro,17784.0,SFX,gold,850,Full,Black / Gold
+656,Apevia ATX-JP1000W,9484.0,ATX,bronze,1000,False,
+657,Enermax Revolution D.F.,11999.0,ATX,gold,750,Full,Black / Silver
+659,EVGA N1,8499.0,ATX,,550,False,
+660,Silverstone Essential,11999.0,ATX,gold,650,False,Black
+661,Super Flower LEADEX VII XG,13999.0,ATX,gold,850,Full,Black
+667,be quiet! Straight Power 11,12949.0,ATX,platinum,550,Full,Black
+670,Enermax Revolution D.F.,12298.0,ATX,gold,850,Full,Black / Silver
+674,FSP Group FSP400-60FGGBA,10999.0,Flex ATX,gold,400,False,
+677,ADATA XPG PYLON,52200.0,ATX,bronze,750,False,Black
+682,SeaSonic FOCUS Plus 550 Gold,20799.0,ATX,gold,550,Full,
+685,Xilence XP400R6,7947.0,ATX,,400,False,Black / Red
+690,Razer Katana Chroma,33599.0,ATX,platinum,850,Full,Black
+691,Cooler Master XG750 Plus,15765.0,ATX,platinum,750,Full,Black
+693,Cougar BXM750,7498.999999999999,ATX,bronze,750,Semi,Orange / Black
+698,CoolMax ZX-500,6729.000000000001,ATX,plus,500,False,
+699,Silverstone Strider Titanium,32999.0,ATX,titanium,1100,Full,Black / Blue
+701,Corsair AX850,49999.0,ATX,titanium,850,Full,Black / Silver
+702,Deepcool PX-G,15999.0,ATX,gold,850,Full,Black
+703,Corsair VS500,17999.0,ATX,plus,500,False,
+707,Corsair AX850,49840.0,ATX,gold,850,Full,
+709,ADATA XPG CYBERCORE,19999.0,ATX,platinum,1300,Full,Black / Silver
+714,SeaSonic SSP-300SUG,9100.0,Flex ATX,gold,300,False,
+715,Thermaltake Thermaltake TP-750M,10899.0,ATX,gold,750,Semi,
+717,SeaSonic PRIME Ultra Platinum 1000,39031.0,ATX,platinum,1000,Full,Black
+719,Cougar VTE X2,5999.0,ATX,plus,600,False,Black
+720,Super Flower Leadex V Pro,24999.0,ATX,gold,1000,Full,Black / Gold
+722,Thermaltake Smart BX1 RGB 650,13775.0,ATX,bronze,650,False,Black
+723,Super Flower LEADEX VII XG,18499.0,ATX,gold,1300,Full,Black
+724,SeaSonic PRIME Ultra Titanium,42900.0,ATX,titanium,850,Full,
+730,SeaSonic S12III,19439.0,ATX,bronze,550,False,Black
+732,In Win IP-S200DF1-0,5202.0,TFX,,200,False,
+733,NZXT C (2019),12999.0,ATX,gold,750,Full,Black
+736,Silverstone Essential,10087.0,ATX,bronze,750,False,Black
+738,SeaSonic S12II,26243.0,ATX,bronze,520,False,
+739,FSP Group FSP300-60LG,14802.000000000002,Mini ITX,bronze,300,False,
+740,Super Flower Leadex Platinum SE,24999.0,ATX,platinum,1000,Full,Black
+748,In Win P85,13391.0,ATX,gold,850,Full,Black
+749,Super Flower Leadex Platinum,69999.0,ATX,platinum,1600,Full,Black
+750,FSP Group Hyper M85+,8614.0,ATX,bronze,650,Semi,Black
+761,Deepcool PX-G,23999.0,ATX,gold,1200,Full,Black
+762,SeaSonic Prime Fanless PX-450,26300.0,ATX,platinum,450,Full,Black
+766,Silverstone Strider,9999.0,ATX,bronze,700,Full,
+767,Sparkle FSP350-60GNV,6998.999999999999,SFX,,350,False,
+771,SHARKOON SilentStorm,14538.0,SFX,gold,500,Full,Black
+772,EVGA SuperNOVA 750 P6,18438.0,ATX,platinum,750,Full,Black / Silver
+784,Xilence XP1050MR9,21089.0,ATX,gold,1050,Full,Black / Red
+785,Deepcool PM650D,10828.0,ATX,gold,650,False,Black
+793,PC Power & Cooling Silencer,19111.0,ATX,platinum,1050,Full,
+797,be quiet! Pure Power 10,15000.0,ATX,silver,600,False,
+801,EVGA SuperNOVA 650 P6,15999.0,ATX,platinum,650,Full,Black / Silver
+803,Silverstone Strider Platinum,14399.0,ATX,platinum,750,Full,
+808,Enermax Platimax D.F.,19999.0,ATX,platinum,1050,Full,Black
+810,ARESGAME AGS,9099.0,ATX,gold,850,Semi,Black / Red
+815,Apex AL-8250SFX,7755.0,SFX,,250,False,
+822,Fractal Design Anode Bronze,13949.0,ATX,bronze,650,Semi,Black
+823,FSP Group Dagger Pro,15999.0,SFX,gold,750,Full,Black / Gold
+827,SeaSonic PRIME Ultra Platinum 750,19798.0,ATX,platinum,750,Full,Black
+830,LEPA MaxBron,9368.0,ATX,bronze,1000,Semi,
+835,Corsair TX650,29999.0,ATX,plus,650,False,
+836,Corsair HX1000,49999.0,ATX,plus,1000,Semi,
+838,be quiet! Dark Power Pro 11,13990.0,ATX,platinum,550,Semi,
+839,Cooler Master V1200,30689.0,ATX,platinum,1200,Full,
+841,Silverstone Strider,11499.0,ATX,gold,550,Full,
+850,Super Flower Leadex Titanium,23999.0,ATX,titanium,850,Full,Black
+851,ADATA XPG CYBERCORE,22999.0,ATX,platinum,1000,Full,Black / Silver
+852,be quiet! Dark Power Pro 11,15990.0,ATX,platinum,650,Semi,
+854,SeaSonic Prime Fanless PX-500,29000.0,ATX,platinum,500,Full,Black
+861,EVGA 610 BP,11900.0,ATX,bronze,610,False,Black
+862,Silverstone TX700-G,18475.0,TFX,gold,700,False,Black
+863,SHARKOON SilentStorm Cool Zero 850,25700.0,ATX,gold,850,Full,Black
+868,Xilence XP700R6,13900.0,ATX,,700,False,Black / Red
+869,Super Flower Leadex III Gold,10499.0,ATX,gold,550,Full,Black
+870,PC Power & Cooling PM0600,9999.0,ATX,bronze,600,Semi,Black / Red
+874,be quiet! Straight Power 11 450W,30717.0,ATX,gold,450,Full,
+882,Corsair TX850,49999.0,ATX,plus,850,False,
+901,Antec Signature Platinum,28499.0,ATX,platinum,1300,Full,Black
+908,Logisys PS550E12BK,2999.0,ATX,,550,False,
+910,NOX Hummer,8514.0,ATX,bronze,650,Semi,
+917,Corsair CX430M,19529.0,ATX,bronze,430,Semi,
+918,Thermaltake TOUGHPOWER PF1 ARGB,29999.0,ATX,platinum,850,Full,
+927,Sparkle FSP300-60ATV,5999.0,ATX,,300,False,
+943,Thermaltake Toughpower GF2 ARGB,15899.0,ATX,gold,750,Full,Black
+944,CoolMax V-500,2978.0,ATX,,500,False,
+946,Corsair CS450M,17495.0,ATX,gold,450,Semi,
+963,Silverstone NJ700,31552.0,ATX,titanium,700,Full,Silver
+972,Corsair HX750,49999.0,ATX,gold,750,Semi,
+976,Corsair RM550,29999.0,ATX,gold,550,Full,
+978,Corsair TX850M,49999.0,ATX,bronze,850,Semi,
+986,EVGA 710 BP,13850.0,ATX,bronze,710,False,Black
+988,Antec EARTHWATTS GOLD PRO 750,18063.0,ATX,gold,750,Semi,Black
+989,Antec VP PLUS,14652.000000000002,ATX,plus,650,False,
+992,Cooler Master V1300 Platinum,44590.0,ATX,platinum,1300,Full,Black
+993,SeaSonic PRIME Ultra Gold 1000,37999.0,ATX,gold,1000,Full,Black
+994,SeaSonic PRIME Ultra Gold 850,19498.0,ATX,gold,850,Full,Black
+998,Corsair GS700,27999.0,ATX,bronze,700,False,
+1000,Silverstone TX300,6329.0,TFX,bronze,300,False,Black
+1006,Thermaltake Toughpower iRGB PLUS 750,21999.0,ATX,gold,750,Full,Black
+1011,Corsair TX750 V2,38498.0,ATX,bronze,750,False,
+1026,Rosewill Glacier 700M,13499.0,ATX,bronze,700,Semi,
+1028,Corsair TX550M,21659.0,ATX,bronze,550,Semi,
+1033,Corsair TX750M,49999.0,ATX,bronze,750,Semi,
+1035,Antec NeoECO,9149.0,ATX,bronze,550,Semi,Black
+1036,Rosewill HIVE,18399.0,ATX,bronze,850,Full,
+1043,LC-Power LC6560GP3 V2.3 230V,48100.0,ATX,silver,560,False,Black
+1044,Rosewill CFZ,9990.0,ATX,bronze,750,Semi,Black
+1045,Thermaltake German,12400.0,ATX,plus,630,False,
+1063,SHARKOON SilentStorm,8959.0,SFX,bronze,450,False,Black
+1066,Xilence XP750MR9,12409.0,ATX,gold,750,Semi,Black / Red
+1067,In Win P65,12400.0,ATX,gold,650,Full,Black
+1069,Enermax Platimax,29999.0,ATX,platinum,1350,Full,Black
+1071,Cougar BXM850,11498.0,ATX,bronze,850,Semi,Orange / Black
+1078,Cooler Master MWE Gold 750,16400.0,ATX,gold,750,False,Black
+1086,Corsair VX550,21563.0,ATX,plus,550,False,
+1091,Corsair VS400,37199.0,ATX,plus,400,False,
+1092,Thermaltake Toughpower,26399.0,ATX,gold,1200,Semi,
+1110,Corsair G800,31992.0,ATX,plus,800,False,
+1117,Silverstone Strider,24790.0,ATX,silver,1500,False,
+1118,XFX TS,15063.0,ATX,gold,550,False,
+1130,Super Flower Leadex III Super Pro,13999.0,ATX,bronze,850,Full,Black
+1132,CoolMax ZX-600,7818.000000000001,ATX,plus,600,False,
+1134,Silverstone Strider Platinum,15597.0,ATX,platinum,550,Full,
+1135,Xilence XP550R9,16000.0,ATX,gold,550,False,Black / Red
+1143,Thermaltake Smart,19682.0,ATX,bronze,750,Semi,
+1160,Xilence XP1250MR9,25339.0,ATX,gold,1250,Full,Black / Red
+1161,Sparkle ATX-350PN-B204,5799.0,ATX,,350,False,
+1162,Cooler Master XG650 Plus,18999.0,ATX,platinum,650,Full,Black
+1163,EVGA 500 BT,11840.0,ATX,bronze,500,False,Black
+1176,PC Power & Cooling Silencer,26389.0,ATX,platinum,1200,Full,
+1182,Rosewill LEPTON 600,17999.0,ATX,gold,600,Semi,Black
+1196,Athena Power Apollo,4699.0,SFX,,300,False,
+1201,Silverstone Essential,11890.0,ATX,gold,750,Semi,Black / Blue
+1211,Corsair G700,32399.0,ATX,plus,700,False,
+1215,SeaSonic SS-300ES Bronze,10444.0,ATX,bronze,300,False,
+1228,Corsair TX650M,29999.0,ATX,bronze,650,Semi,
+1231,Rosewill PHOTON-550,23299.0,ATX,gold,550,Full,
+1232,Enermax MAXREVO SLI,36999.0,ATX,gold,1350,Full,Black / Gold
+1243,Thermaltake Toughpower GF2 ARGB,13999.0,ATX,gold,650,Full,Black
+1244,Apex SL-275TFX,4595.0,TFX,,275,False,
+1249,In Win PB,15000.0,ATX,gold,750,Full,
+1263,Antec Basiq,20000.0,ATX,plus,550,Semi,
+1266,Rosewill Glacier 850M,28139.0,ATX,bronze,850,Semi,
+1267,SeaSonic PRIME Ultra Platinum 850,36842.0,ATX,platinum,850,Full,Black
+1289,SeaSonic SSP-300TBS,7287.0,TFX,bronze,300,False,Silver
+1290,FSP Group FSP500-50FSPT,14999.0,Flex ATX,platinum,500,False,
+1291,CoolMax ZX-700,8881.0,ATX,plus,700,False,
+1309,Corsair TX850 V2,59999.0,ATX,bronze,850,False,
+1315,Athena Power APOLLO 600,19621.0,SFX,bronze,600,False,
+1341,SeaSonic SS-300TFX Bronze,5683.0,TFX,bronze,300,False,
+1359,Enermax MaxTytan,36999.0,ATX,titanium,1050,Full,
+1366,Athena Power AP-MFATX50P8,13699.0,Flex ATX,silver,500,False,
+1367,Athena Power AP-MFATX40P8,11785.0,Flex ATX,bronze,400,False,
+1369,Antec NeoECO V2,9149.0,ATX,bronze,550,Semi,Black
+1370,Silverstone SFX,7398.0,SFX,bronze,300,False,Black
+1426,Cooler Master eXtreme Power Plus,9995.0,ATX,,500,False,
+1429,Fractal Design Anode Bronze,19400.0,ATX,bronze,550,Semi,Black
+1430,Antec Earthwatts Green,10811.0,ATX,plus,500,False,
+1431,Antec True Power,28681.0,ATX,bronze,850,Full,
+1471,Fractal Design Anode Bronze,15569.0,ATX,bronze,750,Semi,Black
+1519,SeaSonic SS-850HT Silver,16900.0,ATX,silver,850,False,
+1532,Antec High Current Pro,26900.0,ATX,platinum,1000,Full,
+1547,Corsair TX750 V2,38498.0,ATX,bronze,750,False,
+1557,In Win IP-S300FF1-0,6269.0,TFX,plus,300,False,
+1677,Topower ZU-550W,6100.0,ATX,,550,False,
+1678,SeaSonic SS-600ES,10000.0,ATX,bronze,600,False,Gray
+1679,Cooler Master eXtreme Power Plus,9995.0,ATX,,500,False,
+1681,FSP Group FSP300-60LG-5K,15374.0,Flex ATX,bronze,300,False,
+1746,SeaSonic SS-400ET Bronze,9800.0,ATX,bronze,400,False,
+1747,Rosewill Green,8000.0,ATX,plus,430,False,
+1748,Antec Basiq,8834.0,ATX,,350,False,
+1814,Corsair TX850 V2,59999.0,ATX,bronze,850,False,
+1849,Sparkle ATX-300PA,18809.0,ATX,,300,False,
+1949,Antec Earthwatts,12498.0,ATX,bronze,500,False,
+2062,Antec High Current Gamer,24999.0,ATX,bronze,400,False,
+2063,SeaSonic Platinum,12804.0,ATX,bronze,600,False,
+2064,Apex AL-A400ATX,8000.0,ATX,,400,False,
+2223,StarTech ATX2PW500PRO,16775.0,ATX,,500,False,
+2224,FSP Group FSP300-60SGV,7998.0,TFX,gold,300,False,

@@ -1,0 +1,16 @@
+langgraph
+langchain-core
+langchain
+langchain-community
+langchain-openai
+pydantic
+fuzzywuzzy
+beautifulsoup4
+selenium
+playwright
+sqlalchemy
+python-dotenv
+typing_extensions
+pyprojroot
+shutil
+sqlite3

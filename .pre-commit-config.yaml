@@ -28,5 +28,20 @@ repos:
     rev: v1.7.1
     hooks:
     -   id: mypy
-        additional_dependencies: [types-requests, pydantic]
-        exclude: ^(notebooks/|tests/) 
+        args: [--explicit-package-bases, --package, src]
+        pass_filenames: false
+        additional_dependencies: [
+            types-requests,
+            pydantic,
+            types-PyYAML,
+            sqlalchemy-stubs,
+            types-selenium,
+            types-python-dotenv,
+            langchain,
+            langchain-core,
+            langchain-community,
+            langchain-openai,
+            gradio,
+            playwright
+          ]
+        exclude: ^(notebooks/|tests/)

@@ -1,15 +1,14 @@
-import json
 import time
-from typing import Any, Optional, Union
+from typing import Any
 
-from fuzzywuzzy import process
 from langchain.tools import tool
 from pydantic import BaseModel
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
+from thefuzz import process  # type: ignore
 
 
 # Основная модель для результата
@@ -18,20 +17,20 @@ class GameRequirementsResult(BaseModel):
     cpu: str
     gpu: str
     ram: int
-    requirements: Optional[str] = None
-    fps_info: list[Any]
+    requirements: str | None = None
+    fps_info: list[dict[str, str]]
     paragraphs: list[str]
-    error: Optional[str] = None
+    error: str | None = None
 
 
 class InputData(BaseModel):
-    game_name: Optional[str]
-    cpu: Optional[str]
-    gpu: Optional[str]
-    ram: Optional[int] = None
+    game_name: str | None
+    cpu: str | None
+    gpu: str | None
+    ram: int | None = None
 
 
-def check_game_requirements(game_name, cpu, gpu, ram) -> Union[GameRequirementsResult, str]:
+def check_game_requirements(game_name, cpu, gpu, ram) -> dict[str, Any]:
     """
     Проверка совместимости системных требований для игры.
     """
@@ -48,13 +47,13 @@ def check_game_requirements(game_name, cpu, gpu, ram) -> Union[GameRequirementsR
         driver.get("https://technical.city/ru/can-i-run-it")
 
         game_name_input = wait.until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR, "input.ui-autocomplete-input"))
+            ec.element_to_be_clickable((By.CSS_SELECTOR, "input.ui-autocomplete-input"))
         )
 
         game_name_input.send_keys(game_name)
 
         wait.until(
-            EC.visibility_of_element_located(
+            ec.visibility_of_element_located(
                 (
                     By.CSS_SELECTOR,
                     "ul.ui-menu.ui-widget.ui-widget-content.ui-autocomplete.highlight.ui-front",
@@ -63,7 +62,7 @@ def check_game_requirements(game_name, cpu, gpu, ram) -> Union[GameRequirementsR
         )
 
         game_item = wait.until(
-            EC.element_to_be_clickable(
+            ec.element_to_be_clickable(
                 (By.XPATH, f"//span[@class='bold-text' and text()='{game_name}']")
             )
         )
@@ -71,20 +70,20 @@ def check_game_requirements(game_name, cpu, gpu, ram) -> Union[GameRequirementsR
         game_item.click()
 
         cpu_input = wait.until(
-            EC.element_to_be_clickable(
+            ec.element_to_be_clickable(
                 (By.CSS_SELECTOR, "input.select-input[placeholder='Выберите процессор']")
             )
         )
         cpu_input.send_keys(cpu)
 
         gpu_input = wait.until(
-            EC.element_to_be_clickable(
+            ec.element_to_be_clickable(
                 (By.CSS_SELECTOR, "input.select-input[placeholder='Выберите видеокарту']")
             )
         )
         gpu_input.send_keys(gpu)
         gpu_list = wait.until(
-            EC.presence_of_all_elements_located(
+            ec.presence_of_all_elements_located(
                 (
                     By.CSS_SELECTOR,
                     "ul.ui-menu.ui-widget.ui-widget-content.ui-autocomplete.highlight.ui-front li.ui-menu-item",
@@ -97,11 +96,11 @@ def check_game_requirements(game_name, cpu, gpu, ram) -> Union[GameRequirementsR
         best_match_element.click()
 
         ram_dropdown = wait.until(
-            EC.element_to_be_clickable((By.XPATH, "//span[@class='selecter-selected']"))
+            ec.element_to_be_clickable((By.XPATH, "//span[@class='selecter-selected']"))
         )
         ram_dropdown.click()
         ram_option = wait.until(
-            EC.element_to_be_clickable(
+            ec.element_to_be_clickable(
                 (By.XPATH, f"//span[@class='selecter-item' and @data-value='{ram}']")
             )
         )
@@ -113,19 +112,19 @@ def check_game_requirements(game_name, cpu, gpu, ram) -> Union[GameRequirementsR
         time.sleep(2)
 
         requirements_notice = wait.until(
-            EC.presence_of_all_elements_located((By.XPATH, "//p[@class='notice']"))
+            ec.presence_of_all_elements_located((By.XPATH, "//p[@class='notice']"))
         )
         requirements_text = requirements_notice[0].text if requirements_notice else None
 
-        paragraph_elements = wait.until(EC.presence_of_all_elements_located((By.XPATH, "//p")))
+        paragraph_elements = wait.until(ec.presence_of_all_elements_located((By.XPATH, "//p")))
 
         resolution_elements = wait.until(
-            EC.presence_of_all_elements_located(
+            ec.presence_of_all_elements_located(
                 (By.XPATH, "//div[@class='fps_quality_resolution']")
             )
         )
         fps_elements = wait.until(
-            EC.presence_of_all_elements_located(
+            ec.presence_of_all_elements_located(
                 (
                     By.XPATH,
                     "//div[@class='fps_value']/em[@class='green' or @class='yellow' or @class='red']",
@@ -156,18 +155,28 @@ def check_game_requirements(game_name, cpu, gpu, ram) -> Union[GameRequirementsR
         )
 
         # Возвращаем результат в виде словаря, преобразуем в JSON
-        return json.loads(result.json())  # Преобразуем результат в JSON
+        return result.model_dump()
 
     except Exception as e:
-        result = GameRequirementsResult(game=game_name, cpu=cpu, gpu=gpu, ram=ram, error=str(e))
-        return json.loads(result.model_dump_json())  # Преобразуем результат в JSON
+        # Указываем все обязательные поля, даже если они None или пустые списки
+        result = GameRequirementsResult(
+            game=game_name,
+            cpu=cpu,
+            gpu=gpu,
+            ram=ram,
+            requirements=None,
+            fps_info=[],
+            paragraphs=[],
+            error=str(e),
+        )
+        return result.model_dump()
 
     finally:
         driver.quit()
 
 
 @tool
-def game_run_tool(input_data: dict) -> dict:
+def game_run_tool(input_data: dict) -> dict[str, Any]:
     """
     Проверяет совместимость системных требований игры с заданными компонентами (процессор, видеокарта, оперативная память).
     Пример входных данных dict:
@@ -197,7 +206,8 @@ def game_run_tool(input_data: dict) -> dict:
 
     result = check_game_requirements(game_name, cpu, gpu, ram)
 
-    return json.dumps(result, ensure_ascii=False, indent=4)
+    # Возвращаем как словарь
+    return result
 
 
 # if __name__ == "__main__":

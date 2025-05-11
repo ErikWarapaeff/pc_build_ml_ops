@@ -1,10 +1,11 @@
-from typing import Optional, Union
+from typing import Annotated
 
+from langchain.schema import HumanMessage
 from langchain_core.runnables import Runnable, RunnableConfig
 from pydantic import BaseModel, Field
 
-from agent_shema.build_agent_state import State
-from tools.regard_parser import RegardInput
+from src.agent_shema.build_agent_state import State
+from src.tools.regard_parser import RegardInput
 
 
 class Assistant:
@@ -59,7 +60,9 @@ class Assistant:
                 not result.content
                 or (isinstance(result.content, list) and not result.content[0].get("text"))
             ):
-                messages = state["messages"] + [("user", "Дайте, пожалуйста, реальный ответ.")]
+                messages = state["messages"] + [
+                    HumanMessage(content="Дайте, пожалуйста, реальный ответ.")
+                ]
                 state = {**state, "messages": messages}
             else:
                 break
@@ -76,11 +79,14 @@ class ToPCBuildAssistant(BaseModel):
                                       совместимости или сборки ПК.
     """
 
-    user_input: Optional[str] = Field(
-        default=None,
-        description="Вопрос о конкретных компонентах, их совместимости или сборке ПК.",
-        example="Собери мне компьютер за 200000 с поддержкой 4K.",
-    )
+    user_input: Annotated[
+        str | None,
+        Field(
+            default=None,
+            description="Вопрос о конкретных компонентах, их совместимости или сборке ПК.",
+            example="Собери мне компьютер за 200000 с поддержкой 4K.",
+        ),
+    ]
 
 
 class GameRunInput(BaseModel):
@@ -94,12 +100,14 @@ class GameRunInput(BaseModel):
         ram (int): Объем оперативной памяти в гигабайтах.
     """
 
-    game_name: str = Field(
-        description="Название игры, которую нужно проверить.", example="Cyberpunk 2077"
-    )
-    cpu: str = Field(description="Модель процессора пользователя.", example="Intel Core i7-12700")
-    gpu: str = Field(description="Модель видеокарты пользователя.", example="RTX 3070")
-    ram: int = Field(description="Объем оперативной памяти (в ГБ).", example=16)
+    game_name: Annotated[
+        str, Field(description="Название игры, которую нужно проверить.", example="Cyberpunk 2077")
+    ]
+    cpu: Annotated[
+        str, Field(description="Модель процессора пользователя.", example="Intel Core i7-12700")
+    ]
+    gpu: Annotated[str, Field(description="Модель видеокарты пользователя.", example="RTX 3070")]
+    ram: Annotated[int, Field(description="Объем оперативной памяти (в ГБ).", example=16)]
 
 
 class BottleNeckInput(BaseModel):
@@ -112,13 +120,20 @@ class BottleNeckInput(BaseModel):
         resolution (str): Разрешение экрана (например, '1440p').
     """
 
-    cpu: str = Field(
-        description="Модель процессора для проверки узкого горлышка.", example="Intel Core i7-12700"
-    )
-    gpu: str = Field(
-        description="Модель видеокарты для проверки узкого горлышка.", example="RTX 3070"
-    )
-    resolution: str = Field(description="Разрешение экрана (например, '1440p').", example="1440p")
+    cpu: Annotated[
+        str,
+        Field(
+            description="Модель процессора для проверки узкого горлышка.",
+            example="Intel Core i7-12700",
+        ),
+    ]
+    gpu: Annotated[
+        str,
+        Field(description="Модель видеокарты для проверки узкого горлышка.", example="RTX 3070"),
+    ]
+    resolution: Annotated[
+        str, Field(description="Разрешение экрана (например, '1440p').", example="1440p")
+    ]
 
 
 class ToPriceValidationCheckerAssistant(BaseModel):
@@ -132,10 +147,12 @@ class ToPriceValidationCheckerAssistant(BaseModel):
             для проверки запуска игры, анализа узкого горлышка или анализа компонентов.
     """
 
-    input_data: Union[GameRunInput, BottleNeckInput, RegardInput] = Field(
-        ...,
-        description="Входные данные для проверки совместимости или поиска компонентов.",
-    )
+    input_data: Annotated[
+        GameRunInput | BottleNeckInput | RegardInput,
+        Field(
+            description="Входные данные для проверки совместимости или поиска компонентов.",
+        ),
+    ]
 
     class Config:
         json_schema_extra = {

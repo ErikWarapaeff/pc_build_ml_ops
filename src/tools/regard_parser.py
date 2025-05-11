@@ -1,7 +1,7 @@
 import json
 import time
 import urllib.parse
-from typing import Any, Optional, Union
+from typing import Annotated, Any
 
 from langchain.tools import tool
 from playwright.sync_api import sync_playwright
@@ -9,40 +9,44 @@ from pydantic import BaseModel, Field
 
 
 class CPU(BaseModel):
-    cpu: str = Field(..., description="Модель процессора", example="Intel Core i7-12700")
+    cpu: Annotated[str, Field(description="Модель процессора", example="Intel Core i7-12700")]
 
 
 class GPU(BaseModel):
-    gpu: str = Field(..., description="Модель видеокарты", example="GeForce RTX 3070")
+    gpu: Annotated[str, Field(description="Модель видеокарты", example="GeForce RTX 3070")]
 
 
 class Memory(BaseModel):
-    name: str = Field(..., description="Название памяти", example="Corsair Vengeance 16 GB")
+    name: Annotated[str, Field(description="Название памяти", example="Corsair Vengeance 16 GB")]
 
 
 class Corpus(BaseModel):
-    name: str = Field(..., description="Модель корпуса", example="Cooler Master MasterBox")
+    name: Annotated[str, Field(description="Модель корпуса", example="Cooler Master MasterBox")]
 
 
 class PowerSupply(BaseModel):
-    name: str = Field(
-        ..., description="Модель блока питания", example="Be Quiet! Pure Power 11 600W"
-    )
+    name: Annotated[
+        str, Field(description="Модель блока питания", example="Be Quiet! Pure Power 11 600W")
+    ]
 
 
 class Motherboard(BaseModel):
-    name: str = Field(..., description="Модель материнской платы", example="ASUS ROG Strix Z690-F")
+    name: Annotated[
+        str, Field(description="Модель материнской платы", example="ASUS ROG Strix Z690-F")
+    ]
 
 
-Component = Union[CPU, GPU, Memory, Corpus, PowerSupply, Motherboard]
+Component = CPU | GPU | Memory | Corpus | PowerSupply | Motherboard
 
 
 class ComponentInput(BaseModel):
-    components: list[Component] = Field(
-        ...,
-        description="Список компонентов для анализа.",
-        example=[{"cpu": "Intel Core i7-12700"}, {"gpu": "GeForce RTX 3070"}],
-    )
+    components: Annotated[
+        list[Component],
+        Field(
+            description="Список компонентов для анализа.",
+            example=[{"cpu": "Intel Core i7-12700"}, {"gpu": "GeForce RTX 3070"}],
+        ),
+    ]
 
 
 class RegardInput(BaseModel):
@@ -54,7 +58,7 @@ class RegardInput(BaseModel):
         return cls(input_data=ComponentInput(**input_data))
 
 
-def parse_first_product(page) -> Optional[dict[str, Any]]:
+def parse_first_product(page) -> dict[str, Any] | None:
     """Извлекает данные о первом товаре."""
     try:
         page.wait_for_selector(".CardText_link__C_fPZ", timeout=15000)
@@ -80,7 +84,7 @@ def parse_first_product(page) -> Optional[dict[str, Any]]:
         return None
 
 
-def apply_sorting(page, sort_text: str) -> Optional[dict[str, Any]]:
+def apply_sorting(page, sort_text: str) -> dict[str, Any] | None:
     """Применяет сортировку и извлекает первый товар."""
     try:
         print(f"\nПрименяем сортировку: {sort_text}")
@@ -101,46 +105,49 @@ def apply_sorting(page, sort_text: str) -> Optional[dict[str, Any]]:
 
 
 @tool(args_schema=RegardInput)
-def regard_parser_tool(input_data: dict) -> str:
+def regard_parser_tool(input_data: dict[str, Any]) -> str:
     """Инструмент парсинга товаров с regard.ru."""
-    # try:
-    #     # ✅ Передаем данные в `ComponentInput`, затем в `RegardInput`
-    #     print(input_data)
-    #     data = RegardInput.from_dict(input_data)
 
-    #     # Получаем список компонентов
-    #     components = data.input_data.components
-    #     print(f"Компоненты для анализа: {components}")
-    components = input_data.components
-    print(f"Компоненты для анализа: {components}")
+    # Используем Pydantic модель для валидации и доступа к данным
+    try:
+        regard_input = RegardInput(input_data=ComponentInput(**input_data))
+        components_to_parse = regard_input.input_data.components
+    except Exception as e:  # Заменил ValidationError на общий Exception для отладки
+        return json.dumps(
+            {"error": f"Ошибка валидации входных данных: {e}"}, ensure_ascii=False, indent=2
+        )
+
+    print(f"Компоненты для анализа: {components_to_parse}")
 
     results = {}
-
-    COMPONENT_CONFIG = {
-        "cpu": lambda c: c.cpu,
-        "gpu": lambda c: c.gpu,
-        "memory": lambda c: c.name,
-        "corpus": lambda c: c.name,
-        "power_supply": lambda c: c.name,
-        "motherboard": lambda c: c.name,
-    }
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False)
         page = browser.new_page()
         try:
-            for component in components:
-                print(component)
+            for component_model in components_to_parse:  # Имя переменной изменено для ясности
                 search_query = None
-                for key, extractor in COMPONENT_CONFIG.items():
-                    print(key)
-                    if hasattr(component, key):
-                        search_query = extractor(component)
-                        print(f"🔍 Обработка компонента {key}: {search_query}")
-                        break
-                else:
-                    print("Нет ключа")
+                component_type_key = None
+
+                # Определяем тип компонента и извлекаем значение для поиска
+                if isinstance(component_model, CPU):
+                    search_query = component_model.cpu
+                    component_type_key = "cpu"
+                elif isinstance(component_model, GPU):
+                    search_query = component_model.gpu
+                    component_type_key = "gpu"
+                elif isinstance(component_model, Memory | Corpus | PowerSupply | Motherboard):
+                    search_query = component_model.name
+                    # Используем имя класса модели напрямую для ключа
+                    component_type_key = type(component_model).__name__.lower()
+
+                if not search_query:
+                    print(
+                        f"Не удалось определить поисковый запрос для компонента: {component_model}"
+                    )
                     continue
+
+                print(f"🔍 Обработка компонента {component_type_key}: {search_query}")
 
                 encoded_query = urllib.parse.quote_plus(search_query)
                 search_url = f"https://www.regard.ru/catalog?search={encoded_query}"
@@ -174,8 +181,17 @@ def regard_parser_tool(input_data: dict) -> str:
 
 
 def main():
-    input_data = {"components": [{"cpu": "Intel Core i7-12700"}, {"gpu": "GeForce RTX 3070"}]}
-    output = regard_parser_tool.invoke({"input_data": input_data})
+    # Пример использования с корректной структурой для RegardInput
+    sample_input_data = {
+        "input_data": {
+            "components": [
+                {"cpu": "Intel Core i7-12700"},
+                {"gpu": "GeForce RTX 3070"},
+                {"name": "Kingston FURY Beast Black 16 ГБ"},  # Пример для памяти
+            ]
+        }
+    }
+    output = regard_parser_tool.invoke(sample_input_data)
     print(output)
 
 

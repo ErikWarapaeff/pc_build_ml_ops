@@ -1,6 +1,6 @@
 directories:
   local_file: "pc_accessories_2.db"
-  
+
 
 openai_models:
   model: gpt-4o-mini

@@ -35,4 +35,4 @@ ENV PYTHONUNBUFFERED=1
 EXPOSE 7860
 
 # Запуск приложения
-CMD ["python", "src/app.py"] 
+CMD ["python", "src/app.py"]

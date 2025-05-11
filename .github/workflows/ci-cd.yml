@@ -2,12 +2,12 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: 
+    branches:
       - main
     tags:
       - 'v*'
   pull_request:
-    branches: 
+    branches:
       - main
 
 jobs:
@@ -40,13 +40,13 @@ jobs:
 
       - name: Run black
         run: poetry run black --check .
-        
+
       - name: Run isort
         run: poetry run isort --check .
-        
+
       - name: Run ruff
         run: poetry run ruff check .
-        
+
       - name: Run mypy
         run: poetry run mypy src/ app.py
 
@@ -189,7 +189,7 @@ jobs:
           name: Release ${{ env.VERSION }}
           body: |
             Release ${{ env.VERSION }}
-            
+
             See [CHANGELOG.md](CHANGELOG.md) for details.
 
   publish-docker:
@@ -269,4 +269,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./site 
+          publish_dir: ./site

@@ -1,9 +1,9 @@
-from typing import Annotated, Literal, Optional, TypedDict
+from typing import Annotated, Literal, TypedDict
 
 from langgraph.graph.message import AnyMessage, add_messages
 
 
-def update_dialog_stack(left: list[str], right: Optional[str]) -> list[str]:
+def update_dialog_stack(left: list[str], right: str | None) -> list[str]:
     """
     Push or pop the state: Updates the dialog stack by either adding a new state or removing the last state.
 
@@ -39,7 +39,7 @@ class State(TypedDict):
     """
 
     messages: Annotated[list[AnyMessage], add_messages]
-    user_info: Optional[str]
+    user_info: str | None
     dialog_state: Annotated[
         list[Literal["assistant", "build_pc", "validate_price"]],
         update_dialog_stack,

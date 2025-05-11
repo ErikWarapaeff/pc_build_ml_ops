@@ -56,7 +56,7 @@ Advanced multi-agent application designed to automate and optimize the process o
 - Хорошо, а пойдет ли на данной системе игра Cyberpunk 2077?
 - Хорошо, найди мне тогда актуальные цены на данную систему.
 
-   
+
 
 
 **Агентный граф:**
@@ -110,16 +110,16 @@ Advanced multi-agent application designed to automate and optimize the process o
    ```bash
    # Запуск всех pre-commit хуков
    poetry run pre-commit run --all-files
-   
+
    # Запуск Black форматирования
    poetry run black .
-   
+
    # Запуск Ruff линтера
    poetry run ruff check .
-   
+
    # Запуск isort для сортировки импортов
    poetry run isort .
-   
+
    # Запуск mypy для проверки типов
    poetry run mypy src/ app.py
    ```

@@ -21,4 +21,4 @@ services:
 
 networks:
   pc-build-network:
-    driver: bridge 
+    driver: bridge

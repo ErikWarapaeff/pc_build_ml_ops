@@ -46,4 +46,4 @@
 
 # Файлы Docker должны использовать LF
 Dockerfile text eol=lf
-.dockerignore text eol=lf 
+.dockerignore text eol=lf

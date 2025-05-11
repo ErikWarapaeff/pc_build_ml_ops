@@ -1,11 +1,14 @@
-from agent_shema.build_assistants import ToPCBuildAssistant, ToPriceValidationCheckerAssistant
-from agent_shema.build_system_prompts import AgentPrompts
-from agent_shema.complete_or_escalate import CompleteOrEscalate
-from load_config import LoadConfig
-from tools.bottle_neck import calculate_bottleneck
-from tools.game_runner import game_run_tool
-from tools.regard_parser import regard_parser_tool
-from tools.sql_agent_tools import pc_builder_tool, question_answer_tool
+from agent_shema.build_assistants import (  # type: ignore
+    ToPCBuildAssistant,
+    ToPriceValidationCheckerAssistant,
+)
+from agent_shema.build_system_prompts import AgentPrompts  # type: ignore
+from agent_shema.complete_or_escalate import CompleteOrEscalate  # type: ignore
+from src.load_config import LoadConfig
+from src.tools.bottle_neck import calculate_bottleneck
+from src.tools.game_runner import game_run_tool
+from src.tools.regard_parser import regard_parser_tool
+from src.tools.sql_agent_tools import pc_builder_tool, question_answer_tool
 
 AGENT_PROMPTS = AgentPrompts()
 CFG = LoadConfig()

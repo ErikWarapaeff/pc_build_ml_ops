@@ -1,7 +1,7 @@
 import gradio as gr
 
-from chat_backend import ChatBot
-from utils.ui_settings import UISettings
+from src.chat_backend import ChatBot
+from src.utils.ui_settings import UISettings
 
 with gr.Blocks() as demo:
     with gr.Tabs():
@@ -12,10 +12,10 @@ with gr.Blocks() as demo:
             with gr.Row() as row_one:
                 chatbot = gr.Chatbot(
                     value=[
-                        {
-                            "role": "system",
-                            "content": "Привет! Я твой проводник в мир компьютерной техники. Чем сегодня могу тебе помочь?",
-                        }
+                        (
+                            None,
+                            "Привет! Я твой проводник в мир компьютерной техники. Чем сегодня могу тебе помочь?",
+                        )
                     ],
                     type="messages",
                     elem_id="chatbot",

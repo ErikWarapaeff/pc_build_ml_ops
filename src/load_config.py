@@ -15,11 +15,16 @@ class LoadConfig:
     def __init__(self) -> None:
         # Databases directories
         self.local_file = here(app_config["directories"]["local_file"])
-        os.environ["OPENAI_API_KEY"] = os.getenv("OPEN_AI_API_KEY")
+        api_key: str | None = os.getenv("OPEN_AI_API_KEY")
+        if api_key is not None:
+            os.environ["OPENAI_API_KEY"] = api_key
 
         self.llm = ChatOpenAI(
             model=app_config["openai_models"]["model"], base_url="https://api.vsegpt.ru/v1"
         )
-        os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
+        langchain_api_key: str | None = os.getenv("LANGCHAIN_API_KEY")
+        if langchain_api_key is not None:
+            os.environ["LANGCHAIN_API_KEY"] = langchain_api_key
+
         os.environ["LANGCHAIN_TRACING_V2"] = str(app_config["langsmith"]["tracing"])
         os.environ["LANGCHAIN_PROJECT"] = str(app_config["langsmith"]["project_name"])

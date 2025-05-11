@@ -1,29 +1,28 @@
-import json
-from typing import Optional
+from typing import Any
 
-from fuzzywuzzy import process
 from langchain.tools import tool
 from pydantic import BaseModel
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
+from thefuzz import process  # type: ignore
 
 
 # Модели для входных и выходных данных
 class InputParameters(BaseModel):
     cpu: str
     gpu: str
-    resolution: Optional[str] = "1080p"  # Если разрешение не указано, по умолчанию 1080p
+    resolution: str | None = "1080p"  # Если разрешение не указано, по умолчанию 1080p
     best_processor_match: str
     best_gpu_match: str
 
 
 class PerformanceScenarios(BaseModel):
-    gaming: Optional[str]
-    content_creation: Optional[str]
-    streaming: Optional[str]
+    gaming: str | None
+    content_creation: str | None
+    streaming: str | None
 
 
 class Results(BaseModel):
@@ -41,12 +40,12 @@ class BottleneckResponse(BaseModel):
 
 # Функция для расчета узкого горлышка между процессором и видеокартой
 @tool
-def calculate_bottleneck(input_json: json) -> dict:
+def calculate_bottleneck(input_json: dict[str, Any]) -> dict[str, Any]:
     """
     Расчет процента узкого горлышка операций между процессором и видеокартой при выбранном разрешении.
 
     Args:
-        input_json (json): Входные данные в формате JSON, содержащие параметры для процессора, видеокарты и разрешения.
+        input_json (Dict[str, Any]): Входные данные в формате JSON, содержащие параметры для процессора, видеокарты и разрешения.
         input_json = {
         "cpu": "Ryzen 9 5950X",
         "gpu": "GeForce RTX 4070",
@@ -54,17 +53,19 @@ def calculate_bottleneck(input_json: json) -> dict:
     }
 
     Returns:
-        dict: Результаты расчета в формате JSON.
+        Dict[str, Any]: Результаты расчета в формате JSON.
     """
     # Загружаем входной JSON
     try:
-        input_json = json.dumps(input_json)
-        input_data = json.loads(input_json)
-        processor = input_data.get("cpu")
-        gpu = input_data.get("gpu")
-        resolution = input_data.get("resolution", "1080p")
+        processor = input_json.get("cpu")
+        gpu = input_json.get("gpu")
+        resolution = input_json.get("resolution", "1080p")
+
+        if not processor or not gpu:
+            return {"error": "CPU and GPU must be provided"}
+
     except Exception as e:
-        return json.dumps({"error": str(e)})
+        return {"error": str(e)}
 
     chrome_options = Options()
     chrome_options.add_argument("--headless")
@@ -84,26 +85,26 @@ def calculate_bottleneck(input_json: json) -> dict:
             return best_match[0] if best_match else ""
 
         # 1. Заполнение поля для процессора
-        processor_input = wait.until(EC.presence_of_element_located((By.ID, "processor")))
+        processor_input = wait.until(ec.presence_of_element_located((By.ID, "processor")))
 
         processor_input.send_keys(processor)
         processor_list = [
             element.text
             for element in wait.until(
-                EC.presence_of_all_elements_located((By.XPATH, "//div[@class='p-2']//span"))
+                ec.presence_of_all_elements_located((By.XPATH, "//div[@class='p-2']//span"))
             )
         ]
         processor_input.clear()
         processor_input.send_keys(get_best_match(processor, processor_list))
 
         # 2. Заполнение поля для GPU
-        gpu_input = wait.until(EC.presence_of_element_located((By.ID, "graphics")))
+        gpu_input = wait.until(ec.presence_of_element_located((By.ID, "graphics")))
 
         gpu_input.send_keys(gpu)
         gpu_list = [
             element.text
             for element in wait.until(
-                EC.presence_of_all_elements_located((By.XPATH, "//div[@class='p-2']//span"))
+                ec.presence_of_all_elements_located((By.XPATH, "//div[@class='p-2']//span"))
             )
         ]
         gpu_input.clear()
@@ -111,7 +112,7 @@ def calculate_bottleneck(input_json: json) -> dict:
 
         try:
             calculate_button = wait.until(
-                EC.element_to_be_clickable((By.XPATH, "//button[text()='Calculate Bottleneck']"))
+                ec.element_to_be_clickable((By.XPATH, "//button[text()='Calculate Bottleneck']"))
             )
             driver.execute_script("arguments[0].scrollIntoView();", calculate_button)
             calculate_button.click()
@@ -120,17 +121,17 @@ def calculate_bottleneck(input_json: json) -> dict:
 
         # Извлечение информации
         cpu_performance = wait.until(
-            EC.presence_of_element_located(
+            ec.presence_of_element_located(
                 (By.XPATH, "//span[text()='CPU Performance']/following-sibling::span")
             )
         ).text
         gpu_performance = wait.until(
-            EC.presence_of_element_located(
+            ec.presence_of_element_located(
                 (By.XPATH, "//span[text()='GPU Performance']/following-sibling::span")
             )
         ).text
         bottleneck_percentage = wait.until(
-            EC.presence_of_element_located(
+            ec.presence_of_element_located(
                 (By.XPATH, "//h3[text()='Bottleneck Percentage']/following-sibling::p")
             )
         ).text
@@ -186,7 +187,7 @@ def calculate_bottleneck(input_json: json) -> dict:
         bottleneck_response = BottleneckResponse(input_parameters=input_params, results=results)
 
         # Возвращаем результаты в формате JSON
-        return bottleneck_response.model_dump_json(indent=4)
+        return bottleneck_response.model_dump()
 
     finally:
         # Закрытие браузера

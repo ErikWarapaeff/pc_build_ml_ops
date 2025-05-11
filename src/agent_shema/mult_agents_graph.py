@@ -1,19 +1,19 @@
 from typing import Any, Literal
 
-from langchain_core.messages import ToolMessage
+from langchain_core.messages import AIMessage, ToolMessage
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import END, START, StateGraph
-from langgraph.prebuilt import tools_condition
+from langgraph.prebuilt.tool_node import tools_condition
 
-from agent_shema.agent_runnables import AIAgentRunnables
-from agent_shema.build_agent_state import State
-from agent_shema.build_assistants import (
+from src.agent_shema.agent_runnables import AIAgentRunnables
+from src.agent_shema.build_agent_state import State
+from src.agent_shema.build_assistants import (
     Assistant,
     ToPCBuildAssistant,
     ToPriceValidationCheckerAssistant,
 )
-from agent_shema.complete_or_escalate import CompleteOrEscalate
-from utils.utilities import create_entry_node, create_tool_node_with_fallback
+from src.agent_shema.complete_or_escalate import CompleteOrEscalate
+from src.utils.utilities import create_entry_node, create_tool_node_with_fallback
 
 AGENT_RUNNABLES = AIAgentRunnables()
 
@@ -21,11 +21,16 @@ AGENT_RUNNABLES = AIAgentRunnables()
 def leave_skill(state: State) -> dict:
     """Завершение работы с подассистентом и возвращение в основной ассистент"""
     messages = []
-    if state["messages"][-1].tool_calls:
+    last_message = state["messages"][-1]
+    if (
+        isinstance(last_message, AIMessage)
+        and last_message.tool_calls
+        and last_message.tool_calls[0].get("id")
+    ):
         messages.append(
             ToolMessage(
                 content="Завершаем текущую задачу и возвращаемся к основному ассистенту.",
-                tool_call_id=state["messages"][-1].tool_calls[0]["id"],
+                tool_call_id=last_message.tool_calls[0]["id"],
             )
         )
     return {"dialog_state": "pop", "messages": messages}
@@ -43,7 +48,22 @@ class AgenticGraph:
         Сбор информации о пользователе. Это определяет, какие данные нужно собирать в контексте запроса.
         Например, информация о запросах на сборку ПК или проверку совместимости.
         """
-        user_query = state["messages"][-1].content.lower()  # Получаем последний запрос пользователя
+        last_message_content = state["messages"][-1].content
+        user_query = ""
+        if isinstance(last_message_content, str):
+            user_query = last_message_content.lower()
+        elif (
+            isinstance(last_message_content, list)
+            and last_message_content
+            and isinstance(last_message_content[0], dict)
+            and isinstance(last_message_content[0].get("text"), str)
+        ):
+            # Если это список словарей (например, от AIMessage с content в виде list of dicts)
+            user_query = last_message_content[0]["text"].lower()
+        else:
+            # Обработка других возможных типов content, или установка значения по умолчанию
+            user_query = ""
+
         self.shared_memory["last_query"] = user_query
         return {"info": user_query}
 
@@ -85,8 +105,15 @@ class AgenticGraph:
 
             route = tools_condition(state)
             if route == END:
-                return END
-            tool_calls = state["messages"][-1].tool_calls
+                return "__end__"
+            last_message = state["messages"][-1]
+            tool_calls = []
+            if isinstance(last_message, AIMessage) and last_message.tool_calls:
+                tool_calls = last_message.tool_calls
+
+            if not tool_calls:
+                return "__end__"
+
             did_cancel = any(tc["name"] == CompleteOrEscalate.__name__ for tc in tool_calls)
             if did_cancel:
                 return "leave_skill"
@@ -140,8 +167,15 @@ class AgenticGraph:
             """
             route = tools_condition(state)
             if route == END:
-                return END
-            tool_calls = state["messages"][-1].tool_calls
+                return "__end__"
+            last_message = state["messages"][-1]
+            tool_calls = []
+            if isinstance(last_message, AIMessage) and last_message.tool_calls:
+                tool_calls = last_message.tool_calls
+
+            if not tool_calls:
+                return "__end__"
+
             did_cancel = any(tc["name"] == CompleteOrEscalate.__name__ for tc in tool_calls)
             if did_cancel:
                 return "leave_skill"
@@ -197,9 +231,12 @@ class AgenticGraph:
 
             route = tools_condition(state)
             if route == END:
-                return END
+                return "__end__"
 
-            tool_calls = state["messages"][-1].tool_calls
+            last_message = state["messages"][-1]
+            tool_calls = []
+            if isinstance(last_message, AIMessage) and last_message.tool_calls:
+                tool_calls = last_message.tool_calls
 
             if tool_calls:
                 tool_name = tool_calls[0]["name"]
@@ -214,7 +251,7 @@ class AgenticGraph:
                 else:
                     print(f"Ошибка: инструмент {tool_name} не поддерживается.")
                     return "primary_assistant_tools"
-            return "primary_assistant_tools"  # Default return
+            return "primary_assistant_tools"
 
         self.builder.add_conditional_edges(
             "primary_assistant",
@@ -223,14 +260,14 @@ class AgenticGraph:
                 "enter_build_pc": "enter_build_pc",
                 "enter_validate_price": "enter_validate_price",
                 "primary_assistant_tools": "primary_assistant_tools",
-                END: END,
+                "__end__": "__end__",
             },
         )
         self.builder.add_edge("primary_assistant_tools", "primary_assistant")
 
         def route_to_workflow(
             state: State,
-        ) -> Literal["primary_assistant", "build_pc", "validate_price"]:
+        ) -> Literal["assistant", "build_pc", "validate_price"]:
             """
             Определяет конечный маршрут для перехода в рабочий процесс на основе состояния диалога.
 
@@ -246,8 +283,14 @@ class AgenticGraph:
 
             dialog_state = state.get("dialog_state")
             if not dialog_state:
-                return "primary_assistant"
-            return dialog_state[-1]
+                return "assistant"
+            # Проверяем, что последний элемент dialog_state соответствует одному из Literal
+            last_state = dialog_state[-1]
+            if last_state in ("build_pc", "validate_price", "assistant"):
+                return last_state
+            else:
+                # Если состояние неизвестно, возвращаем ассистента по умолчанию
+                return "assistant"
 
         self.builder.add_conditional_edges("fetch_user_info", route_to_workflow)
 
@@ -263,5 +306,5 @@ class AgenticGraph:
         self.add_pc_build_nodes_to_graph()
         self.add_price_validation_nodes_to_graph()
         memory = MemorySaver()
-        graph = self.builder.compile()
+        graph = self.builder.compile(checkpointer=memory)
         return graph, memory

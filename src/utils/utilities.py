@@ -1,10 +1,10 @@
 from collections.abc import Callable
 
-from langchain_core.messages import ToolMessage
+from langchain_core.messages import AIMessage, ToolMessage
 from langchain_core.runnables import RunnableLambda
-from langgraph.prebuilt import ToolNode
+from langgraph.prebuilt.tool_node import ToolNode
 
-from agent_shema.build_agent_state import State
+from src.agent_shema.build_agent_state import State
 
 
 def handle_tool_error(state) -> dict:
@@ -21,7 +21,22 @@ def handle_tool_error(state) -> dict:
         dict: Словарь, содержащий список объектов `ToolMessage` с информацией об ошибке.
     """
     error = state.get("error")
-    tool_calls = state["messages"][-1].tool_calls
+    last_message = state["messages"][-1]
+    tool_calls = []
+    if isinstance(last_message, AIMessage) and last_message.tool_calls:
+        tool_calls = last_message.tool_calls
+
+    if not tool_calls:
+        return {
+            "messages": [
+                ToolMessage(
+                    content=f"Ошибка: {repr(error)}\nНе удалось определить ID вызова инструмента.",
+                    name="error_handler",
+                    tool_call_id="",
+                )
+            ]
+        }
+
     return {
         "messages": [
             ToolMessage(
@@ -46,7 +61,7 @@ def create_tool_node_with_fallback(tools: list) -> dict:
     Возвращает:
         dict: Объект `ToolNode`, настроенный с использованием fallback-обработки ошибок.
     """
-    return ToolNode(tools).with_fallbacks(
+    return ToolNode(tools).with_fallbacks(  # type: ignore
         [RunnableLambda(handle_tool_error)], exception_key="error"
     )
 
@@ -101,7 +116,29 @@ def create_entry_node(assistant_name: str, new_dialog_state: str) -> Callable:
     """
 
     def entry_node(state: State) -> dict:
-        tool_call_id = state["messages"][-1].tool_calls[0]["id"]
+        last_message = state["messages"][-1]
+        tool_call_id = None
+        if (
+            isinstance(last_message, AIMessage)
+            and last_message.tool_calls
+            and last_message.tool_calls[0].get("id")
+        ):
+            tool_call_id = last_message.tool_calls[0]["id"]
+
+        if not tool_call_id:
+            return {
+                "messages": [
+                    ToolMessage(
+                        content=(
+                            f"Помощник {assistant_name} сейчас активен. Не удалось определить ID вызова инструмента."
+                        ),
+                        name=assistant_name,
+                        tool_call_id="unknown_tool_call_id",
+                    )
+                ],
+                "dialog_state": new_dialog_state,
+            }
+
         return {
             "messages": [
                 ToolMessage(

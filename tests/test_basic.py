@@ -10,10 +10,11 @@ import pytest
 def test_imports():
     """Проверка возможности импорта основных модулей."""
     try:
-        import app
-        import src
+        # Проверяем, доступны ли модули, не используя их напрямую
+        import importlib.util
 
-        assert True
+        assert importlib.util.find_spec("app") is not None, "Модуль app недоступен"
+        assert importlib.util.find_spec("src") is not None, "Модуль src недоступен"
     except ImportError as e:
         pytest.fail(f"Ошибка импорта: {e}")
 

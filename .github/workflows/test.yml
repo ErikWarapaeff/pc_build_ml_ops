@@ -15,32 +15,32 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
-        
+
     - name: Install Poetry
       run: |
         curl -sSL https://install.python-poetry.org | python3 -
         poetry --version
-    
+
     - name: Configure Poetry
       run: |
         poetry config virtualenvs.create true
         poetry config virtualenvs.in-project true
-        
+
     - name: Install dependencies
       run: |
         poetry install --with dev
-        
+
     - name: Run tests
       run: |
         poetry run pytest --cov=src tests/
-        
+
     - name: Upload coverage report
       uses: codecov/codecov-action@v3
       with:
         file: ./coverage.xml
-        fail_ci_if_error: false 
+        fail_ci_if_error: false

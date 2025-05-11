@@ -1,9 +1,8 @@
 import json
 import os
-from typing import Any, Literal, Optional
+from typing import Any, Literal
 
 from langchain.chains import create_sql_query_chain
-from langchain.chat_models import ChatOpenAI
 from langchain.schema import HumanMessage, SystemMessage
 from langchain.sql_database import SQLDatabase
 from langchain_community.agent_toolkits import SQLDatabaseToolkit
@@ -18,16 +17,15 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.tools import tool
 from langchain_openai import ChatOpenAI
-from pydantic import BaseModel, Field, ValidationError, field_validator
+from pydantic import BaseModel, Field, SecretStr, ValidationError, field_validator
 from pyprojroot import here
 from sqlalchemy import create_engine, text
 
-from load_config import LoadConfig
+from src.load_config import LoadConfig
 
 CFG = LoadConfig()
 db_path = str(here("")) + "\\pc_accessories_2.db"
 db_path = f"sqlite:///{db_path}"
-db_path
 
 engine = create_engine(db_path)
 db = SQLDatabase(engine)
@@ -38,11 +36,12 @@ class SQLAgentRequest(BaseModel):
         ..., description="Вопрос пользователя, на основе которого нужно сформировать SQL-запрос"
     )
     top_k: int = Field(1, description="Количество примеров для генерации SQL-запроса")
+    table_info: str | None = Field(None, description="Информация о таблицах базы данных")
 
 
 # ------------------- Класс SQLAgent с цепочкой Runnables  -------------------
 class SQLAgent:
-    def __init__(self, engine, llm: ChatOpenAI = None):
+    def __init__(self, engine, llm: ChatOpenAI | None = None):
         """
         Инициализация SQL-агента.
           - engine: SQLAlchemy engine для подключения к базе.
@@ -143,6 +142,7 @@ class SQLAgent:
                     print(f"Переписываем запрос: {query}")
                 else:
                     raise e
+        return []
 
     def validate_sql_query(self, query: str, question: str) -> str:
         """
@@ -167,17 +167,24 @@ class SQLAgent:
         # Принудительная очистка сгенерированного запроса
         return self.clean_sql_query(str(new_query))
 
-    def run(self, request: SQLAgentRequest) -> dict:
+    def run(self, request: SQLAgentRequest) -> dict[str, Any]:
         """
         Основной метод SQL-агента, реализованный через цепочку Runnables.
         Принимает запрос (SQLAgentRequest) и возвращает результат в виде словаря.
         """
         if isinstance(request, dict):
+            if "table_info" not in request:
+                request["table_info"] = self.info_tool.run("Get all table and column information")
             input_dict = request
         else:
             input_dict = request.model_dump()
+            if input_dict.get("table_info") is None:
+                input_dict["table_info"] = self.info_tool.run(
+                    "Get all table and column information"
+                )
+
         output = self.chain.invoke(input_dict)
-        return output
+        return output  # type: ignore
 
 
 def parse_user_request(user_input: str) -> str:
@@ -190,7 +197,7 @@ def parse_user_request(user_input: str) -> str:
         additional_info: dict[str, str] = {}
 
         @field_validator("build_type")
-        def normalize_build_type(cls, v):
+        def normalize_build_type(self, v):
             build_mapping = {
                 "игр": "игровая",
                 "гейм": "игровая",
@@ -206,7 +213,7 @@ def parse_user_request(user_input: str) -> str:
             return next((val for key, val in build_mapping.items() if key in lower_v), "офисная")
 
     # Исправленный системный промпт с экранированием
-    SYSTEM_PROMPT = """Ты ИИ-ассистент для парсинга технических запросов. Строго следуй правилам:
+    system_prompt = """Ты ИИ-ассистент для парсинга технических запросов. Строго следуй правилам:
 
         1. **Бюджет**: Число в рублях (200к → 200000)
         2. **Тип сборки** (ТОЛЬКО 2 варианта):
@@ -266,28 +273,35 @@ def parse_user_request(user_input: str) -> str:
     """
 
     # Получение ответа от LLM
-    openai_api_key = os.getenv("OPEN_AI_API_KEY")
-    if not openai_api_key:
+    openai_api_key_str = os.getenv("OPEN_AI_API_KEY")
+    if not openai_api_key_str:
         raise ValueError("API ключ не найден в переменных окружения")
+    openai_api_key = SecretStr(openai_api_key_str)
 
     # Получение ответа от LLM
-    client = ChatOpenAI(openai_api_key=openai_api_key, model="gpt-4o-mini")
+    client = ChatOpenAI(api_key=openai_api_key, model="gpt-4o-mini")
     response = client.invoke(
-        [SystemMessage(content=SYSTEM_PROMPT), HumanMessage(content=user_input)]
+        [SystemMessage(content=system_prompt), HumanMessage(content=user_input)]
     )
 
     try:
-        raw_data = json.loads(response.content)
+        raw_content = response.content
+        if not isinstance(raw_content, str):
+            raise TypeError(
+                f"Ожидалось, что содержимое ответа LLM будет строкой для JSON-парсинга, получено: {type(raw_content)}"
+            )
+        raw_data = json.loads(raw_content)
         validated = BuildRequest(**raw_data).model_dump()
 
         # Возвращаем строку JSON
-        return json.dumps(validated, ensure_ascii=False)
+        return json.dumps(validated, ensure_ascii=False)  # type: ignore
 
-    except (json.JSONDecodeError, ValidationError):
+    except (json.JSONDecodeError, ValidationError, TypeError) as e:
+        print(f"Ошибка парсинга или валидации: {e}")
         default_data = BuildRequest(
             budget=50000, build_type="офисная", additional_info={}
         ).model_dump()
-        return json.dumps(default_data, ensure_ascii=False)
+        return json.dumps(default_data, ensure_ascii=False)  # type: ignore
 
 
 @tool
@@ -306,7 +320,9 @@ def question_answer_tool(user_input: str) -> str:
     Выход: "Цена процессора Intel Core i9-12900K составляет 600 долларов."
     """
     sql_agent = SQLAgent(engine, llm=CFG.llm)  # Создаем экземпляр SQL-агента
-    request = SQLAgentRequest(question=user_input, top_k=5)
+    request = SQLAgentRequest(
+        question=user_input, top_k=5, table_info=sql_agent.db.get_table_info()
+    )
 
     sql_response = sql_agent.run(request)
 
@@ -326,7 +342,7 @@ def question_answer_tool(user_input: str) -> str:
 class BuildRequest(BaseModel):
     budget: int
     build_type: str  # например, "игровая" или "офисная"
-    additional_info: Optional[dict[str, Any]] = None
+    additional_info: dict[str, Any] | None = None
 
 
 def calculate_component_budgets(
@@ -451,7 +467,7 @@ class DynamicPCBuilderPrompter:
         }
 
     def _table_reference(self, component: str) -> str:
-        return self.component_config.get(component, {}).get("main_table", component)
+        return self.component_config.get(component, {}).get("main_table", component)  # type: ignore
 
     def _calculate_power_consumption(self) -> int:
         total_power = 0
@@ -460,7 +476,7 @@ class DynamicPCBuilderPrompter:
                 total_power += comp["power"]
         return total_power if total_power else 500
 
-    def _gen_dynamic_conditions(self, params: dict, table: str) -> Optional[str]:
+    def _gen_dynamic_conditions(self, params: dict, table: str) -> str | None:
         ignore = {"budget"}
         conditions = []
         for key, value in params.items():
@@ -478,7 +494,7 @@ class DynamicPCBuilderPrompter:
                     conditions.append(f"{table}.{key} = {value}")
         return "Доп. условия: " + ", ".join(conditions) if conditions else None
 
-    def build_prompts(self, user_request: dict[str, Any]) -> (dict[str, str], dict[str, Any]):
+    def build_prompts(self, user_request: dict[str, Any]) -> tuple[dict[str, str], dict[str, Any]]:
         """
         Для каждого компонента (из списка распределённых по бюджету) формируется промпт.
         """
@@ -506,7 +522,7 @@ class DynamicPCBuilderPrompter:
 
             agent = SQLAgent(engine=engine, llm=CFG.llm)
             response = agent.run(
-                {"question": prompt, "table_info": db.get_table_info(), "top_k": 1}
+                SQLAgentRequest(question=prompt, table_info=db.get_table_info(), top_k=1)
             )
             components[component] = response.get("result")
 
@@ -537,11 +553,11 @@ class DynamicPCBuilderPrompter:
 
             self.selected_components[component] = comp_info
 
-        return components
+        return prompts, components
 
 
 @tool
-def pc_builder_tool(user_input: str) -> dict:
+def pc_builder_tool(user_input: str) -> dict[str, Any]:
     """
     Обрабатывает запрос пользователя на сборку ПК, рассчитывает бюджет для компонентов и генерирует рекомендации по сборке.
 
@@ -557,7 +573,7 @@ def pc_builder_tool(user_input: str) -> dict:
     try:
         build_req = BuildRequest.model_validate_json(input_json)
     except ValidationError as e:
-        return json.dumps({"error": e.errors()}, ensure_ascii=False, indent=2)
+        return {"error": e.errors()}
 
     component_budgets = calculate_component_budgets(
         build_req.budget, build_req.build_type, components_percentages
@@ -572,5 +588,5 @@ def pc_builder_tool(user_input: str) -> dict:
 
     request_dict = {"components": components}
     builder = DynamicPCBuilderPrompter()
-    components_results = builder.build_prompts(request_dict)
+    prompts, components_results = builder.build_prompts(request_dict)
     return {"user_input": user_input, "components": components_results}

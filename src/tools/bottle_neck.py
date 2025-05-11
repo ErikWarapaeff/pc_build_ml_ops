@@ -1,14 +1,14 @@
-from pydantic import BaseModel, Field
-from typing import List, Optional, Dict, Union
 import json
+from typing import Optional
+
 from fuzzywuzzy import process
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from langchain.tools import tool
-import time
+from pydantic import BaseModel
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 # Модели для входных и выходных данных
@@ -31,7 +31,7 @@ class Results(BaseModel):
     gpu_performance: str
     bottleneck_percentage: str
     performance_scenarios: PerformanceScenarios
-    recommendations: List[str]
+    recommendations: list[str]
 
 
 class BottleneckResponse(BaseModel):
@@ -115,7 +115,7 @@ def calculate_bottleneck(input_json: json) -> dict:
             )
             driver.execute_script("arguments[0].scrollIntoView();", calculate_button)
             calculate_button.click()
-        except Exception as e:
+        except Exception:
             driver.execute_script("arguments[0].click();", calculate_button)
 
         # Извлечение информации

@@ -1,35 +1,27 @@
+import json
 import os
-from langchain.chat_models import ChatOpenAI
-from langchain_openai import ChatOpenAI
-from langchain_community.agent_toolkits import create_sql_agent
-from sqlalchemy import create_engine
-from langchain.sql_database import SQLDatabase
-from dotenv import load_dotenv
-from langchain_core.tools import tool
-import json
-from typing import Dict, Any, Optional, Literal
-from pydantic import BaseModel, ValidationError
-import re
-import json
-from pydantic import BaseModel, Field, ValidationError
-from sqlalchemy import text, create_engine
-from langchain.sql_database import SQLDatabase
-from langchain_core.prompts import ChatPromptTemplate, PromptTemplate
+from typing import Any, Literal, Optional
+
 from langchain.chains import create_sql_query_chain
-from langchain_openai import ChatOpenAI
+from langchain.chat_models import ChatOpenAI
+from langchain.schema import HumanMessage, SystemMessage
+from langchain.sql_database import SQLDatabase
 from langchain_community.agent_toolkits import SQLDatabaseToolkit
 from langchain_community.tools import (
-    QuerySQLDatabaseTool,
     InfoSQLDatabaseTool,
     ListSQLDatabaseTool,
     QuerySQLCheckerTool,
+    QuerySQLDatabaseTool,
 )
-from langchain.schema import HumanMessage, SystemMessage
-from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
-from langchain.agents import AgentType
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.runnables import RunnablePassthrough
+from langchain_core.tools import tool
+from langchain_openai import ChatOpenAI
+from pydantic import BaseModel, Field, ValidationError, field_validator
 from pyprojroot import here
-from pydantic import conint, field_validator
+from sqlalchemy import create_engine, text
+
 from load_config import LoadConfig
 
 CFG = LoadConfig()
@@ -195,7 +187,7 @@ def parse_user_request(user_input: str) -> str:
     class BuildRequest(BaseModel):
         budget: int
         build_type: Literal["игровая", "офисная"]
-        additional_info: Dict[str, str] = {}
+        additional_info: dict[str, str] = {}
 
         @field_validator("build_type")
         def normalize_build_type(cls, v):
@@ -291,7 +283,7 @@ def parse_user_request(user_input: str) -> str:
         # Возвращаем строку JSON
         return json.dumps(validated, ensure_ascii=False)
 
-    except (json.JSONDecodeError, ValidationError) as e:
+    except (json.JSONDecodeError, ValidationError):
         default_data = BuildRequest(
             budget=50000, build_type="офисная", additional_info={}
         ).model_dump()
@@ -334,12 +326,12 @@ def question_answer_tool(user_input: str) -> str:
 class BuildRequest(BaseModel):
     budget: int
     build_type: str  # например, "игровая" или "офисная"
-    additional_info: Optional[Dict[str, Any]] = None
+    additional_info: Optional[dict[str, Any]] = None
 
 
 def calculate_component_budgets(
-    budget: int, build_type: str, components_percentages: Dict[str, Dict[str, float]]
-) -> Dict[str, int]:
+    budget: int, build_type: str, components_percentages: dict[str, dict[str, float]]
+) -> dict[str, int]:
     """
     Распределяет общий бюджет между компонентами в зависимости от типа сборки.
     """
@@ -364,20 +356,20 @@ components_percentages = {
 # --- Основной класс для построения промптов ---
 class DynamicPCBuilderPrompter:
     def __init__(self):
-        self.selected_components: Dict[str, Any] = {}
+        self.selected_components: dict[str, Any] = {}
         # для сборки пк мы последовательно выбираем компоненты, так как необходимо учитывать совместимость
         self.component_order = ["gpu", "cpu", "motherboard", "memory", "corpus", "power_supply"]
         self.component_config = self._init_config()
 
     # Создание промптов с динамическими полями
-    def _init_config(self) -> Dict[str, Dict]:
+    def _init_config(self) -> dict[str, dict]:
         return {
             "gpu": {
                 "description": "Подбор видеокарты: ",
                 "main_table": "gpu_full_info",
                 "dynamic_rules": [
-                    lambda p: f"Таблица: gpu_full_info выбирать только dustinct gpu в запросе",
-                    lambda p: f"JOIN gpu_hierarchy ON gpu_hierarchy.gpu = gpu_full_info.gpu",
+                    lambda p: "Таблица: gpu_full_info выбирать только dustinct gpu в запросе",
+                    lambda p: "JOIN gpu_hierarchy ON gpu_hierarchy.gpu = gpu_full_info.gpu",
                     lambda p: (
                         f"Разрешение: {p.get('resolution')} (проверить в gpu_hierarchy.{p.get('resolution', '')} Ultra)"
                         if "resolution" in p
@@ -397,7 +389,7 @@ class DynamicPCBuilderPrompter:
                 "description": "Подбор процессора:",
                 "main_table": "cpu_merged",
                 "dynamic_rules": [
-                    lambda p: f"Таблица: cpu_merged",
+                    lambda p: "Таблица: cpu_merged",
                     lambda p: f"Бюджет: <= {p['budget']} руб." if "budget" in p else None,
                     lambda p: self._gen_dynamic_conditions(p, "cpu_merged"),
                     "Сортировка: рейтинг (по убыванию)",
@@ -408,7 +400,7 @@ class DynamicPCBuilderPrompter:
                 "description": "Подбор материнской платы:",
                 "main_table": "motherboard",
                 "dynamic_rules": [
-                    lambda p: f"Таблица: motherboard",
+                    lambda p: "Таблица: motherboard",
                     lambda p: "JOIN socket_compatibility ON socket_compatibility.motherboard_socket = motherboard.socket",
                     lambda p: f"Сокет процессора: {self.selected_components.get('cpu', {}).get('socket', 'N/A')}",
                     lambda p: f"Бюджет: <= {p['budget']} руб." if "budget" in p else None,
@@ -421,7 +413,7 @@ class DynamicPCBuilderPrompter:
                 "description": "Подбор оперативной памяти:",
                 "main_table": "memory",
                 "dynamic_rules": [
-                    lambda p: f"Таблица: memory",
+                    lambda p: "Таблица: memory",
                     lambda p: f"Совместимость: <= {self.selected_components.get('motherboard', {}).get('memory_slots', 'N/A')} слотов",
                     lambda p: f"Макс. объем: <= {self.selected_components.get('motherboard', {}).get('max_memory', 'N/A')} GB",
                     lambda p: f"Бюджет: <= {p['budget']} руб." if "budget" in p else None,
@@ -434,7 +426,7 @@ class DynamicPCBuilderPrompter:
                 "description": "Подбор корпуса:",
                 "main_table": "corpus",
                 "dynamic_rules": [
-                    lambda p: f"Таблица: corpus",
+                    lambda p: "Таблица: corpus",
                     lambda p: "JOIN case_motherboard_compatibility ON corpus.form_factor = case_motherboard_compatibility.case_form_factor",
                     lambda p: f"Форм-фактор: {self.selected_components.get('motherboard', {}).get('form_factor', 'N/A')}",
                     lambda p: f"Бюджет: <= {p['budget']} руб." if "budget" in p else None,
@@ -468,7 +460,7 @@ class DynamicPCBuilderPrompter:
                 total_power += comp["power"]
         return total_power if total_power else 500
 
-    def _gen_dynamic_conditions(self, params: Dict, table: str) -> Optional[str]:
+    def _gen_dynamic_conditions(self, params: dict, table: str) -> Optional[str]:
         ignore = {"budget"}
         conditions = []
         for key, value in params.items():
@@ -486,7 +478,7 @@ class DynamicPCBuilderPrompter:
                     conditions.append(f"{table}.{key} = {value}")
         return "Доп. условия: " + ", ".join(conditions) if conditions else None
 
-    def build_prompts(self, user_request: Dict[str, Any]) -> (Dict[str, str], Dict[str, Any]):
+    def build_prompts(self, user_request: dict[str, Any]) -> (dict[str, str], dict[str, Any]):
         """
         Для каждого компонента (из списка распределённых по бюджету) формируется промпт.
         """

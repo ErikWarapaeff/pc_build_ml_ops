@@ -1,11 +1,11 @@
-from typing import Dict, Optional, Any, List, Union
-from pydantic import BaseModel, ValidationError, Field
-from langchain.tools import tool
 import json
-import urllib.parse
-import asyncio
-from playwright.sync_api import sync_playwright
 import time
+import urllib.parse
+from typing import Any, Optional, Union
+
+from langchain.tools import tool
+from playwright.sync_api import sync_playwright
+from pydantic import BaseModel, Field
 
 
 class CPU(BaseModel):
@@ -38,7 +38,7 @@ Component = Union[CPU, GPU, Memory, Corpus, PowerSupply, Motherboard]
 
 
 class ComponentInput(BaseModel):
-    components: List[Component] = Field(
+    components: list[Component] = Field(
         ...,
         description="Список компонентов для анализа.",
         example=[{"cpu": "Intel Core i7-12700"}, {"gpu": "GeForce RTX 3070"}],
@@ -49,12 +49,12 @@ class RegardInput(BaseModel):
     input_data: ComponentInput
 
     @classmethod
-    def from_dict(cls, input_data: Dict[str, Any]) -> "RegardInput":
+    def from_dict(cls, input_data: dict[str, Any]) -> "RegardInput":
         """Метод преобразования словаря в объект `RegardInput`"""
         return cls(input_data=ComponentInput(**input_data))
 
 
-def parse_first_product(page) -> Optional[Dict[str, Any]]:
+def parse_first_product(page) -> Optional[dict[str, Any]]:
     """Извлекает данные о первом товаре."""
     try:
         page.wait_for_selector(".CardText_link__C_fPZ", timeout=15000)
@@ -80,7 +80,7 @@ def parse_first_product(page) -> Optional[Dict[str, Any]]:
         return None
 
 
-def apply_sorting(page, sort_text: str) -> Optional[Dict[str, Any]]:
+def apply_sorting(page, sort_text: str) -> Optional[dict[str, Any]]:
     """Применяет сортировку и извлекает первый товар."""
     try:
         print(f"\nПрименяем сортировку: {sort_text}")
@@ -101,7 +101,7 @@ def apply_sorting(page, sort_text: str) -> Optional[Dict[str, Any]]:
 
 
 @tool(args_schema=RegardInput)
-def regard_parser_tool(input_data: Dict) -> str:
+def regard_parser_tool(input_data: dict) -> str:
     """Инструмент парсинга товаров с regard.ru."""
     # try:
     #     # ✅ Передаем данные в `ComponentInput`, затем в `RegardInput`

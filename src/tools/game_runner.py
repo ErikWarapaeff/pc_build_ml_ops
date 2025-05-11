@@ -1,14 +1,15 @@
 import json
-from pydantic import BaseModel, Field
-from typing import List, Optional, Union, Any
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from fuzzywuzzy import process
 import time
+from typing import Any, Optional, Union
+
+from fuzzywuzzy import process
 from langchain.tools import tool
+from pydantic import BaseModel
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 # Основная модель для результата
@@ -18,8 +19,8 @@ class GameRequirementsResult(BaseModel):
     gpu: str
     ram: int
     requirements: Optional[str] = None
-    fps_info: List[Any]
-    paragraphs: List[str]
+    fps_info: list[Any]
+    paragraphs: list[str]
     error: Optional[str] = None
 
 

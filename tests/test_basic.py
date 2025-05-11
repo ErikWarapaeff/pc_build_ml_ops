@@ -2,10 +2,9 @@
 Базовые тесты для проверки настройки окружения.
 """
 
-import os
 import sys
+
 import pytest
-from pathlib import Path
 
 
 def test_imports():

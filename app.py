@@ -1,7 +1,7 @@
 import gradio as gr
+
 from chat_backend import ChatBot
 from src.utils.ui_settings import UISettings
-
 
 with gr.Blocks() as demo:
     with gr.Tabs():

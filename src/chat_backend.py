@@ -1,10 +1,9 @@
+import os
 import uuid
-import shutil
+
 from agent_shema.mult_agents_graph import AgenticGraph
 from load_config import LoadConfig
 from utils.utilities import _print_event
-from typing import List, Tuple
-import os
 
 CFG = LoadConfig()
 db = CFG.local_file
@@ -23,7 +22,7 @@ config = {"configurable": {"thread_id": thread_id, "recursion_limit": 50}}
 
 class ChatBot:
     @staticmethod
-    def respond(chatbot: List[dict], message: str) -> Tuple:
+    def respond(chatbot: list[dict], message: str) -> tuple:
         _printed = set()
         events = graph.stream(
             {"messages": [{"role": "user", "content": message}]}, config, stream_mode="values"

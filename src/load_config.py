@@ -1,8 +1,9 @@
 import os
-from dotenv import load_dotenv
+
 import yaml
-from pyprojroot import here
+from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
+from pyprojroot import here
 
 load_dotenv()
 

@@ -1,10 +1,9 @@
-import shutil
-import pandas as pd
-import sqlite3
-from typing import Callable
+from collections.abc import Callable
+
 from langchain_core.messages import ToolMessage
 from langchain_core.runnables import RunnableLambda
 from langgraph.prebuilt import ToolNode
+
 from agent_shema.build_agent_state import State
 
 

@@ -2,10 +2,10 @@
 Конфигурационный файл для pytest с общими фикстурами.
 """
 
-import os
 import sys
-import pytest
 from pathlib import Path
+
+import pytest
 
 # Добавляем корневую директорию проекта в PYTHONPATH для импорта модулей
 PROJECT_ROOT = Path(__file__).parent.parent

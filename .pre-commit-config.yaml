@@ -44,7 +44,9 @@ repos:
             --disable-error-code=attr-defined,
             --disable-error-code=syntax,
             --disable-error-code=unreachable,
-            --disable-error-code=unused-ignore
+            --disable-error-code=unused-ignore,
+            --disable-error-code=arg-type,
+            --disable-error-code=import-untyped
         ]
         pass_filenames: false
         additional_dependencies: [

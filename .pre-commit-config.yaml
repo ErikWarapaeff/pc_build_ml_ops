@@ -31,17 +31,10 @@ repos:
         args: [--explicit-package-bases, --package, src]
         pass_filenames: false
         additional_dependencies: [
-            types-requests,
+            types-requests, 
             pydantic,
             types-PyYAML,
             sqlalchemy-stubs,
-            types-selenium,
-            types-python-dotenv,
-            langchain,
-            langchain-core,
-            langchain-community,
-            langchain-openai,
-            gradio,
-            playwright
+            types-selenium
           ]
         exclude: ^(notebooks/|tests/)

@@ -1,12 +1,11 @@
-from langchain_core.runnables import Runnable, RunnableConfig
-from load_config import LoadConfig
-from agent_shema.complete_or_escalate import CompleteOrEscalate
-from agent_shema.build_system_prompts import AgentPrompts
 from agent_shema.build_assistants import ToPCBuildAssistant, ToPriceValidationCheckerAssistant
-from tools.sql_agent_tools import pc_builder_tool, question_answer_tool
+from agent_shema.build_system_prompts import AgentPrompts
+from agent_shema.complete_or_escalate import CompleteOrEscalate
+from load_config import LoadConfig
 from tools.bottle_neck import calculate_bottleneck
-from tools.regard_parser import regard_parser_tool
 from tools.game_runner import game_run_tool
+from tools.regard_parser import regard_parser_tool
+from tools.sql_agent_tools import pc_builder_tool, question_answer_tool
 
 AGENT_PROMPTS = AgentPrompts()
 CFG = LoadConfig()
@@ -25,13 +24,15 @@ class AIAgentRunnables:
     """
 
     def __init__(self) -> None:
-        self.primary_assistant_tools, self.primary_assistant_runnable = (
-            self.build_primary_assistant_runnable()
-        )
+        (
+            self.primary_assistant_tools,
+            self.primary_assistant_runnable,
+        ) = self.build_primary_assistant_runnable()
         self.pc_build_tools, self.pc_build_runnable = self.build_pc_build_runnable()
-        self.price_validation_checker_tools, self.price_validation_checker_runnable = (
-            self.build_price_validation_checker_runnable()
-        )
+        (
+            self.price_validation_checker_tools,
+            self.price_validation_checker_runnable,
+        ) = self.build_price_validation_checker_runnable()
 
     def build_primary_assistant_runnable(self):
         primary_assistant_tools = [

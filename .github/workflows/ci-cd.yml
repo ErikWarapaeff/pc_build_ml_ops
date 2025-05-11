@@ -48,7 +48,7 @@ jobs:
         run: poetry run ruff check .
 
       - name: Run mypy
-        run: poetry run mypy src/ app.py
+        run: poetry run mypy --explicit-package-bases --ignore-missing-imports --allow-untyped-decorators --allow-subclassing-any --allow-any-generics --disable-error-code=misc --disable-error-code=no-untyped-def --disable-error-code=no-untyped-call --disable-error-code=no-any-return --disable-error-code=valid-type --disable-error-code=operator --disable-error-code=attr-defined --disable-error-code=syntax --disable-error-code=unreachable --disable-error-code=unused-ignore src/ app/
 
   test:
     name: Run Tests

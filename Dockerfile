@@ -13,7 +13,7 @@ RUN python -m pip install --no-cache-dir --upgrade pip && \
 COPY pyproject.toml poetry.lock* ./
 
 # Установка зависимостей
-RUN poetry install --no-dev --no-interaction --no-ansi
+RUN poetry install --without dev --no-interaction --no-ansi
 
 # Второй этап для создания минимального образа
 FROM python:3.12-slim

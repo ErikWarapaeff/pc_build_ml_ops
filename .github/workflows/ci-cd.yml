@@ -234,14 +234,18 @@ jobs:
 
       - name: Push Docker image
         run: |
-          echo "Source image name for tagging will be: ${{ github.repository }}:${{ env.DOCKER_METADATA_OUTPUT_VERSION }}"
+          LOWERCASE_REPO=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          LOADED_IMAGE_TAG="${{ env.DOCKER_METADATA_OUTPUT_VERSION }}"
+          LOADED_IMAGE_NAME="${LOWERCASE_REPO}:${LOADED_IMAGE_TAG}"
+
+          echo "Using loaded image for tagging: ${LOADED_IMAGE_NAME}"
           echo "Target tags from metadata action: ${{ steps.meta.outputs.tags }}"
-          # Перебираем все теги из метаданных
-          for tag in $(echo "${{ steps.meta.outputs.tags }}" | tr '\n' ' '); do
-            echo "Tagging ${{ github.repository }}:${{ env.DOCKER_METADATA_OUTPUT_VERSION }} to $tag"
-            docker tag "${{ github.repository }}:${{ env.DOCKER_METADATA_OUTPUT_VERSION }}" "$tag"
-            echo "Pushing $tag"
-            docker push "$tag"
+
+          for target_tag in $(echo "${{ steps.meta.outputs.tags }}" | tr '\n' ' '); do
+            echo "Tagging ${LOADED_IMAGE_NAME} to ${target_tag}"
+            docker tag "${LOADED_IMAGE_NAME}" "${target_tag}"
+            echo "Pushing ${target_tag}"
+            docker push "${target_tag}"
           done
 
   deploy-docs:

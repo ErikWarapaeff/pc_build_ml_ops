@@ -234,10 +234,14 @@ jobs:
 
       - name: Push Docker image
         run: |
+          echo "Source image name for tagging will be: ${{ github.repository }}:${{ env.DOCKER_METADATA_OUTPUT_VERSION }}"
+          echo "Target tags from metadata action: ${{ steps.meta.outputs.tags }}"
           # Перебираем все теги из метаданных
           for tag in $(echo "${{ steps.meta.outputs.tags }}" | tr '\n' ' '); do
-            docker tag ${{ github.repository }} $tag
-            docker push $tag
+            echo "Tagging ${{ github.repository }}:${{ env.DOCKER_METADATA_OUTPUT_VERSION }} to $tag"
+            docker tag "${{ github.repository }}:${{ env.DOCKER_METADATA_OUTPUT_VERSION }}" "$tag"
+            echo "Pushing $tag"
+            docker push "$tag"
           done
 
   deploy-docs:

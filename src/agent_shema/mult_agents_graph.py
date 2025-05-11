@@ -1,17 +1,19 @@
-from langgraph.prebuilt import tools_condition
-from langgraph.graph import StateGraph, START, END
+from typing import Any, Literal
+
+from langchain_core.messages import ToolMessage
 from langgraph.checkpoint.memory import MemorySaver
-from typing import Literal
-from utils.utilities import create_entry_node, create_tool_node_with_fallback
+from langgraph.graph import END, START, StateGraph
+from langgraph.prebuilt import tools_condition
+
+from agent_shema.agent_runnables import AIAgentRunnables
+from agent_shema.build_agent_state import State
 from agent_shema.build_assistants import (
     Assistant,
-    ToPriceValidationCheckerAssistant,
     ToPCBuildAssistant,
+    ToPriceValidationCheckerAssistant,
 )
-from agent_shema.agent_runnables import AIAgentRunnables
 from agent_shema.complete_or_escalate import CompleteOrEscalate
-from agent_shema.build_agent_state import State
-from langchain_core.messages import ToolMessage
+from utils.utilities import create_entry_node, create_tool_node_with_fallback
 
 AGENT_RUNNABLES = AIAgentRunnables()
 
@@ -30,12 +32,11 @@ def leave_skill(state: State) -> dict:
 
 
 class AgenticGraph:
-
     def __init__(self) -> None:
         self.builder = StateGraph(State)
         self.builder.add_node("fetch_user_info", self.fetch_user_info)
         self.builder.add_edge(START, "fetch_user_info")
-        self.shared_memory = {}
+        self.shared_memory: dict[str, Any] = {}
 
     def fetch_user_info(self, state: State):
         """
@@ -213,7 +214,7 @@ class AgenticGraph:
                 else:
                     print(f"Ошибка: инструмент {tool_name} не поддерживается.")
                     return "primary_assistant_tools"
-            raise ValueError("Invalid route")
+            return "primary_assistant_tools"  # Default return
 
         self.builder.add_conditional_edges(
             "primary_assistant",
@@ -250,22 +251,17 @@ class AgenticGraph:
 
         self.builder.add_conditional_edges("fetch_user_info", route_to_workflow)
 
-    def Compile_graph(self):
+    def compile_graph(self):
         """
-        Компилирует граф агентных состояний, объединяя все узлы и ребра.
+        Компилирует полный граф, добавляя все необходимые узлы и ребра между ними.
 
-        Функция последовательно добавляет узлы для подассистентов по сборке ПК, проверки цен и основного ассистента,
-        а затем компилирует граф, используя MemorySaver для сохранения состояния.
-
-        Возвращает:
-            Готовый граф агентных состояний.
+        Сначала добавляются узлы для основного ассистента, затем - для различных подассистентов
+        (например, для сборки ПК и проверки цен). В конце граф компилируется и возвращается
+        вместе с сохранителем памяти для возможности сохранения состояния диалога.
         """
-
+        self.add_primary_assistant_nodes_to_graph()
         self.add_pc_build_nodes_to_graph()
         self.add_price_validation_nodes_to_graph()
-        self.add_primary_assistant_nodes_to_graph()
-
-        # Compile graph
         memory = MemorySaver()
-        graph = self.builder.compile(checkpointer=memory)
-        return graph
+        graph = self.builder.compile()
+        return graph, memory

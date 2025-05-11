@@ -1,4 +1,4 @@
-from typing import Annotated
+from typing import Annotated, Any
 
 from langchain.schema import HumanMessage
 from langchain_core.runnables import Runnable, RunnableConfig
@@ -33,7 +33,7 @@ class Assistant:
         """
         self.runnable = runnable
 
-    def __call__(self, state: State, config: RunnableConfig):
+    def __call__(self, state: State, config: RunnableConfig) -> dict[str, Any]:
         """
         Выполняет вызов runnable с заданным состоянием и конфигурацией, гарантируя получение корректного ответа.
 

@@ -7,7 +7,7 @@ class UISettings:
     """
 
     @staticmethod
-    def feedback(data: gr.LikeData):
+    def feedback(data: gr.LikeData) -> None:
         """
         Process user feedback on the generated response.
 

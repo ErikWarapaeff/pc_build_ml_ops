@@ -1,3 +1,5 @@
+from typing import Any
+
 from agent_shema.build_assistants import (  # type: ignore
     ToPCBuildAssistant,
     ToPriceValidationCheckerAssistant,
@@ -37,7 +39,7 @@ class AIAgentRunnables:
             self.price_validation_checker_runnable,
         ) = self.build_price_validation_checker_runnable()
 
-    def build_primary_assistant_runnable(self):
+    def build_primary_assistant_runnable(self) -> tuple[list[Any], Any]:
         primary_assistant_tools = [
             ToPCBuildAssistant,
             ToPriceValidationCheckerAssistant,
@@ -47,14 +49,14 @@ class AIAgentRunnables:
         )
         return primary_assistant_tools, primary_assistant_runnable
 
-    def build_pc_build_runnable(self):
+    def build_pc_build_runnable(self) -> tuple[list[Any], Any]:
         pc_build_tools = [pc_builder_tool, question_answer_tool]
         pc_build_runnable = AGENT_PROMPTS.pc_info_prompt | CFG.llm.bind_tools(
             pc_build_tools + [CompleteOrEscalate]
         )
         return pc_build_tools, pc_build_runnable
 
-    def build_price_validation_checker_runnable(self):
+    def build_price_validation_checker_runnable(self) -> tuple[list[Any], Any]:
         price_validation_checker_tools = [regard_parser_tool, calculate_bottleneck, game_run_tool]
         price_validation_checker_runnable = (
             AGENT_PROMPTS.price_validation_checker_prompt

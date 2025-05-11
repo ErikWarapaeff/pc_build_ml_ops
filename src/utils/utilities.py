@@ -1,4 +1,5 @@
 from collections.abc import Callable
+from typing import Any
 
 from langchain_core.messages import AIMessage, ToolMessage
 from langchain_core.runnables import RunnableLambda
@@ -7,7 +8,7 @@ from langgraph.prebuilt.tool_node import ToolNode
 from src.agent_shema.build_agent_state import State
 
 
-def handle_tool_error(state) -> dict:
+def handle_tool_error(state: dict[str, Any]) -> dict[str, list[ToolMessage]]:
     """
     Обрабатывает ошибки, форматируя их в сообщение и добавляя в историю чата.
 
@@ -48,7 +49,7 @@ def handle_tool_error(state) -> dict:
     }
 
 
-def create_tool_node_with_fallback(tools: list) -> dict:
+def create_tool_node_with_fallback(tools: list) -> ToolNode:
     """
     Создает объект `ToolNode` с обработкой ошибок через fallback.
 
@@ -66,7 +67,7 @@ def create_tool_node_with_fallback(tools: list) -> dict:
     )
 
 
-def _print_event(event: dict, _printed: set, max_length=1500):
+def _print_event(event: dict[str, Any], _printed: set[str], max_length: int = 1500) -> None:
     """
     Выводит текущее состояние и сообщения события с возможным усечением длинных сообщений.
 
@@ -93,7 +94,9 @@ def _print_event(event: dict, _printed: set, max_length=1500):
             _printed.add(message.id)
 
 
-def create_entry_node(assistant_name: str, new_dialog_state: str) -> Callable:
+def create_entry_node(
+    assistant_name: str, new_dialog_state: str
+) -> Callable[[State], dict[str, Any]]:
     """
     Создает функцию для перехода к новому этапу диалога с указанием состояния и инструмента.
 
@@ -115,7 +118,7 @@ def create_entry_node(assistant_name: str, new_dialog_state: str) -> Callable:
           сообщение рекомендует вызвать функцию `CompleteOrEscalate`, чтобы передать управление основному помощнику.
     """
 
-    def entry_node(state: State) -> dict:
+    def entry_node(state: State) -> dict[str, Any]:
         last_message = state["messages"][-1]
         tool_call_id = None
         if (

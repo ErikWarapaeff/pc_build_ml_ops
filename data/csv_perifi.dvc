@@ -1,0 +1,6 @@
+outs:
+- md5: a6f5d1a3a3d9d874b9dbe98ba2879bd6.dir
+  size: 1183441
+  nfiles: 17
+  hash: md5
+  path: csv_perifi

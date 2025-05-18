@@ -1,0 +1,164 @@
+models:
+- model: gpt-3.5-turbo
+  questions:
+  - input_tokens: 13
+    output_tokens: 18
+    question: "\u041F\u0440\u0438\u0432\u0435\u0442, \u0447\u0442\u043E \u0442\u044B\
+      \ \u0443\u043C\u0435\u0435\u0448\u044C?"
+    time: 2.6332788467407227
+    tokens_per_second: 6.835584473812587
+  - input_tokens: 25
+    output_tokens: 18
+    question: "\u0410 \u043A\u0430\u043A\u0430\u044F \u0441\u0440\u0435\u0434\u043D\
+      \u044F\u044F \u0446\u0435\u043D\u0430 \u043D\u0430 \u0432\u0438\u0434\u0435\u043E\
+      \u043A\u0430\u0440\u0442\u044B \u0441 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\
+      \u043A\u043E\u0439 4\u043A?"
+    time: 17.398017168045044
+    tokens_per_second: 1.0346006574278257
+  - input_tokens: 34
+    output_tokens: 18
+    question: "\u041C\u043D\u0435 \u043D\u0443\u0436\u0435\u043D \u0438\u0433\u0440\
+      \u043E\u0432\u043E\u0439 \u041F\u041A \u0447\u0442\u043E\u0431\u044B \u0432\u0438\
+      \u0434\u0435\u043E\u043A\u0430\u0440\u0442\u0430 \u043F\u043E\u0434\u0434\u0435\
+      \u0440\u0436\u0438\u0432\u0430\u043B\u0430 4\u043A, \u043C\u043E\u0439 \u0431\
+      \u044E\u0434\u0436\u0435\u0442 200\u043A"
+    time: 38.82519006729126
+    tokens_per_second: 0.46361653268928393
+  - input_tokens: 24
+    output_tokens: 18
+    question: "\u0410 \u043D\u0430\u0441\u043A\u043E\u043B\u044C\u043A\u043E \u0432\
+      \ \u0434\u0430\u043D\u043D\u043E\u0439 \u0441\u0438\u0441\u0442\u0435\u043C\u0435\
+      \ \u043F\u0440\u043E\u0446\u0435\u0441\u0441\u043E\u0440 \u0440\u0430\u0441\u043A\
+      \u0440\u044B\u0432\u0430\u0435\u0442 \u0432\u0438\u0434\u0435\u043E\u043A\u0430\
+      \u0440\u0442\u0443?"
+    time: 91.2857711315155
+    tokens_per_second: 0.19718297580098634
+  - input_tokens: 26
+    output_tokens: 18
+    question: "\u0425\u043E\u0440\u043E\u0448\u043E, \u0430 \u043F\u043E\u0439\u0434\
+      \u0435\u0442 \u043B\u0438 \u043D\u0430 \u0434\u0430\u043D\u043D\u043E\u0439\
+      \ \u0441\u0438\u0441\u0442\u0435\u043C\u0435 \u0438\u0433\u0440\u0430 Cyberpunk\
+      \ 2077?"
+    time: 1.8906536102294922
+    tokens_per_second: 9.520517086054232
+  - input_tokens: 26
+    output_tokens: 18
+    question: "\u0425\u043E\u0440\u043E\u0448\u043E, \u043D\u0430\u0439\u0434\u0438\
+      \ \u043C\u043D\u0435 \u0442\u043E\u0433\u0434\u0430 \u0430\u043A\u0442\u0443\
+      \u0430\u043B\u044C\u043D\u044B\u0435 \u0446\u0435\u043D\u044B \u043D\u0430 \u0434\
+      \u0430\u043D\u043D\u0443\u044E \u0441\u0438\u0441\u0442\u0435\u043C\u0443."
+    time: 9.246592044830322
+    tokens_per_second: 1.946663150351012
+  token_efficiency: 0.421875
+  token_per_second: 0.6696449212641503
+  total_input_tokens: 148
+  total_output_tokens: 108
+- model: gpt-4o-mini
+  questions:
+  - input_tokens: 13
+    output_tokens: 18
+    question: "\u041F\u0440\u0438\u0432\u0435\u0442, \u0447\u0442\u043E \u0442\u044B\
+      \ \u0443\u043C\u0435\u0435\u0448\u044C?"
+    time: 3.0179200172424316
+    tokens_per_second: 5.964372778986756
+  - input_tokens: 25
+    output_tokens: 18
+    question: "\u0410 \u043A\u0430\u043A\u0430\u044F \u0441\u0440\u0435\u0434\u043D\
+      \u044F\u044F \u0446\u0435\u043D\u0430 \u043D\u0430 \u0432\u0438\u0434\u0435\u043E\
+      \u043A\u0430\u0440\u0442\u044B \u0441 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\
+      \u043A\u043E\u0439 4\u043A?"
+    time: 6.576529502868652
+    tokens_per_second: 2.7370058922640705
+  - input_tokens: 34
+    output_tokens: 18
+    question: "\u041C\u043D\u0435 \u043D\u0443\u0436\u0435\u043D \u0438\u0433\u0440\
+      \u043E\u0432\u043E\u0439 \u041F\u041A \u0447\u0442\u043E\u0431\u044B \u0432\u0438\
+      \u0434\u0435\u043E\u043A\u0430\u0440\u0442\u0430 \u043F\u043E\u0434\u0434\u0435\
+      \u0440\u0436\u0438\u0432\u0430\u043B\u0430 4\u043A, \u043C\u043E\u0439 \u0431\
+      \u044E\u0434\u0436\u0435\u0442 200\u043A"
+    time: 36.61675453186035
+    tokens_per_second: 0.4915782469016511
+  - input_tokens: 24
+    output_tokens: 18
+    question: "\u0410 \u043D\u0430\u0441\u043A\u043E\u043B\u044C\u043A\u043E \u0432\
+      \ \u0434\u0430\u043D\u043D\u043E\u0439 \u0441\u0438\u0441\u0442\u0435\u043C\u0435\
+      \ \u043F\u0440\u043E\u0446\u0435\u0441\u0441\u043E\u0440 \u0440\u0430\u0441\u043A\
+      \u0440\u044B\u0432\u0430\u0435\u0442 \u0432\u0438\u0434\u0435\u043E\u043A\u0430\
+      \u0440\u0442\u0443?"
+    time: 91.95033502578735
+    tokens_per_second: 0.19575785118076974
+  - input_tokens: 26
+    output_tokens: 18
+    question: "\u0425\u043E\u0440\u043E\u0448\u043E, \u0430 \u043F\u043E\u0439\u0434\
+      \u0435\u0442 \u043B\u0438 \u043D\u0430 \u0434\u0430\u043D\u043D\u043E\u0439\
+      \ \u0441\u0438\u0441\u0442\u0435\u043C\u0435 \u0438\u0433\u0440\u0430 Cyberpunk\
+      \ 2077?"
+    time: 1.7214465141296387
+    tokens_per_second: 10.45632254749476
+  - input_tokens: 26
+    output_tokens: 18
+    question: "\u0425\u043E\u0440\u043E\u0448\u043E, \u043D\u0430\u0439\u0434\u0438\
+      \ \u043C\u043D\u0435 \u0442\u043E\u0433\u0434\u0430 \u0430\u043A\u0442\u0443\
+      \u0430\u043B\u044C\u043D\u044B\u0435 \u0446\u0435\u043D\u044B \u043D\u0430 \u0434\
+      \u0430\u043D\u043D\u0443\u044E \u0441\u0438\u0441\u0442\u0435\u043C\u0443."
+    time: 7.706017971038818
+    tokens_per_second: 2.335836753515057
+  token_efficiency: 0.421875
+  token_per_second: 0.7317568874315372
+  total_input_tokens: 148
+  total_output_tokens: 108
+- model: gpt-4.1-mini
+  questions:
+  - input_tokens: 13
+    output_tokens: 18
+    question: "\u041F\u0440\u0438\u0432\u0435\u0442, \u0447\u0442\u043E \u0442\u044B\
+      \ \u0443\u043C\u0435\u0435\u0448\u044C?"
+    time: 3.6189846992492676
+    tokens_per_second: 4.973770683179172
+  - input_tokens: 25
+    output_tokens: 18
+    question: "\u0410 \u043A\u0430\u043A\u0430\u044F \u0441\u0440\u0435\u0434\u043D\
+      \u044F\u044F \u0446\u0435\u043D\u0430 \u043D\u0430 \u0432\u0438\u0434\u0435\u043E\
+      \u043A\u0430\u0440\u0442\u044B \u0441 \u043F\u043E\u0434\u0434\u0435\u0440\u0436\
+      \u043A\u043E\u0439 4\u043A?"
+    time: 6.68287992477417
+    tokens_per_second: 2.693449561060049
+  - input_tokens: 34
+    output_tokens: 18
+    question: "\u041C\u043D\u0435 \u043D\u0443\u0436\u0435\u043D \u0438\u0433\u0440\
+      \u043E\u0432\u043E\u0439 \u041F\u041A \u0447\u0442\u043E\u0431\u044B \u0432\u0438\
+      \u0434\u0435\u043E\u043A\u0430\u0440\u0442\u0430 \u043F\u043E\u0434\u0434\u0435\
+      \u0440\u0436\u0438\u0432\u0430\u043B\u0430 4\u043A, \u043C\u043E\u0439 \u0431\
+      \u044E\u0434\u0436\u0435\u0442 200\u043A"
+    time: 53.217246532440186
+    tokens_per_second: 0.3382362142510991
+  - input_tokens: 24
+    output_tokens: 18
+    question: "\u0410 \u043D\u0430\u0441\u043A\u043E\u043B\u044C\u043A\u043E \u0432\
+      \ \u0434\u0430\u043D\u043D\u043E\u0439 \u0441\u0438\u0441\u0442\u0435\u043C\u0435\
+      \ \u043F\u0440\u043E\u0446\u0435\u0441\u0441\u043E\u0440 \u0440\u0430\u0441\u043A\
+      \u0440\u044B\u0432\u0430\u0435\u0442 \u0432\u0438\u0434\u0435\u043E\u043A\u0430\
+      \u0440\u0442\u0443?"
+    time: 29.74277687072754
+    tokens_per_second: 0.6051889532115399
+  - input_tokens: 26
+    output_tokens: 18
+    question: "\u0425\u043E\u0440\u043E\u0448\u043E, \u0430 \u043F\u043E\u0439\u0434\
+      \u0435\u0442 \u043B\u0438 \u043D\u0430 \u0434\u0430\u043D\u043D\u043E\u0439\
+      \ \u0441\u0438\u0441\u0442\u0435\u043C\u0435 \u0438\u0433\u0440\u0430 Cyberpunk\
+      \ 2077?"
+    time: 35.84836745262146
+    tokens_per_second: 0.5021149156593943
+  - input_tokens: 26
+    output_tokens: 18
+    question: "\u0425\u043E\u0440\u043E\u0448\u043E, \u043D\u0430\u0439\u0434\u0438\
+      \ \u043C\u043D\u0435 \u0442\u043E\u0433\u0434\u0430 \u0430\u043A\u0442\u0443\
+      \u0430\u043B\u044C\u043D\u044B\u0435 \u0446\u0435\u043D\u044B \u043D\u0430 \u0434\
+      \u0430\u043D\u043D\u0443\u044E \u0441\u0438\u0441\u0442\u0435\u043C\u0443."
+    time: 8.940561771392822
+    tokens_per_second: 2.013296307352266
+  token_efficiency: 0.421875
+  token_per_second: 0.7823149561719189
+  total_input_tokens: 148
+  total_output_tokens: 108
+timestamp: '2025-05-18 22:08:31'

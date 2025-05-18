@@ -19,8 +19,8 @@ import time
 from typing import Any
 
 import yaml
-from chat_backend import ChatBot  # type: ignore
 
+from src.chat_backend import ChatBot  # type: ignore
 from src.load_config import LoadConfig
 
 # Настройка логирования

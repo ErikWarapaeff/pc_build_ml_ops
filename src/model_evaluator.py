@@ -164,6 +164,7 @@ class ModelEvaluator:
             # Возвращаем оригинальную конфигурацию между тестами моделей
             self._save_config(self.original_config)
             from src.load_config import LoadConfig
+
             LoadConfig()
 
             logger.info(f"Завершено тестирование модели: {model_name}")
@@ -174,6 +175,7 @@ class ModelEvaluator:
         # Восстанавливаем исходную конфигурацию в конце тестирования
         self._save_config(self.original_config)
         from src.load_config import LoadConfig
+
         LoadConfig()
 
         # Сохраняем результаты

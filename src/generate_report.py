@@ -1,19 +1,22 @@
 #!/usr/bin/env python3
+# type: ignore
+
+"""
+Скрипт для генерации полного отчета о сравнении языковых моделей.
+Интегрирует данные из тестирования, анализа токенов и визуализации.
+"""
 
 import argparse
 import glob
-import json
 import logging
 import os
 import sys
 import time
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 import matplotlib.pyplot as plt
 import pandas as pd
 import yaml
-
-# type: ignore
 
 # Настройка пути для импорта других модулей проекта
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -205,7 +208,7 @@ class ReportGenerator:
         Returns:
             Словарь с рекомендациями по различным аспектам
         """
-        recommendations = {}
+        recommendations: dict[str, str] = {}
 
         if df.empty:
             return recommendations
@@ -460,7 +463,9 @@ class ReportGenerator:
 
         return report_path
 
-    def run_and_generate_report(self, models: list[str] = None, config_path: str = None) -> str:
+    def run_and_generate_report(
+        self, models: list[str] | None = None, config_path: str | None = None
+    ) -> str:
         """
         Запуск тестирования моделей и генерация отчета
 

@@ -7,20 +7,19 @@ import sys
 import time
 from typing import Any
 
+# Настройка пути для импорта других модулей проекта
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# Импорт после настройки путей
 import yaml
 
-# type: ignore
+from src.chat_backend import ChatBot  # type: ignore
+from src.load_config import LoadConfig
 
 """
 Скрипт для тестирования различных моделей в мультиагентной системе
 с использованием базы данных из DVC.
 """
-
-# Настройка пути для импорта других модулей проекта
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-from src.chat_backend import ChatBot
-from src.load_config import LoadConfig
 
 # Настройка логирования
 logging.basicConfig(
@@ -54,7 +53,10 @@ class ModelEvaluator:
         try:
             with open(self.config_path, encoding="utf-8") as f:
                 config = yaml.safe_load(f)
-            return config
+            # Убеждаемся, что результат соответствует типу Dict[str, Any]
+            if not isinstance(config, dict):
+                config = {}
+            return config  # type: ignore[no-any-return]
         except Exception as e:
             logger.error(f"Ошибка при загрузке конфигурации: {str(e)}")
             sys.exit(1)
@@ -102,12 +104,18 @@ class ModelEvaluator:
         chatbot = ChatBot()
 
         # Результаты тестирования
-        results = {"model": model_name, "responses": [], "timings": [], "total_time": 0}
+        results: dict[str, Any] = {
+            "model": model_name,
+            "responses": [],
+            "timings": [],
+            "total_time": 0,
+        }
 
         # Запускаем тестирование
         logger.info(f"Тестирование модели: {model_name}")
         start_time_total = time.time()
 
+        # Используем List для chat_history
         chat_history: list[tuple[str | None, str]] = []
 
         for i, question in enumerate(self.test_questions):
@@ -117,9 +125,9 @@ class ModelEvaluator:
             start_time = time.time()
 
             # Получаем ответ от бота
-            # Здесь вызываем метод из ChatBot для получения ответа
             try:
-                chat_history, response = chatbot.respond(chat_history, question)
+                chat_history_new, response = chatbot.respond(chat_history, question)
+                chat_history = chat_history_new  # Правильное присвоение результата
                 # Сохраняем последний ответ
                 bot_response = chat_history[-1][1] if chat_history else "Нет ответа"
             except Exception as e:
@@ -130,11 +138,13 @@ class ModelEvaluator:
             response_time = end_time - start_time
 
             # Записываем результаты
-            results["responses"].append(
-                {"question": question, "response": bot_response, "time": response_time}
-            )
+            if isinstance(results["responses"], list):
+                results["responses"].append(
+                    {"question": question, "response": bot_response, "time": response_time}
+                )
 
-            results["timings"].append(response_time)
+            if isinstance(results["timings"], list):
+                results["timings"].append(response_time)
 
             logger.info(f"Ответ получен за {response_time:.2f} секунд")
 
@@ -156,12 +166,16 @@ class ModelEvaluator:
         Returns:
             Словарь с результатами тестирования всех моделей
         """
-        evaluation_results = {"models": [], "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")}
+        evaluation_results: dict[str, Any] = {
+            "models": [],
+            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+        }
 
         for model_name in models:
             logger.info(f"Начало тестирования модели: {model_name}")
             model_results = self.test_model(model_name)
-            evaluation_results["models"].append(model_results)
+            if isinstance(evaluation_results["models"], list):
+                evaluation_results["models"].append(model_results)
 
             # Возвращаем оригинальную конфигурацию между тестами моделей
             self._save_config(self.original_config)
@@ -204,7 +218,7 @@ class ModelEvaluator:
             logger.error(f"Ошибка при сохранении результатов: {str(e)}")
 
 
-def main():
+def main() -> None:
     """Основная функция для запуска тестирования моделей"""
     parser = argparse.ArgumentParser(description="Тестирование моделей в мультиагентной системе")
     parser.add_argument(

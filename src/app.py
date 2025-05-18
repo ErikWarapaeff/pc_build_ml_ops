@@ -1,6 +1,8 @@
+#!/usr/bin/env python3
+# type: ignore
+
 import os
 import sys
-# type: ignore
 
 import gradio as gr
 

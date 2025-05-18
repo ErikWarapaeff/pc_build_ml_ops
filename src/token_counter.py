@@ -1,17 +1,20 @@
 #!/usr/bin/env python3
+# type: ignore
+
+"""
+Скрипт для подсчета токенов, используемых разными моделями,
+и анализа их эффективности.
+"""
 
 import argparse
 import logging
 import os
 import sys
 import time
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 import tiktoken
 import yaml
-from tiktoken.model import MODEL_TO_ENCODING
-
-# type: ignore
 
 # Настройка пути для импорта других модулей проекта
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

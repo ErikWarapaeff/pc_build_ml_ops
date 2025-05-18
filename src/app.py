@@ -1,7 +1,13 @@
+import os
+import sys
+
 import gradio as gr
 
-from src.chat_backend import ChatBot
-from src.utils.ui_settings import UISettings
+# Добавляем корневую директорию в пути для импорта
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from chat_backend import ChatBot
+from utils.ui_settings import UISettings
 
 with gr.Blocks() as demo:
     with gr.Tabs():
@@ -12,14 +18,10 @@ with gr.Blocks() as demo:
             with gr.Row() as row_one:
                 chatbot = gr.Chatbot(
                     value=[
-                        (
-                            None,
-                            "Привет! Я твой проводник в мир компьютерной техники. Чем сегодня могу тебе помочь?",
-                        )
+                        {"role": "assistant", "content": "Привет! Я твой проводник в мир компьютерной техники. Чем сегодня могу тебе помочь?"}
                     ],
                     type="messages",
                     elem_id="chatbot",
-                    bubble_full_width=False,
                     height=500,
                     avatar_images=("images/user.jpg", "images/chatbot.png"),
                 )

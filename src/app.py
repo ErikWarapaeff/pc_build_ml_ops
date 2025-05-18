@@ -6,11 +6,11 @@ import sys
 
 import gradio as gr
 
-# Добавляем корневую директорию в пути для импорта
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 from chat_backend import ChatBot
 from utils.ui_settings import UISettings
+
+# Добавляем корневую директорию в пути для импорта
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 with gr.Blocks() as demo:
     with gr.Tabs():

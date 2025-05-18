@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 
+"""
+Скрипт для тестирования различных моделей в мультиагентной системе
+с использованием базы данных из DVC.
+"""
+
 import argparse
 import logging
 import os
@@ -7,19 +12,10 @@ import sys
 import time
 from typing import Any
 
-# Настройка пути для импорта других модулей проекта
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-# Импорт после настройки путей
 import yaml
 
-from src.chat_backend import ChatBot  # type: ignore
+from src.chat_backend import ChatBot
 from src.load_config import LoadConfig
-
-"""
-Скрипт для тестирования различных моделей в мультиагентной системе
-с использованием базы данных из DVC.
-"""
 
 # Настройка логирования
 logging.basicConfig(
@@ -28,6 +24,9 @@ logging.basicConfig(
     handlers=[logging.StreamHandler(sys.stdout)],
 )
 logger = logging.getLogger(__name__)
+
+# Настройка пути для импорта других модулей проекта
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 class ModelEvaluator:

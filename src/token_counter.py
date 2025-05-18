@@ -16,9 +16,6 @@ from typing import Any
 import tiktoken
 import yaml
 
-# Настройка пути для импорта других модулей проекта
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 from src.model_evaluator import ModelEvaluator
 
 # Настройка логирования

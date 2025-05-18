@@ -9,8 +9,8 @@ beautifulsoup4
 selenium
 playwright
 sqlalchemy
-python-dotenv
 typing_extensions
 pyprojroot
-shutil
-sqlite3
+tiktoken
+pandas
+matplotlib

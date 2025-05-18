@@ -1,3 +1,6 @@
+# type: ignore
+
+import os
 from typing import Any, Literal
 
 from langchain_core.messages import AIMessage, ToolMessage
@@ -14,6 +17,10 @@ from src.agent_shema.build_assistants import (
 )
 from src.agent_shema.complete_or_escalate import CompleteOrEscalate
 from src.utils.utilities import create_entry_node, create_tool_node_with_fallback
+
+# Настройка альтернативного API-эндпоинта для OpenAI
+os.environ["OPENAI_API_BASE"] = "https://api.vsegpt.ru/v1"
+print("Использование альтернативного API-эндпоинта для OpenAI:", os.environ.get("OPENAI_API_BASE"))
 
 AGENT_RUNNABLES = AIAgentRunnables()
 
@@ -267,7 +274,7 @@ class AgenticGraph:
 
         def route_to_workflow(
             state: State,
-        ) -> Literal["assistant", "build_pc", "validate_price"]:
+        ) -> Literal["primary_assistant", "build_pc", "validate_price"]:
             """
             Определяет конечный маршрут для перехода в рабочий процесс на основе состояния диалога.
 
@@ -283,14 +290,14 @@ class AgenticGraph:
 
             dialog_state = state.get("dialog_state")
             if not dialog_state:
-                return "assistant"
+                return "primary_assistant"
             # Проверяем, что последний элемент dialog_state соответствует одному из Literal
             last_state = dialog_state[-1]
-            if last_state in ("build_pc", "validate_price", "assistant"):
+            if last_state in ("build_pc", "validate_price", "primary_assistant"):
                 return last_state
             else:
                 # Если состояние неизвестно, возвращаем ассистента по умолчанию
-                return "assistant"
+                return "primary_assistant"
 
         self.builder.add_conditional_edges("fetch_user_info", route_to_workflow)
 

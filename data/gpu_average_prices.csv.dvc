@@ -1,0 +1,5 @@
+outs:
+- md5: c8e65818b6081fce578f35566f798c96
+  size: 6078
+  hash: md5
+  path: gpu_average_prices.csv

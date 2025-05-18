@@ -1,0 +1,5 @@
+outs:
+- md5: af11a5345a1a2fbe3714a7317bc595be
+  size: 229349
+  hash: md5
+  path: cpu_ratings.csv

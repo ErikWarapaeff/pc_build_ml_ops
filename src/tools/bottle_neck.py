@@ -1,3 +1,5 @@
+# type: ignore
+
 from typing import Any
 
 from langchain.tools import tool

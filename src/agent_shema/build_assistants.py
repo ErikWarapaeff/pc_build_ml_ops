@@ -1,3 +1,5 @@
+# type: ignore
+
 from typing import Annotated, Any
 
 from langchain.schema import HumanMessage

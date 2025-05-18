@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 # type: ignore
+# ruff: noqa: E402
 
-import os
 import sys
-
-import gradio as gr
-
-from chat_backend import ChatBot
-from utils.ui_settings import UISettings
+from pathlib import Path
 
 # Добавляем корневую директорию в пути для импорта
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(str(Path(__file__).parent.parent))
+
+# Импорты после настройки sys.path
+import gradio as gr
+from chat_backend import ChatBot  # type: ignore
+from utils.ui_settings import UISettings  # type: ignore
 
 with gr.Blocks() as demo:
     with gr.Tabs():

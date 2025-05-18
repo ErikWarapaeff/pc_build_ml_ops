@@ -1,20 +1,26 @@
 #!/usr/bin/env python3
-
+# type: ignore
+# ruff: noqa: E402
 """
 Скрипт для тестирования различных моделей в мультиагентной системе
 с использованием базы данных из DVC.
 """
 
-import argparse
-import logging
 import os
 import sys
+
+# Настройка пути для импорта других модулей проекта
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# Импорты после настройки sys.path
+import argparse
+import logging
 import time
 from typing import Any
 
 import yaml
+from chat_backend import ChatBot  # type: ignore
 
-from src.chat_backend import ChatBot
 from src.load_config import LoadConfig
 
 # Настройка логирования
@@ -24,9 +30,6 @@ logging.basicConfig(
     handlers=[logging.StreamHandler(sys.stdout)],
 )
 logger = logging.getLogger(__name__)
-
-# Настройка пути для импорта других модулей проекта
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 class ModelEvaluator:

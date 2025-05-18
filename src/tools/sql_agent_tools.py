@@ -1,6 +1,6 @@
 import json
 import os
-from typing import Any, Literal, Dict, Optional
+from typing import Any, Literal, Optional
 
 from langchain.chains import create_sql_query_chain
 from langchain.schema import HumanMessage, SystemMessage
@@ -54,7 +54,7 @@ class SQLAgent:
           - QuerySQLCheckerTool (требует llm)
         """
         self.engine = engine
-        self.llm = CFG.llm 
+        self.llm = CFG.llm
         # , base_url="https://api.vsegpt.ru/v1"
         # Инициализируем объект базы через LangChain SQLDatabase
         self.db = SQLDatabase(engine)
@@ -86,7 +86,7 @@ class SQLAgent:
                     "   - Возвращай все совпадения, когда не указаны конкретные фильтры\n\n"
                     "**Специальные инструкции для поиска GPU с поддержкой разрешения:**\n"
                     "   - Если в таблице отсутствует определенный столбец, ищи по столбцам name/description\n"
-                    "   - Если в запросе указано разрешение 4K, используй `%4K%'` для поиска GPU с поддержкой 4K\n"
+                    "   - Если в запросе указано разрешение 4K, используй `%4K%'` для поиска GPU с поддержкой 4K\n",
                 ),
                 ("human", "{input}"),
             ]
@@ -145,7 +145,9 @@ class SQLAgent:
                     query = self.validate_sql_query(query, question)
                     print(f"Переписываем запрос: {query}")
                 else:
-                    print(f"Все попытки выполнения запроса завершились неудачей. Последняя ошибка: {e}")
+                    print(
+                        f"Все попытки выполнения запроса завершились неудачей. Последняя ошибка: {e}"
+                    )
                     return []
         return []
 
@@ -192,7 +194,7 @@ class SQLAgent:
         return output  # type: ignore
 
 
-def parse_user_request(user_input: str) -> str:
+def parse_user_request(user_input: str) -> dict[str, Any]:
     """Парсит пользовательский запрос в структурированный JSON с валидацией"""
 
     # Pydantic модель внутри функции
@@ -231,7 +233,7 @@ def parse_user_request(user_input: str) -> str:
 
         3. **Главное**: в additional_info добавляй ТОЛЬКО то, что ЯВНО указано в запросе!
            - МАКСИМАЛЬНО КРАТКО
-           - БЕЗ дополнительных слов или объяснений 
+           - БЕЗ дополнительных слов или объяснений
            - Если упоминается "4K" - обязательно добавь "gpu": "4k" (только так, не более!)
            - Используй ТОЛЬКО следующие ключи: gpu, cpu, memory, motherboard, corpus, power_supply
            - Значения должны быть максимально краткими!
@@ -249,7 +251,7 @@ def parse_user_request(user_input: str) -> str:
           "build_type": "игровая",
           "additional_info": {"gpu": "rtx 3080", "cpu": "ryzen 9"}
         }
-        
+
         НЕ ДОБАВЛЯЙ никаких дополнительных объяснений или комментариев. Только конкретные детали из запроса.
         КАТЕГОРИЧЕСКИ ЗАПРЕЩЕНО добавлять компоненты, не упомянутые в запросе!
 
@@ -263,7 +265,9 @@ def parse_user_request(user_input: str) -> str:
     openai_api_key = SecretStr(openai_api_key_str)
 
     # Получение ответа от LLM
-    client = ChatOpenAI(api_key=openai_api_key, model="gpt-4o-mini", base_url="https://api.vsegpt.ru/v1")
+    client = ChatOpenAI(
+        api_key=openai_api_key, model="gpt-4o-mini", base_url="https://api.vsegpt.ru/v1"
+    )
     try:
         response = client.invoke(
             [SystemMessage(content=system_prompt), HumanMessage(content=user_input)]
@@ -279,52 +283,67 @@ def parse_user_request(user_input: str) -> str:
         # Безопасный парсинг JSON с предварительной очисткой
         cleaned_content = raw_content.strip()
         # Удаляем все, что находится до первой { и после последней }
-        first_brace = cleaned_content.find('{')
-        last_brace = cleaned_content.rfind('}')
+        first_brace = cleaned_content.find("{")
+        last_brace = cleaned_content.rfind("}")
         if first_brace >= 0 and last_brace >= 0:
-            cleaned_content = cleaned_content[first_brace:last_brace+1]
-            
+            cleaned_content = cleaned_content[first_brace : last_brace + 1]
+
         raw_data = json.loads(cleaned_content)
-        
+
         # Обрабатываем случай, когда бюджет задан как строка
         if isinstance(raw_data.get("budget"), str):
             try:
                 raw_data["budget"] = int(raw_data["budget"].replace("k", "000").replace("K", "000"))
             except ValueError:
                 raw_data["budget"] = 150000  # дефолтный бюджет, если не удалось распарсить
-        
+
         # Проверяем наличие и тип ключевых данных
         if not raw_data.get("budget"):
             raw_data["budget"] = 150000
-        
+
         if "build_type" not in raw_data or raw_data["build_type"] not in ["игровая", "офисная"]:
             # Если в запросе упоминаются игры или 4K, предполагаем игровую сборку
-            if "игр" in user_input.lower() or "4k" in user_input.lower() or "4к" in user_input.lower():
+            if (
+                "игр" in user_input.lower()
+                or "4k" in user_input.lower()
+                or "4к" in user_input.lower()
+            ):
                 raw_data["build_type"] = "игровая"
             else:
                 raw_data["build_type"] = "офисная"
 
         if "additional_info" not in raw_data:
             raw_data["additional_info"] = {}
-            
+
         # Если в запросе упоминается 4K, добавляем в additional_info
         if "4k" in user_input.lower() or "4к" in user_input.lower():
             if "additional_info" not in raw_data:
                 raw_data["additional_info"] = {}
             raw_data["additional_info"]["gpu"] = "4k"
-            
+
         # Проверяем и очищаем компоненты, которые не были явно указаны в запросе
         if "additional_info" in raw_data:
             components_to_remove = []
             component_keywords = {
-                "gpu": ["видеокарт", "rtx", "gtx", "nvidia", "geforce", "amd", "radeon", "rx", "4k", "4к"],
+                "gpu": [
+                    "видеокарт",
+                    "rtx",
+                    "gtx",
+                    "nvidia",
+                    "geforce",
+                    "amd",
+                    "radeon",
+                    "rx",
+                    "4k",
+                    "4к",
+                ],
                 "cpu": ["процессор", "intel", "amd", "ryzen", "core", "i5", "i7", "i9"],
                 "memory": ["память", "озу", "ram", "ddr", "гб", "gb"],
                 "motherboard": ["мать", "материнск", "плат", "motherboard", "чипсет"],
                 "corpus": ["корпус", "корпуса", "case"],
-                "power_supply": ["блок питания", "бп", "питание", "ватт", "вт", "w"]
+                "power_supply": ["блок питания", "бп", "питание", "ватт", "вт", "w"],
             }
-            
+
             for comp in list(raw_data["additional_info"].keys()):
                 # Проверяем, был ли этот компонент явно упомянут в запросе
                 if comp in component_keywords:
@@ -335,12 +354,12 @@ def parse_user_request(user_input: str) -> str:
                             break
                     if not was_mentioned:
                         components_to_remove.append(comp)
-                        
+
             # Удаляем компоненты, которые не были явно упомянуты
             for comp in components_to_remove:
                 if comp in raw_data["additional_info"]:
                     del raw_data["additional_info"][comp]
-            
+
             # Упрощаем значения для краткости
             for key, value in raw_data["additional_info"].items():
                 if isinstance(value, str):
@@ -350,28 +369,37 @@ def parse_user_request(user_input: str) -> str:
                     else:
                         # Удаляем лишние слова и пробелы, оставляем только ключевую информацию
                         raw_data["additional_info"][key] = value.strip()
-                        
+
         # Проверяем тип сборки - для игрового ПК с 4K нужна видеокарта
-        if raw_data.get("build_type") == "игровая" and ("4k" in user_input.lower() or "4к" in user_input.lower()):
+        if raw_data.get("build_type") == "игровая" and (
+            "4k" in user_input.lower() or "4к" in user_input.lower()
+        ):
             if "additional_info" not in raw_data:
                 raw_data["additional_info"] = {}
             if "gpu" not in raw_data["additional_info"]:
                 raw_data["additional_info"]["gpu"] = "4k"
-        
+
         validated = BuildRequest(**raw_data).model_dump()
-        
+
         print(f"Распознанный запрос: {validated}")
-        return json.dumps(validated, ensure_ascii=False)
+        return validated
 
     except (json.JSONDecodeError, ValidationError, TypeError) as e:
         print(f"Ошибка парсинга или валидации: {e}")
         # Создаем запасной объект на основе анализа текста
         fallback_budget = 150000
-        fallback_type = "игровая" if "игр" in user_input.lower() or "4k" in user_input.lower() or "4к" in user_input.lower() else "офисная"
-        
+        fallback_type = (
+            "игровая"
+            if "игр" in user_input.lower()
+            or "4k" in user_input.lower()
+            or "4к" in user_input.lower()
+            else "офисная"
+        )
+
         # Ищем числа в запросе, которые могут быть бюджетом
         import re
-        budget_match = re.search(r'(\d+)\s*(?:k|K|к|тыс|тысяч|руб|₽)?', user_input)
+
+        budget_match = re.search(r"(\d+)\s*(?:k|K|к|тыс|тысяч|руб|₽)?", user_input)
         if budget_match:
             try:
                 budget_str = budget_match.group(1)
@@ -382,11 +410,11 @@ def parse_user_request(user_input: str) -> str:
                 fallback_budget = budget_val
             except ValueError:
                 pass
-                
+
         additional_info = {}
         if "4k" in user_input.lower() or "4к" in user_input.lower():
             additional_info["gpu"] = "4k"
-            
+
         # Проверяем упоминания конкретных компонентов - только явно указанных
         component_keywords = {
             "gpu": ["видеокарт", "rtx", "gtx", "nvidia", "geforce", "amd", "radeon", "rx"],
@@ -394,54 +422,60 @@ def parse_user_request(user_input: str) -> str:
             "memory": ["память", "озу", "ram", "ddr"],
             "motherboard": ["мать", "материнск", "плат", "motherboard"],
             "corpus": ["корпус", "корпуса", "case"],
-            "power_supply": ["блок питания", "бп", "питание", "ватт", "вт", "w"]
+            "power_supply": ["блок питания", "бп", "питание", "ватт", "вт", "w"],
         }
-        
+
         # Находим конкретные модели, упомянутые в запросе
         for comp, keywords in component_keywords.items():
             # Проверяем, упоминается ли компонент в запросе
             was_mentioned = False
             mentions = []
-            
+
             for keyword in keywords:
                 if keyword in user_input.lower():
                     was_mentioned = True
-                    
+
                     # Ищем возможные значения для этого ключевого слова
                     # Например, для "rtx" ищем "rtx 4080" или для "процессор" ищем "i9-14900k"
                     if keyword in ["rtx", "gtx", "rx"]:
-                        model_match = re.search(f"{keyword}\\s*(\\d+\\s*[a-zA-Z0-9]*)", user_input.lower())
+                        model_match = re.search(
+                            f"{keyword}\\s*(\\d+\\s*[a-zA-Z0-9]*)", user_input.lower()
+                        )
                         if model_match:
                             mentions.append(f"{keyword.upper()} {model_match.group(1)}")
                     elif keyword in ["intel", "core"]:
-                        model_match = re.search(f"{keyword}\\s*([a-zA-Z0-9\\-]+)", user_input.lower())
+                        model_match = re.search(
+                            f"{keyword}\\s*([a-zA-Z0-9\\-]+)", user_input.lower()
+                        )
                         if model_match:
                             mentions.append(f"{keyword} {model_match.group(1)}")
                     elif keyword in ["ryzen", "amd"]:
-                        model_match = re.search(f"{keyword}\\s*([a-zA-Z0-9\\-]+)", user_input.lower())
+                        model_match = re.search(
+                            f"{keyword}\\s*([a-zA-Z0-9\\-]+)", user_input.lower()
+                        )
                         if model_match:
                             mentions.append(f"{keyword} {model_match.group(1)}")
                     elif keyword in ["ddr"]:
-                        model_match = re.search(f"(\\d+)\\s*(?:гб|gb)?\\s*{keyword}(\\d+)?", user_input.lower())
+                        model_match = re.search(
+                            f"(\\d+)\\s*(?:гб|gb)?\\s*{keyword}(\\d+)?", user_input.lower()
+                        )
                         if model_match:
                             gb = model_match.group(1) or ""
                             ver = model_match.group(2) or ""
                             mentions.append(f"{gb}GB {keyword.upper()}{ver}")
-            
+
             if was_mentioned:
                 if mentions:
                     additional_info[comp] = " ".join(mentions)
                 else:
                     # Добавляем только категорию без конкретной модели
                     additional_info[comp] = ""
-                    
+
         default_data = BuildRequest(
-            budget=fallback_budget, 
-            build_type=fallback_type, 
-            additional_info=additional_info
+            budget=fallback_budget, build_type=fallback_type, additional_info=additional_info
         ).model_dump()
-        
-        return json.dumps(default_data, ensure_ascii=False)  # type: ignore
+
+        return default_data
 
 
 @tool
@@ -503,92 +537,93 @@ components_percentages = {
         "memory": 0.1,
         "motherboard": 0.1,
         "power_supply": 0.05,
-        "corpus": 0.05
+        "corpus": 0.05,
     },
-    "офисная": {
-        "cpu": 0.4,
-        "memory": 0.3,
-        "motherboard": 0.2,
-        "power_supply": 0.1
-    }
+    "офисная": {"cpu": 0.4, "memory": 0.3, "motherboard": 0.2, "power_supply": 0.1},
 }
+
 
 # --- Основной класс для построения промптов ---
 class DynamicPCBuilderPrompter:
     def __init__(self):
-        self.selected_components: Dict[str, Any] = {}
+        self.selected_components: dict[str, Any] = {}
         # для сборки пк мы последовательно выбираем компоненты, так как необходимо учитывать совместимость
-        self.component_order = [
-            "gpu", "cpu", "motherboard", 
-            "memory", "corpus", "power_supply"
-        ]
+        self.component_order = ["gpu", "cpu", "motherboard", "memory", "corpus", "power_supply"]
         self.component_config = self._init_config()
+
     # Создание промптов с динамическими полями
-    def _init_config(self) -> Dict[str, Dict]:
+    def _init_config(self) -> dict[str, dict]:
         return {
             "gpu": {
                 "description": "Подбор видеокарты: ",
                 "main_table": "gpu_full_info",
                 "dynamic_rules": [
-                    lambda p: f"Таблица: gpu_full_info выбирать только dustinct gpu в запросе",
-                    lambda p: f"JOIN gpu_hierarchy ON gpu_hierarchy.gpu = gpu_full_info.gpu" ,
-                    lambda p: f"Разрешение: {p.get('resolution')} (проверить в gpu_hierarchy.{p.get('resolution', '')} Ultra)" 
-                        if "resolution" in p else None,
-                    lambda p: f"Бюджет: <= {p['budget']} руб. Колонка average_price" if "budget" in p else None,
+                    lambda p: "Таблица: gpu_full_info выбирать только dustinct gpu в запросе",
+                    lambda p: "JOIN gpu_hierarchy ON gpu_hierarchy.gpu = gpu_full_info.gpu",
+                    lambda p: (
+                        f"Разрешение: {p.get('resolution')} (проверить в gpu_hierarchy.{p.get('resolution', '')} Ultra)"
+                        if "resolution" in p
+                        else None
+                    ),
+                    lambda p: (
+                        f"Бюджет: <= {p['budget']} руб. Колонка average_price"
+                        if "budget" in p
+                        else None
+                    ),
                     lambda p: self._gen_dynamic_conditions(p, "gpu_full_info"),
                     "Сортировка: рейтинг (по убыванию), average_price (по убыванию)",
-                    "Вывести все поля"
-                ]
+                    "Вывести все поля",
+                ],
             },
             "cpu": {
                 "description": "Подбор процессора:",
                 "main_table": "cpu_merged",
                 "dynamic_rules": [
-                    lambda p: f"Таблица: cpu_merged",
+                    lambda p: "Таблица: cpu_merged",
                     lambda p: f"Бюджет: <= {p['budget']} руб." if "budget" in p else None,
                     lambda p: self._gen_dynamic_conditions(p, "cpu_merged"),
                     "Сортировка: рейтинг (по убыванию)",
-                    "Вывести все поля"
-                ]
+                    "Вывести все поля",
+                ],
             },
             "motherboard": {
                 "description": "Подбор материнской платы:",
                 "main_table": "motherboard",
                 "dynamic_rules": [
-                    lambda p: f"Таблица: motherboard",
+                    lambda p: "Таблица: motherboard",
                     lambda p: "JOIN socket_compatibility ON socket_compatibility.motherboard_socket = motherboard.socket",
                     lambda p: f"Сокет процессора: {self.selected_components.get('cpu', {}).get('socket', 'N/A')}",
                     lambda p: f"Бюджет: <= {p['budget']} руб." if "budget" in p else None,
                     lambda p: self._gen_dynamic_conditions(p, "motherboard"),
                     "Сортировка: price (по убыванию)",
-                    "Вывести все поля"
-                ]
+                    "Вывести все поля",
+                ],
             },
             "memory": {
                 "description": "Подбор оперативной памяти:",
                 "main_table": "memory",
                 "dynamic_rules": [
-                    lambda p: f"Таблица: memory",
+                    lambda p: "Таблица: memory",
                     lambda p: f"Совместимость: <= {self.selected_components.get('motherboard', {}).get('memory_slots', 'N/A')} слотов",
                     lambda p: f"Макс. объем: <= {self.selected_components.get('motherboard', {}).get('max_memory', 'N/A')} GB",
                     lambda p: f"Бюджет: <= {p['budget']} руб." if "budget" in p else None,
                     lambda p: self._gen_dynamic_conditions(p, "memory"),
                     "Сортировка: speed_num (по убыванию)",
-                    "Вывести все поля"
-                ]
+                    "Вывести все поля",
+                ],
             },
             "corpus": {
                 "description": "Подбор корпуса:",
                 "main_table": "corpus",
                 "dynamic_rules": [
-                    lambda p: f"Таблица: corpus",
+                    lambda p: "Таблица: corpus",
                     lambda p: "JOIN case_motherboard_compatibility ON corpus.form_factor = case_motherboard_compatibility.case_form_factor",
                     lambda p: f"Форм-фактор: {self.selected_components.get('motherboard', {}).get('form_factor', 'N/A')}",
                     lambda p: f"Бюджет: <= {p['budget']} руб." if "budget" in p else None,
                     lambda p: self._gen_dynamic_conditions(p, "corpus"),
                     "Сортировка: цена (по возрастанию)",
-                    "Вывести все поля"
-                ]
+                    "Вывести все поля",
+                ],
             },
             "power_supply": {
                 "description": "Подбор блока питания:",
@@ -599,10 +634,10 @@ class DynamicPCBuilderPrompter:
                     lambda p: f"Бюджет: <= {p['budget']} руб." if "budget" in p else None,
                     lambda p: self._gen_dynamic_conditions(p, "power-supply"),
                     "Сортировка: цена (по убыванию)",
-                    "Вывести все поля"
+                    "Вывести все поля",
                 ],
-                "dependencies": ["gpu", "cpu"]
-            }
+                "dependencies": ["gpu", "cpu"],
+            },
         }
 
     def _table_reference(self, component: str) -> str:
@@ -615,8 +650,8 @@ class DynamicPCBuilderPrompter:
                 total_power += comp["power"]
         return total_power if total_power else 500
 
-    def _gen_dynamic_conditions(self, params: Dict, table: str) -> Optional[str]:
-        ignore = {'budget'}
+    def _gen_dynamic_conditions(self, params: dict[str, Any], table: str) -> Optional[str]:
+        ignore = {"budget"}
         conditions = []
         for key, value in params.items():
             if key in ignore:
@@ -631,16 +666,16 @@ class DynamicPCBuilderPrompter:
                     # Специальное условие для поиска 4K видеокарт
                     if key == "additional_info" and "4k" in value.lower():
                         # Ищем по названию или описанию видеокарты
-                        conditions.append(f"name LIKE '%4K%' OR name LIKE '%RTX%' OR name LIKE '%RX%'")
+                        conditions.append(
+                            "name LIKE '%4K%' OR name LIKE '%RTX%' OR name LIKE '%RX%'"
+                        )
                     else:
                         conditions.append(f"{table}.{key} = '{value}'")
                 else:
                     conditions.append(f"{table}.{key} = {value}")
         return "Доп. условия: " + ", ".join(conditions) if conditions else None
 
-    
-
-    def build_prompts(self, user_request: Dict[str, Any]) -> (Dict[str, str], Dict[str, Any]):
+    def build_prompts(self, user_request: dict[str, Any]) -> dict[str, Any]:
         """
         Для каждого компонента (из списка распределённых по бюджету) формируется промпт.
         """
@@ -665,24 +700,23 @@ class DynamicPCBuilderPrompter:
             prompt = "\n".join(prompt_lines)
             prompts[component] = prompt
             print(prompt)
-            
-            
+
             agent = SQLAgent(engine=engine, llm=CFG.llm)
-            response = agent.run({
-                "question": prompt,
-                "table_info": db.get_table_info(),
-                "top_k": 1
-            })
-            
+            response = agent.run(
+                {"question": prompt, "table_info": db.get_table_info(), "top_k": 1}
+            )
+
             # Добавляем отладочную информацию о запросе и результатах
             print(f"=== Компонент: {component} ===")
             print(f"Сформированный запрос: {response.get('query', 'Запрос не сформирован')}")
             print(f"Результат запроса (raw): {response.get('result', 'Результат не получен')}")
             print(f"Тип результата: {type(response.get('result', None))}")
-            print(f"Длина результата: {len(response.get('result', [])) if isinstance(response.get('result', []), list) else 'не список'}")
-            
+            print(
+                f"Длина результата: {len(response.get('result', [])) if isinstance(response.get('result', []), list) else 'не список'}"
+            )
+
             components[component] = response.get("result")
-            
+
             raw_result = response.get("result", [])
             if isinstance(raw_result, str):
                 try:
@@ -695,7 +729,7 @@ class DynamicPCBuilderPrompter:
                 result_data = raw_result
             else:
                 result_data = []
-            
+
             print(f"Обработанный результат: {result_data}")
             print(f"Количество элементов: {len(result_data)}")
 
@@ -708,7 +742,7 @@ class DynamicPCBuilderPrompter:
                 comp_info = {
                     "memory_slots": selected.get("memory_slots"),
                     "max_memory": selected.get("max_memory"),
-                    "form_factor": selected.get("form_factor")
+                    "form_factor": selected.get("form_factor"),
                 }
             else:
                 comp_info = selected
@@ -719,8 +753,9 @@ class DynamicPCBuilderPrompter:
 
         return components
 
+
 @tool
-def pc_builder_tool(user_input: str) -> dict:
+def pc_builder_tool(user_input: str) -> dict[str, Any]:
     """
     Обрабатывает запрос пользователя на сборку ПК, рассчитывает бюджет для компонентов и генерирует рекомендации по сборке.
 
@@ -728,27 +763,27 @@ def pc_builder_tool(user_input: str) -> dict:
     - user_input (str): Строка с запросом пользователя, содержащая требования для сборки ПК, включая бюджет и тип сборки.
 
     Возвращает:
-    - dict: Словарь с результатами, включающий компоненты сборки и соответствующие рекомендации.
+    - Dict[str, Any]: Словарь с результатами, включающий компоненты сборки и соответствующие рекомендации.
       Пример возвращаемого значения
     """
-    input_json = parse_user_request(user_input)
+    parsed_data = parse_user_request(user_input)
 
     try:
-        build_req = BuildRequest.model_validate_json(input_json)
+        build_req = BuildRequest.model_validate(parsed_data)
     except ValidationError as e:
-        return json.dumps({"error": e.errors()}, ensure_ascii=False, indent=2)
-    
+        return {"error": e.errors()}
+
     component_budgets = calculate_component_budgets(
         build_req.budget, build_req.build_type, components_percentages
     )
-    
+
     components = {}
     for comp, comp_budget in component_budgets.items():
         comp_params = {"budget": comp_budget}
         if build_req.additional_info and comp in build_req.additional_info:
             comp_params["additional_info"] = build_req.additional_info[comp]
         components[comp] = comp_params
-    
+
     request_dict = {"components": components}
     builder = DynamicPCBuilderPrompter()
     components_results = builder.build_prompts(request_dict)

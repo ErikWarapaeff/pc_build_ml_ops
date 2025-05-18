@@ -1,6 +1,6 @@
 import json
 import os
-from typing import Any, Literal, Optional
+from typing import Any, Literal
 
 from langchain.chains import create_sql_query_chain
 from langchain.schema import HumanMessage, SystemMessage
@@ -650,7 +650,7 @@ class DynamicPCBuilderPrompter:
                 total_power += comp["power"]
         return total_power if total_power else 500
 
-    def _gen_dynamic_conditions(self, params: dict[str, Any], table: str) -> Optional[str]:
+    def _gen_dynamic_conditions(self, params: dict[str, Any], table: str) -> str | None:
         ignore = {"budget"}
         conditions = []
         for key, value in params.items():

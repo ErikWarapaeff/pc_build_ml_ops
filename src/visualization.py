@@ -10,7 +10,7 @@ import glob
 import logging
 import os
 import sys
-from typing import Any, Optional
+from typing import Any
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -37,7 +37,7 @@ class ResultsVisualizer:
         """
         self.results_dir = results_dir
 
-    def load_results(self, results_file: str) -> Optional[dict[str, Any]]:
+    def load_results(self, results_file: str) -> dict[str, Any] | None:
         """
         Загрузка результатов из файла
 
@@ -55,7 +55,7 @@ class ResultsVisualizer:
             logger.error(f"Ошибка при загрузке результатов из {results_file}: {str(e)}")
             return None
 
-    def find_latest_results(self) -> Optional[str]:
+    def find_latest_results(self) -> str | None:
         """
         Поиск последнего файла с результатами
 

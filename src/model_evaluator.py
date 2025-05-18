@@ -10,15 +10,15 @@ import logging
 import os
 import sys
 import time
-from typing import Any, Optional
+from typing import Any
+
+import yaml
 
 # Настройка пути для импорта других модулей проекта
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import yaml
-
 from src.chat_backend import ChatBot
-from src.load_config import load_config
+from src.load_config import LoadConfig
 
 # Настройка логирования
 logging.basicConfig(
@@ -94,7 +94,7 @@ class ModelEvaluator:
         self._save_config(config)
 
         # Перезагружаем конфигурацию в системе
-        load_config()
+        LoadConfig()
 
         # Инициализируем чат-бота
         chatbot = ChatBot()
@@ -106,7 +106,7 @@ class ModelEvaluator:
         logger.info(f"Тестирование модели: {model_name}")
         start_time_total = time.time()
 
-        chat_history: list[tuple[Optional[str], str]] = []
+        chat_history: list[tuple[str | None, str]] = []
 
         for i, question in enumerate(self.test_questions):
             logger.info(f"Вопрос {i+1}: {question}")
@@ -163,7 +163,8 @@ class ModelEvaluator:
 
             # Возвращаем оригинальную конфигурацию между тестами моделей
             self._save_config(self.original_config)
-            load_config()
+            from src.load_config import LoadConfig
+            LoadConfig()
 
             logger.info(f"Завершено тестирование модели: {model_name}")
 
@@ -172,7 +173,8 @@ class ModelEvaluator:
 
         # Восстанавливаем исходную конфигурацию в конце тестирования
         self._save_config(self.original_config)
-        load_config()
+        from src.load_config import LoadConfig
+        LoadConfig()
 
         # Сохраняем результаты
         self._save_evaluation_results(evaluation_results)

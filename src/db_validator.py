@@ -13,9 +13,8 @@ import sqlite3
 import subprocess
 import sys
 import time
-from typing import Any, Dict, List, Optional, Tuple, Collection
+from typing import Any
 
-import pandas as pd
 import yaml
 
 # Настройка логирования
@@ -38,8 +37,8 @@ class DatabaseValidator:
             db_path: Путь к файлу базы данных
         """
         self.db_path = db_path
-        self.connection: Optional[sqlite3.Connection] = None
-        self.cursor: Optional[sqlite3.Cursor] = None
+        self.connection: sqlite3.Connection | None = None
+        self.cursor: sqlite3.Cursor | None = None
         self.tables: list[str] = []
         self.total_checks = 0
         self.passed_checks = 0

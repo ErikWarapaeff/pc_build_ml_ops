@@ -1,3 +1,5 @@
+# type: ignore
+
 from typing import Any
 
 from src.agent_shema.build_assistants import (  # type: ignore

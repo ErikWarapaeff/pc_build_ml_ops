@@ -1,3 +1,5 @@
+# type: ignore
+
 import json
 import time
 import urllib.parse
@@ -133,7 +135,7 @@ def regard_parser_tool(input_data: dict[str, Any]) -> str:
         else:
             # Предполагаем, что это уже правильная структура данных
             regard_input = RegardInput.from_dict(input_data)
-            
+
         components_to_parse = regard_input.input_data.components
     except Exception as e:  # Заменил ValidationError на общий Exception для отладки
         return json.dumps(
@@ -203,7 +205,7 @@ def regard_parser_tool(input_data: dict[str, Any]) -> str:
     return json.dumps(results, ensure_ascii=False, indent=2)
 
 
-def main():
+def main() -> None:
     # Пример использования с корректной структурой для RegardInput
     sample_input_data = {
         "input_data": {

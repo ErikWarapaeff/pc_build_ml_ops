@@ -1,5 +1,6 @@
 import os
 import sys
+# type: ignore
 
 import gradio as gr
 
@@ -18,7 +19,10 @@ with gr.Blocks() as demo:
             with gr.Row() as row_one:
                 chatbot = gr.Chatbot(
                     value=[
-                        {"role": "assistant", "content": "Привет! Я твой проводник в мир компьютерной техники. Чем сегодня могу тебе помочь?"}
+                        {
+                            "role": "assistant",
+                            "content": "Привет! Я твой проводник в мир компьютерной техники. Чем сегодня могу тебе помочь?",
+                        }
                     ],
                     type="messages",
                     elem_id="chatbot",

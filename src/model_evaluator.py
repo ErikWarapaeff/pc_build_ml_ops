@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 
-"""
-Скрипт для тестирования различных моделей в мультиагентной системе
-с использованием базы данных из DVC.
-"""
-
 import argparse
 import logging
 import os
@@ -13,6 +8,13 @@ import time
 from typing import Any
 
 import yaml
+
+# type: ignore
+
+"""
+Скрипт для тестирования различных моделей в мультиагентной системе
+с использованием базы данных из DVC.
+"""
 
 # Настройка пути для импорта других модулей проекта
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

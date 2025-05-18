@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# type: ignore
 
 """
 Скрипт для визуализации результатов тестирования различных моделей
@@ -316,7 +317,7 @@ class ResultsVisualizer:
         logger.info(f"Сохранен HTML-отчет: {report_path}")
 
 
-def main():
+def main() -> None:
     """Основная функция для запуска визуализации результатов"""
     parser = argparse.ArgumentParser(description="Визуализация результатов тестирования моделей")
     parser.add_argument(

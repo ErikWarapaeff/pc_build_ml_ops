@@ -1,5 +1,5 @@
 directories:
-  local_file: "pc_accessories_2.db"
+  local_file: "data/databases/pc_accessories_2.db"
 
 
 openai_models:

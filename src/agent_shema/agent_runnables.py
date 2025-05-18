@@ -1,11 +1,13 @@
+# type: ignore
+
 from typing import Any
 
-from agent_shema.build_assistants import (  # type: ignore
+from src.agent_shema.build_assistants import (  # type: ignore
     ToPCBuildAssistant,
     ToPriceValidationCheckerAssistant,
 )
-from agent_shema.build_system_prompts import AgentPrompts  # type: ignore
-from agent_shema.complete_or_escalate import CompleteOrEscalate  # type: ignore
+from src.agent_shema.build_system_prompts import AgentPrompts  # type: ignore
+from src.agent_shema.complete_or_escalate import CompleteOrEscalate  # type: ignore
 from src.load_config import LoadConfig
 from src.tools.bottle_neck import calculate_bottleneck
 from src.tools.game_runner import game_run_tool

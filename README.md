@@ -275,3 +275,59 @@ git add data/новый_файл.csv.dvc
 git commit -m "Добавлен новый файл данных"
 dvc push
 ```
+
+## Airflow
+
+### Вариативность 
+Есть 2 основных способа развернуть apache airflow(не учитывая многочисленных настроек):
+С помощью рекомендованного docker-compose файла или же через pip.
+Опробовав оба, пришли к выводу, что для проекта удобнее использовать docker-compose.
+
+### Шаги 
+
+1. Скачать curl -LfO 'https://airflow.apache.org/docs/apache-airflow/3.0.1/docker-compose.yaml'
+2. Создать папку - dags, поместить туда даг с задачами тестирования.
+3. Для выполняния тестирования модели были необходимы библиотеки, которых нет в образе airflow по умолчанию , поэтому необходимо было создать свой образ - pc_build_ml_ops/airflow/airflow-compose/Dockerfile.
+4. Запустить docker-compose
+![alt text](airflow/airflow-compose/image_2025-05-26_23-29-08.png)
+5. По адресу доступен интерфейс airflow
+http://localhost:8080/dags
+![alt text](image-1.png)
+
+
+### Альтернативный путь:
+1. Создать env для airflow
+2. Установка переменных окружения:
+```bash
+export AIRFLOW_HOME=/opt/airflow
+export AIRFLOW__CORE__EXECUTOR=LocalExecutor
+export AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+export AIRFLOW__CORE__LOAD_EXAMPLES=False
+export AIRFLOW_VERSION = 2.7.3
+```
+3. Установить библиотеки:
+```bash
+sudo apt-get install -y --no-install-recommends \
+        freetds-bin \
+        krb5-user \
+        ldap-utils \
+        libffi6 \
+        libsasl2-2 \
+        libsasl2-modules \
+        libssl1.1 \
+        locales  \
+        lsb-release \
+        sasl2-bin \
+        psycopg2 \
+        unixodbc
+```
+4.  Установка airflow
+```bash
+pip install "apache-airflow==${AIRFLOW_VERSION}"
+```
+5. Инциализировать бд, сервер, планировщик 
+``` bash
+airflow db init
+airflow webserver --port 8080
+airflow scheduler
+```

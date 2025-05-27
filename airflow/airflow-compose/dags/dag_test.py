@@ -17,9 +17,9 @@ with DAG(
     tags=['example']
 ) as dag:
     
-    hello_task = PythonOperator(
-        task_id='print_hello_task',
+    testing_different_model = PythonOperator(
+        task_id='testing_different_model',
         python_callable=main
     )
 
-hello_task
+testing_different_model

@@ -1,0 +1,17 @@
+langgraph
+langchain-core
+langchain
+langchain-community
+langchain-openai
+pydantic
+fuzzywuzzy
+beautifulsoup4
+selenium
+playwright
+sqlalchemy
+typing_extensions
+pyprojroot
+tiktoken
+pandas
+matplotlib
+thefuzz

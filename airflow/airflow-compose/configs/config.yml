@@ -1,0 +1,9 @@
+directories:
+  local_file: data/databases/pc_accessories_2.db
+langsmith:
+  project_name: PC-Build Assistants
+  tracing: 'true'
+openai_models:
+  model: gpt-4.1-mini
+  # Модель выбрана на основе результатов тестирования от 18.05.2025
+  # Показала лучшую производительность по времени ответа и обработке токенов

@@ -338,4 +338,7 @@ airflow scheduler
 3. Был создан dag_test - c запуском тестов.
 4. В airflow были добавлены переменые 
 ![alt text](image-2.png)
+5. Запустила через интрефейс
+   ![image](https://github.com/user-attachments/assets/cbb3f037-4a2c-4716-b4be-cea68d68b2ad)
+
 

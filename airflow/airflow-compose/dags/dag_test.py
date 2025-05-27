@@ -1,9 +1,8 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime
+from src.model_evaluator import main
 
-def print_hello():
-    print("Hello from Airflow!")
 
 default_args = {
     'owner': 'airflow',
@@ -12,15 +11,15 @@ default_args = {
 }
 
 with DAG(
-    dag_id='simple_dag',
+    dag_id='testing_model',
     default_args=default_args,
-    schedule_interval='@daily',
+    schedule=None,
     tags=['example']
 ) as dag:
     
     hello_task = PythonOperator(
         task_id='print_hello_task',
-        python_callable=print_hello
+        python_callable=main
     )
 
 hello_task

@@ -1,0 +1,8 @@
+model_name,avg_response_length
+gpt-3.5-turbo,561.6666666666666
+gpt-4o,584.5
+gpt-4o-mini,545.1666666666666
+gpt-3.5-turbo,278.6666666666667
+gpt-4o,278.6666666666667
+gpt-4o-mini,280.3333333333333
+gpt-4o-mini,46.0

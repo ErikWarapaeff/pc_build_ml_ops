@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Erik/Documents/VSCode/pc_build_ml_ops/mlruns/447070135491903799/716599b746544649a1824cec9594693c/artifacts
+end_time: 1749412607253
+entry_point_name: ''
+experiment_id: '447070135491903799'
+lifecycle_stage: active
+run_id: 716599b746544649a1824cec9594693c
+run_name: gpt-4o
+run_uuid: 716599b746544649a1824cec9594693c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1749412583968
+status: 3
+tags: []
+user_id: Erik

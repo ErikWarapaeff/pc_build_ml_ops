@@ -1,0 +1,75 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Отчет о сравнении моделей</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            h1, h2 { color: #2c3e50; }
+            table { border-collapse: collapse; width: 100%; margin: 20px 0; }
+            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+            th { background-color: #f2f2f2; }
+            tr:nth-child(even) { background-color: #f9f9f9; }
+            .chart { max-width: 800px; margin: 20px 0; }
+        </style>
+    </head>
+    <body>
+        <h1>Отчет о сравнении языковых моделей</h1>
+        <p>Дата создания: 2025-05-17 19:00:36</p>
+
+        <h2>Сравнение производительности моделей</h2>
+        <table>
+            <tr>
+                <th>Модель</th>
+                <th>Среднее время ответа (сек.)</th>
+                <th>Токенов в секунду</th>
+                <th>Общее время (сек.)</th>
+            </tr>
+
+            <tr>
+                <td>gpt-4o</td>
+                <td>0.75</td>
+                <td>87.15</td>
+                <td>3.73</td>
+            </tr>
+
+            <tr>
+                <td>gpt-4o-mini</td>
+                <td>0.61</td>
+                <td>103.54</td>
+                <td>3.05</td>
+            </tr>
+
+            <tr>
+                <td>gpt-3.5-turbo</td>
+                <td>0.63</td>
+                <td>100.61</td>
+                <td>3.15</td>
+            </tr>
+
+        </table>
+
+        <h2>Визуализации</h2>
+        <div class="chart">
+            <img src="avg_response_time.png" alt="График среднего времени ответа">
+            <p>График среднего времени ответа моделей</p>
+        </div>
+        <div class="chart">
+            <img src="tokens_per_second.png" alt="График токенов в секунду">
+            <p>График производительности (токенов в секунду)</p>
+        </div>
+
+        <h2>Выводы</h2>
+        <p>На основе проведенного тестирования можно сделать следующие выводы:</p>
+        <ul>
+
+            <li>Модель <strong>gpt-4o-mini</strong> показала наилучшее время ответа среди тестируемых моделей (0.61 сек).</li>
+
+            <li>Модель <strong>gpt-4o-mini</strong> показала наилучшую производительность по генерации токенов (103.54 токенов/сек).</li>
+
+        <li>При выборе модели рекомендуется учитывать баланс между скоростью ответа и качеством генерируемого текста. Если для вас важна скорость, рекомендуется gpt-4o-mini. Если важнее качество и полнота ответов, стоит выбрать более мощную модель.</li>
+
+        </ul>
+    </body>
+    </html>

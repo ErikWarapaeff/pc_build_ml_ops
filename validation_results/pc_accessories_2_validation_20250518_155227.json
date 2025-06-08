@@ -1,0 +1,2217 @@
+{
+  "database": "pc_accessories_2.db",
+  "timestamp": "2025-05-18 15:52:27",
+  "tables": [
+    {
+      "name": "case_motherboard_compatibility",
+      "record_count": 34,
+      "columns": [
+        {
+          "name": "case_form_factor",
+          "type": "VARCHAR(50)",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "case_motherboard_compatibility",
+            "column": "case_form_factor",
+            "type": "VARCHAR(50)",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        },
+        {
+          "name": "motherboard_form_factor",
+          "type": "VARCHAR(50)",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "case_motherboard_compatibility",
+            "column": "motherboard_form_factor",
+            "type": "VARCHAR(50)",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        }
+      ],
+      "issues": []
+    },
+    {
+      "name": "case-accessory",
+      "record_count": 8,
+      "columns": [
+        {
+          "name": "name",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "case-accessory",
+            "column": "name",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 8,
+            "min_length": 8,
+            "max_length": 27,
+            "avg_length": 15.0
+          }
+        },
+        {
+          "name": "price",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "case-accessory",
+            "column": "price",
+            "type": "FLOAT",
+            "min": 24.99,
+            "max": 29.95,
+            "avg": 27.47,
+            "count": 2
+          }
+        },
+        {
+          "name": "type",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "case-accessory",
+            "column": "type",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 8,
+            "min_length": 11,
+            "max_length": 14,
+            "avg_length": 12.125
+          }
+        },
+        {
+          "name": "form_factor",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "case-accessory",
+            "column": "form_factor",
+            "type": "FLOAT",
+            "min": 2.5,
+            "max": 5.25,
+            "avg": 4.34375,
+            "count": 8
+          }
+        }
+      ],
+      "issues": []
+    },
+    {
+      "name": "cpu_ratings",
+      "record_count": 3410,
+      "columns": [
+        {
+          "name": "processor",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_ratings",
+            "column": "processor",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 3410,
+            "min_length": 2,
+            "max_length": 31,
+            "avg_length": 13.580351906158358
+          }
+        },
+        {
+          "name": "processor_type",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_ratings",
+            "column": "processor_type",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 3410,
+            "min_length": 9,
+            "max_length": 19,
+            "avg_length": 9.026392961876834
+          }
+        },
+        {
+          "name": "socket",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_ratings",
+            "column": "socket",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 3260,
+            "min_length": 1,
+            "max_length": 30,
+            "avg_length": 10.91319018404908
+          }
+        },
+        {
+          "name": "rating",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_ratings",
+            "column": "rating",
+            "type": "FLOAT",
+            "min": 0.07,
+            "max": 100.0,
+            "avg": 6.888475073313787,
+            "count": 3410
+          }
+        },
+        {
+          "name": "core/streams",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_ratings",
+            "column": "core/streams",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 3338,
+            "min_length": 3,
+            "max_length": 27,
+            "avg_length": 5.538945476333134
+          }
+        },
+        {
+          "name": "year",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_ratings",
+            "column": "year",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 3410,
+            "min_length": 1,
+            "max_length": 4,
+            "avg_length": 3.901466275659824
+          }
+        },
+        {
+          "name": "power_consumption",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_ratings",
+            "column": "power_consumption",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 3410,
+            "min_length": 1,
+            "max_length": 7,
+            "avg_length": 4.163636363636364
+          }
+        }
+      ],
+      "issues": []
+    },
+    {
+      "name": "external-hard-drive",
+      "record_count": 470,
+      "columns": [
+        {
+          "name": "name",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "external-hard-drive",
+            "column": "name",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 470,
+            "min_length": 8,
+            "max_length": 45,
+            "avg_length": 21.451063829787234
+          }
+        },
+        {
+          "name": "price",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "external-hard-drive",
+            "column": "price",
+            "type": "FLOAT",
+            "min": 34.9,
+            "max": 1049.99,
+            "avg": 176.3490954773872,
+            "count": 199
+          }
+        },
+        {
+          "name": "type",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "external-hard-drive",
+            "column": "type",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 470,
+            "min_length": 7,
+            "max_length": 8,
+            "avg_length": 7.6617021276595745
+          }
+        },
+        {
+          "name": "interface",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "external-hard-drive",
+            "column": "interface",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 460,
+            "min_length": 10,
+            "max_length": 66,
+            "avg_length": 22.208695652173912
+          }
+        },
+        {
+          "name": "capacity",
+          "type": "BIGINT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "external-hard-drive",
+            "column": "capacity",
+            "type": "BIGINT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        },
+        {
+          "name": "price_per_gb",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "external-hard-drive",
+            "column": "price_per_gb",
+            "type": "FLOAT",
+            "min": 0.016,
+            "max": 3.788,
+            "avg": 0.11176381909547739,
+            "count": 199
+          }
+        },
+        {
+          "name": "color",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "external-hard-drive",
+            "column": "color",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 192,
+            "min_length": 3,
+            "max_length": 15,
+            "avg_length": 5.744791666666667
+          }
+        }
+      ],
+      "issues": []
+    },
+    {
+      "name": "internal-hard-drive",
+      "record_count": 5473,
+      "columns": [
+        {
+          "name": "name",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "internal-hard-drive",
+            "column": "name",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 5473,
+            "min_length": 6,
+            "max_length": 137,
+            "avg_length": 17.84213411291796
+          }
+        },
+        {
+          "name": "price",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "internal-hard-drive",
+            "column": "price",
+            "type": "FLOAT",
+            "min": 11.49,
+            "max": 4500.0,
+            "avg": 168.73292568203104,
+            "count": 2126
+          }
+        },
+        {
+          "name": "capacity",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "internal-hard-drive",
+            "column": "capacity",
+            "type": "FLOAT",
+            "min": 8.0,
+            "max": 22000.0,
+            "avg": 1685.6902612826605,
+            "count": 5473
+          }
+        },
+        {
+          "name": "price_per_gb",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "internal-hard-drive",
+            "column": "price_per_gb",
+            "type": "FLOAT",
+            "min": 0.01,
+            "max": 6.493,
+            "avg": 0.2140959548447792,
+            "count": 2126
+          }
+        },
+        {
+          "name": "type",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "internal-hard-drive",
+            "column": "type",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 5443,
+            "min_length": 3,
+            "max_length": 5,
+            "avg_length": 3.311225427154143
+          }
+        },
+        {
+          "name": "cache",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "internal-hard-drive",
+            "column": "cache",
+            "type": "FLOAT",
+            "min": 2.0,
+            "max": 131072.0,
+            "avg": 342.92153589315524,
+            "count": 1797
+          }
+        },
+        {
+          "name": "form_factor",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "internal-hard-drive",
+            "column": "form_factor",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 5473,
+            "min_length": 3,
+            "max_length": 9,
+            "avg_length": 4.462634752420976
+          }
+        },
+        {
+          "name": "interface",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "internal-hard-drive",
+            "column": "interface",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 5473,
+            "min_length": 3,
+            "max_length": 15,
+            "avg_length": 12.895852366161154
+          }
+        }
+      ],
+      "issues": []
+    },
+    {
+      "name": "ups",
+      "record_count": 678,
+      "columns": [
+        {
+          "name": "name",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "ups",
+            "column": "name",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 678,
+            "min_length": 9,
+            "max_length": 34,
+            "avg_length": 18.293510324483776
+          }
+        },
+        {
+          "name": "price",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "ups",
+            "column": "price",
+            "type": "FLOAT",
+            "min": 53.95,
+            "max": 22186.17,
+            "avg": 1274.6025147928985,
+            "count": 338
+          }
+        },
+        {
+          "name": "capacity_w",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "ups",
+            "column": "capacity_w",
+            "type": "FLOAT",
+            "min": 16.0,
+            "max": 16000.0,
+            "avg": 1453.5896296296296,
+            "count": 675
+          }
+        },
+        {
+          "name": "capacity_va",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "ups",
+            "column": "capacity_va",
+            "type": "FLOAT",
+            "min": 125.0,
+            "max": 20000.0,
+            "avg": 1881.7185185185185,
+            "count": 675
+          }
+        }
+      ],
+      "issues": []
+    },
+    {
+      "name": "socket_compatibility",
+      "record_count": 36,
+      "columns": [
+        {
+          "name": "id",
+          "type": "SERIAL",
+          "primary_key": true,
+          "not_null": false,
+          "checks": [
+            {
+              "type": "duplicate_check",
+              "status": "passed"
+            }
+          ],
+          "range_data": {
+            "table": "socket_compatibility",
+            "column": "id",
+            "type": "SERIAL",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        },
+        {
+          "name": "processor_socket",
+          "type": "VARCHAR(50)",
+          "primary_key": false,
+          "not_null": true,
+          "checks": [
+            {
+              "type": "null_check",
+              "status": "passed"
+            }
+          ],
+          "range_data": {
+            "table": "socket_compatibility",
+            "column": "processor_socket",
+            "type": "VARCHAR(50)",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        },
+        {
+          "name": "motherboard_socket",
+          "type": "VARCHAR(50)",
+          "primary_key": false,
+          "not_null": true,
+          "checks": [
+            {
+              "type": "null_check",
+              "status": "passed"
+            }
+          ],
+          "range_data": {
+            "table": "socket_compatibility",
+            "column": "motherboard_socket",
+            "type": "VARCHAR(50)",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        }
+      ],
+      "issues": []
+    },
+    {
+      "name": "case-fan",
+      "record_count": 2075,
+      "columns": [
+        {
+          "name": "name",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "case-fan",
+            "column": "name",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 2075,
+            "min_length": 7,
+            "max_length": 124,
+            "avg_length": 20.829397590361445
+          }
+        },
+        {
+          "name": "price",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "case-fan",
+            "column": "price",
+            "type": "FLOAT",
+            "min": 4.69,
+            "max": 396.0,
+            "avg": 31.867308584687027,
+            "count": 862
+          }
+        },
+        {
+          "name": "size",
+          "type": "BIGINT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "case-fan",
+            "column": "size",
+            "type": "BIGINT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        },
+        {
+          "name": "color",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "case-fan",
+            "column": "color",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 2054,
+            "min_length": 3,
+            "max_length": 25,
+            "avg_length": 7.588120740019474
+          }
+        },
+        {
+          "name": "rpm",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "case-fan",
+            "column": "rpm",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 2017,
+            "min_length": 3,
+            "max_length": 13,
+            "avg_length": 7.403569657907783
+          }
+        },
+        {
+          "name": "airflow",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "case-fan",
+            "column": "airflow",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 1984,
+            "min_length": 1,
+            "max_length": 15,
+            "avg_length": 5.573084677419355
+          }
+        },
+        {
+          "name": "noise_level",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "case-fan",
+            "column": "noise_level",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 1949,
+            "min_length": 1,
+            "max_length": 14,
+            "avg_length": 5.337095946639303
+          }
+        },
+        {
+          "name": "pwm",
+          "type": "BOOLEAN",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "case-fan",
+            "column": "pwm",
+            "type": "BOOLEAN",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        }
+      ],
+      "issues": []
+    },
+    {
+      "name": "corpus",
+      "record_count": 1014,
+      "columns": [
+        {
+          "name": "name",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "corpus",
+            "column": "name",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 1014,
+            "min_length": 7,
+            "max_length": 54,
+            "avg_length": 21.391518737672584
+          }
+        },
+        {
+          "name": "price",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "corpus",
+            "column": "price",
+            "type": "FLOAT",
+            "min": 2999.0,
+            "max": 89999.0,
+            "avg": 15233.598619329388,
+            "count": 1014
+          }
+        },
+        {
+          "name": "type",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "corpus",
+            "column": "type",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 1014,
+            "min_length": 4,
+            "max_length": 19,
+            "avg_length": 13.994082840236686
+          }
+        },
+        {
+          "name": "color",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "corpus",
+            "column": "color",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 999,
+            "min_length": 3,
+            "max_length": 17,
+            "avg_length": 6.303303303303303
+          }
+        },
+        {
+          "name": "psu",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "corpus",
+            "column": "psu",
+            "type": "FLOAT",
+            "min": 120.0,
+            "max": 750.0,
+            "avg": 324.2307692307692,
+            "count": 26
+          }
+        },
+        {
+          "name": "side_panel",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "corpus",
+            "column": "side_panel",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 830,
+            "min_length": 4,
+            "max_length": 21,
+            "avg_length": 13.337349397590362
+          }
+        },
+        {
+          "name": "external_525_bays",
+          "type": "BIGINT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "corpus",
+            "column": "external_525_bays",
+            "type": "BIGINT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        },
+        {
+          "name": "internal_35_bays",
+          "type": "BIGINT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "corpus",
+            "column": "internal_35_bays",
+            "type": "BIGINT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        }
+      ],
+      "issues": []
+    },
+    {
+      "name": "cpu-cooler",
+      "record_count": 1967,
+      "columns": [
+        {
+          "name": "name",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu-cooler",
+            "column": "name",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 1967,
+            "min_length": 8,
+            "max_length": 62,
+            "avg_length": 22.630401626842907
+          }
+        },
+        {
+          "name": "price",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu-cooler",
+            "column": "price",
+            "type": "FLOAT",
+            "min": 4.99,
+            "max": 715.0,
+            "avg": 107.95493525179863,
+            "count": 695
+          }
+        },
+        {
+          "name": "rpm",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu-cooler",
+            "column": "rpm",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 1863,
+            "min_length": 3,
+            "max_length": 12,
+            "avg_length": 9.92109500805153
+          }
+        },
+        {
+          "name": "noise_level",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu-cooler",
+            "column": "noise_level",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 1776,
+            "min_length": 1,
+            "max_length": 14,
+            "avg_length": 7.0816441441441444
+          }
+        },
+        {
+          "name": "color",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu-cooler",
+            "column": "color",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 1053,
+            "min_length": 4,
+            "max_length": 25,
+            "avg_length": 7.630579297245964
+          }
+        },
+        {
+          "name": "size",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu-cooler",
+            "column": "size",
+            "type": "FLOAT",
+            "min": 120.0,
+            "max": 420.0,
+            "avg": 253.80888290713324,
+            "count": 743
+          }
+        }
+      ],
+      "issues": []
+    },
+    {
+      "name": "cpu_merged",
+      "record_count": 1795,
+      "columns": [
+        {
+          "name": "processor",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_merged",
+            "column": "processor",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 1795,
+            "min_length": 12,
+            "max_length": 35,
+            "avg_length": 19.32033426183844
+          }
+        },
+        {
+          "name": "price",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_merged",
+            "column": "price",
+            "type": "FLOAT",
+            "min": 2299.0,
+            "max": 448300.0,
+            "avg": 29703.46922024624,
+            "count": 731
+          }
+        },
+        {
+          "name": "core_count",
+          "type": "BIGINT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_merged",
+            "column": "core_count",
+            "type": "BIGINT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        },
+        {
+          "name": "core_clock",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_merged",
+            "column": "core_clock",
+            "type": "FLOAT",
+            "min": 1.1,
+            "max": 4.7,
+            "avg": 3.121826183844007,
+            "count": 1795
+          }
+        },
+        {
+          "name": "boost_clock",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_merged",
+            "column": "boost_clock",
+            "type": "FLOAT",
+            "min": 2.3,
+            "max": 6.0,
+            "avg": 4.146024096385552,
+            "count": 830
+          }
+        },
+        {
+          "name": "tdp",
+          "type": "BIGINT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_merged",
+            "column": "tdp",
+            "type": "BIGINT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        },
+        {
+          "name": "graphics",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_merged",
+            "column": "graphics",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 784,
+            "min_length": 6,
+            "max_length": 22,
+            "avg_length": 20.117346938775512
+          }
+        },
+        {
+          "name": "smt",
+          "type": "BOOLEAN",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_merged",
+            "column": "smt",
+            "type": "BOOLEAN",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        },
+        {
+          "name": "socket",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_merged",
+            "column": "socket",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 1736,
+            "min_length": 2,
+            "max_length": 19,
+            "avg_length": 7.217741935483871
+          }
+        },
+        {
+          "name": "rating",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_merged",
+            "column": "rating",
+            "type": "FLOAT",
+            "min": 0.26,
+            "max": 49.88,
+            "avg": 4.670139275766021,
+            "count": 1795
+          }
+        },
+        {
+          "name": "core/streams",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_merged",
+            "column": "core/streams",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 1778,
+            "min_length": 3,
+            "max_length": 8,
+            "avg_length": 5.3143982002249714
+          }
+        },
+        {
+          "name": "year",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_merged",
+            "column": "year",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 1795,
+            "min_length": 1,
+            "max_length": 4,
+            "avg_length": 3.894707520891365
+          }
+        },
+        {
+          "name": "power_consumption",
+          "type": "BIGINT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_merged",
+            "column": "power_consumption",
+            "type": "BIGINT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        }
+      ],
+      "issues": []
+    },
+    {
+      "name": "cpu_servers",
+      "record_count": 456,
+      "columns": [
+        {
+          "name": "processor",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_servers",
+            "column": "processor",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 456,
+            "min_length": 9,
+            "max_length": 29,
+            "avg_length": 13.317982456140351
+          }
+        },
+        {
+          "name": "processor_type",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_servers",
+            "column": "processor_type",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 456,
+            "min_length": 9,
+            "max_length": 19,
+            "avg_length": 9.021929824561404
+          }
+        },
+        {
+          "name": "socket",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_servers",
+            "column": "socket",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 453,
+            "min_length": 3,
+            "max_length": 17,
+            "avg_length": 10.609271523178808
+          }
+        },
+        {
+          "name": "rating",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_servers",
+            "column": "rating",
+            "type": "FLOAT",
+            "min": 0.64,
+            "max": 100.0,
+            "avg": 21.509605263157898,
+            "count": 456
+          }
+        },
+        {
+          "name": "core/streams",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_servers",
+            "column": "core/streams",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 456,
+            "min_length": 5,
+            "max_length": 9,
+            "avg_length": 6.589912280701754
+          }
+        },
+        {
+          "name": "year",
+          "type": "BIGINT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_servers",
+            "column": "year",
+            "type": "BIGINT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        },
+        {
+          "name": "power_consumption",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "cpu_servers",
+            "column": "power_consumption",
+            "type": "FLOAT",
+            "min": 9.0,
+            "max": 400.0,
+            "avg": 157.19353070175438,
+            "count": 456
+          }
+        }
+      ],
+      "issues": []
+    },
+    {
+      "name": "gpu_full_info",
+      "record_count": 3448,
+      "columns": [
+        {
+          "name": "gpu",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "gpu_full_info",
+            "column": "gpu",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 3448,
+            "min_length": 4,
+            "max_length": 27,
+            "avg_length": 15.433294663573086
+          }
+        },
+        {
+          "name": "memory",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "gpu_full_info",
+            "column": "memory",
+            "type": "FLOAT",
+            "min": 0.125,
+            "max": 48.0,
+            "avg": 5.567829176334107,
+            "count": 3448
+          }
+        },
+        {
+          "name": "core_clock",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "gpu_full_info",
+            "column": "core_clock",
+            "type": "FLOAT",
+            "min": 400.0,
+            "max": 2593.0,
+            "avg": 1230.4622921615203,
+            "count": 3368
+          }
+        },
+        {
+          "name": "boost_clock",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "gpu_full_info",
+            "column": "boost_clock",
+            "type": "FLOAT",
+            "min": 720.0,
+            "max": 2855.0,
+            "avg": 1693.8135149292823,
+            "count": 1909
+          }
+        },
+        {
+          "name": "boost_clock.1",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "gpu_full_info",
+            "column": "boost_clock.1",
+            "type": "FLOAT",
+            "min": 720.0,
+            "max": 2855.0,
+            "avg": 1693.8135149292823,
+            "count": 1909
+          }
+        },
+        {
+          "name": "length",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "gpu_full_info",
+            "column": "length",
+            "type": "FLOAT",
+            "min": 69.0,
+            "max": 360.0,
+            "avg": 247.57092539225104,
+            "count": 3123
+          }
+        },
+        {
+          "name": "rating",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "gpu_full_info",
+            "column": "rating",
+            "type": "FLOAT",
+            "min": 0.17,
+            "max": 100.0,
+            "avg": 25.86037703016219,
+            "count": 3448
+          }
+        },
+        {
+          "name": "architecture",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "gpu_full_info",
+            "column": "architecture",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 3448,
+            "min_length": 5,
+            "max_length": 15,
+            "avg_length": 7.625580046403712
+          }
+        },
+        {
+          "name": "year",
+          "type": "BIGINT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "gpu_full_info",
+            "column": "year",
+            "type": "BIGINT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        },
+        {
+          "name": "power_consumption",
+          "type": "BIGINT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "gpu_full_info",
+            "column": "power_consumption",
+            "type": "BIGINT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        },
+        {
+          "name": "average_price",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "gpu_full_info",
+            "column": "average_price",
+            "type": "FLOAT",
+            "min": 8020.285714285715,
+            "max": 532625.3333333334,
+            "avg": 60427.17148102929,
+            "count": 1503
+          }
+        }
+      ],
+      "issues": []
+    },
+    {
+      "name": "gpu_hierarchy",
+      "record_count": 86,
+      "columns": [
+        {
+          "name": "gpu",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "gpu_hierarchy",
+            "column": "gpu",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 86,
+            "min_length": 9,
+            "max_length": 25,
+            "avg_length": 17.36046511627907
+          }
+        },
+        {
+          "name": "1080p Ultra",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "gpu_hierarchy",
+            "column": "1080p Ultra",
+            "type": "FLOAT",
+            "min": 0.0,
+            "max": 154.1,
+            "avg": 74.26976744186048,
+            "count": 86
+          }
+        },
+        {
+          "name": "1080p Medium",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "gpu_hierarchy",
+            "column": "1080p Medium",
+            "type": "FLOAT",
+            "min": 14.6,
+            "max": 195.7,
+            "avg": 116.55232558139537,
+            "count": 86
+          }
+        },
+        {
+          "name": "1440p Ultra",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "gpu_hierarchy",
+            "column": "1440p Ultra",
+            "type": "FLOAT",
+            "min": 0.0,
+            "max": 146.1,
+            "avg": 56.04186046511627,
+            "count": 86
+          }
+        },
+        {
+          "name": "4K Ultra",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "gpu_hierarchy",
+            "column": "4K Ultra",
+            "type": "FLOAT",
+            "min": 0.0,
+            "max": 114.5,
+            "avg": 26.369767441860468,
+            "count": 86
+          }
+        },
+        {
+          "name": "Specifications (Links to Review)",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "gpu_hierarchy",
+            "column": "Specifications (Links to Review)",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 86,
+            "min_length": 7,
+            "max_length": 158,
+            "avg_length": 75.22093023255815
+          }
+        }
+      ],
+      "issues": []
+    },
+    {
+      "name": "memory",
+      "record_count": 3034,
+      "columns": [
+        {
+          "name": "name",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "memory",
+            "column": "name",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 3034,
+            "min_length": 12,
+            "max_length": 163,
+            "avg_length": 26.930784442979565
+          }
+        },
+        {
+          "name": "price",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "memory",
+            "column": "price",
+            "type": "FLOAT",
+            "min": 500.0,
+            "max": 193768.0,
+            "avg": 12802.662491760053,
+            "count": 3034
+          }
+        },
+        {
+          "name": "price_per_gb",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "memory",
+            "column": "price_per_gb",
+            "type": "FLOAT",
+            "min": 90.6,
+            "max": 9100.0,
+            "avg": 519.3186222808147,
+            "count": 3034
+          }
+        },
+        {
+          "name": "color",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "memory",
+            "column": "color",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 2868,
+            "min_length": 3,
+            "max_length": 14,
+            "avg_length": 7.805439330543933
+          }
+        },
+        {
+          "name": "first_word_latency",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "memory",
+            "column": "first_word_latency",
+            "type": "FLOAT",
+            "min": 7.0,
+            "max": 19.167,
+            "avg": 11.817610085695437,
+            "count": 3034
+          }
+        },
+        {
+          "name": "cas_latency",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "memory",
+            "column": "cas_latency",
+            "type": "FLOAT",
+            "min": 3.0,
+            "max": 48.0,
+            "avg": 20.021094264996705,
+            "count": 3034
+          }
+        },
+        {
+          "name": "speed_num",
+          "type": "BIGINT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "memory",
+            "column": "speed_num",
+            "type": "BIGINT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        },
+        {
+          "name": "speed_value",
+          "type": "BIGINT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "memory",
+            "column": "speed_value",
+            "type": "BIGINT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        },
+        {
+          "name": "modules_num",
+          "type": "BIGINT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "memory",
+            "column": "modules_num",
+            "type": "BIGINT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        },
+        {
+          "name": "modules_value",
+          "type": "BIGINT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "memory",
+            "column": "modules_value",
+            "type": "BIGINT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        }
+      ],
+      "issues": []
+    },
+    {
+      "name": "motherboard",
+      "record_count": 725,
+      "columns": [
+        {
+          "name": "name",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "motherboard",
+            "column": "name",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 725,
+            "min_length": 11,
+            "max_length": 47,
+            "avg_length": 23.630344827586207
+          }
+        },
+        {
+          "name": "price",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "motherboard",
+            "column": "price",
+            "type": "FLOAT",
+            "min": 6399.0,
+            "max": 259177.0,
+            "avg": 28021.01931034483,
+            "count": 725
+          }
+        },
+        {
+          "name": "socket",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "motherboard",
+            "column": "socket",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 725,
+            "min_length": 3,
+            "max_length": 21,
+            "avg_length": 5.597241379310345
+          }
+        },
+        {
+          "name": "form_factor",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "motherboard",
+            "column": "form_factor",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 725,
+            "min_length": 3,
+            "max_length": 9,
+            "avg_length": 5.551724137931035
+          }
+        },
+        {
+          "name": "max_memory",
+          "type": "BIGINT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "motherboard",
+            "column": "max_memory",
+            "type": "BIGINT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        },
+        {
+          "name": "memory_slots",
+          "type": "BIGINT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "motherboard",
+            "column": "memory_slots",
+            "type": "BIGINT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        },
+        {
+          "name": "color",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "motherboard",
+            "column": "color",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 719,
+            "min_length": 5,
+            "max_length": 14,
+            "avg_length": 10.613351877607789
+          }
+        }
+      ],
+      "issues": []
+    },
+    {
+      "name": "power-supply",
+      "record_count": 611,
+      "columns": [
+        {
+          "name": "Unnamed: 0",
+          "type": "BIGINT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "power-supply",
+            "column": "Unnamed: 0",
+            "type": "BIGINT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        },
+        {
+          "name": "name",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "power-supply",
+            "column": "name",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 611,
+            "min_length": 6,
+            "max_length": 44,
+            "avg_length": 20.319148936170212
+          }
+        },
+        {
+          "name": "price",
+          "type": "FLOAT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "power-supply",
+            "column": "price",
+            "type": "FLOAT",
+            "min": 1698.0,
+            "max": 79999.0,
+            "avg": 18789.489361702126,
+            "count": 611
+          }
+        },
+        {
+          "name": "type",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "power-supply",
+            "column": "type",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 611,
+            "min_length": 3,
+            "max_length": 8,
+            "avg_length": 3.0736497545008183
+          }
+        },
+        {
+          "name": "efficiency",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "power-supply",
+            "column": "efficiency",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 580,
+            "min_length": 4,
+            "max_length": 8,
+            "avg_length": 5.317241379310345
+          }
+        },
+        {
+          "name": "wattage",
+          "type": "BIGINT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "power-supply",
+            "column": "wattage",
+            "type": "BIGINT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 0
+          }
+        },
+        {
+          "name": "modular",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "power-supply",
+            "column": "modular",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 611,
+            "min_length": 4,
+            "max_length": 5,
+            "avg_length": 4.266775777414075
+          }
+        },
+        {
+          "name": "color",
+          "type": "TEXT",
+          "primary_key": false,
+          "not_null": false,
+          "checks": [],
+          "range_data": {
+            "table": "power-supply",
+            "column": "color",
+            "type": "TEXT",
+            "min": null,
+            "max": null,
+            "avg": null,
+            "count": 407,
+            "min_length": 4,
+            "max_length": 14,
+            "avg_length": 6.614250614250614
+          }
+        }
+      ],
+      "issues": []
+    }
+  ],
+  "summary": {
+    "total_tables": 17,
+    "total_records": 25320,
+    "total_checks": 4,
+    "passed_checks": 4,
+    "failed_checks": 0,
+    "warnings": 0
+  },
+  "foreign_keys_check": "passed",
+  "dvc_status": "под контролем DVC",
+  "validation_time": 0.05364871025085449
+}

@@ -14,11 +14,14 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Импорты после настройки sys.path
 import argparse
+import json  # Для сохранения результатов эксперимента
 import logging
 import time
 from typing import Any
 
+import mlflow
 import yaml
+from dvc.repo import Repo
 
 from src.chat_backend import ChatBot  # type: ignore
 from src.load_config import LoadConfig
@@ -45,6 +48,8 @@ class ModelEvaluator:
         self.config_path = config_path
         self.original_config = self._load_config()
         self.test_questions = self._prepare_test_questions()
+        # Подтягиваем данные из DVC перед тестированием
+        Repo().pull()
 
     def _load_config(self) -> dict[str, Any]:
         """Загрузка конфигурации из файла"""
@@ -128,10 +133,13 @@ class ModelEvaluator:
 
             # Получаем ответ от бота
             try:
-                chat_history_new, response = chatbot.respond(chat_history, question)
-                chat_history = chat_history_new  # Правильное присвоение результата
-                # Сохраняем последний ответ
-                bot_response = chat_history[-1][1] if chat_history else "Нет ответа"
+                # `respond` возвращает три значения: игнорируем первый и третий
+                _, chat_history_new, _ = chatbot.respond(chat_history, question)
+                chat_history = chat_history_new
+                # Извлекаем текст последнего ответа из поля 'content'
+                bot_response = (
+                    chat_history[-1].get("content") if isinstance(chat_history[-1], dict) else None
+                ) or "Нет ответа"
             except Exception as e:
                 logger.error(f"Ошибка при получении ответа: {str(e)}")
                 bot_response = f"ОШИБКА: {str(e)}"
@@ -168,14 +176,30 @@ class ModelEvaluator:
         Returns:
             Словарь с результатами тестирования всех моделей
         """
+        # Настройка эксперимента MLflow
+        mlflow.set_experiment("model_evaluation")
         evaluation_results: dict[str, Any] = {
             "models": [],
             "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
         }
 
         for model_name in models:
-            logger.info(f"Начало тестирования модели: {model_name}")
-            model_results = self.test_model(model_name)
+            with mlflow.start_run(run_name=model_name):
+                logger.info(f"Начало тестирования модели: {model_name}")
+                # Тестируем модель и получаем результаты
+                model_results = self.test_model(model_name)
+                # Сохраняем полные результаты как артефакт
+                artifact_file = f"model_results_{model_name}.json"
+                with open(artifact_file, "w", encoding="utf-8") as f:
+                    json.dump(model_results, f, ensure_ascii=False, indent=2)
+                mlflow.log_artifact(artifact_file)
+                # Логирование параметров и метрик
+                mlflow.log_param("model_name", model_name)
+                for idx, t in enumerate(model_results["timings"]):
+                    mlflow.log_metric("response_time", t, step=idx)
+                mlflow.log_metric("total_time", model_results["total_time"])
+            # Конец MLflow запуска
+
             if isinstance(evaluation_results["models"], list):
                 evaluation_results["models"].append(model_results)
 

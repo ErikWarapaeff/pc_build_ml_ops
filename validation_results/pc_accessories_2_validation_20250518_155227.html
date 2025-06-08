@@ -1,0 +1,2300 @@
+
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <title>Отчет о валидации базы данных</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        line-height: 1.6;
+                        max-width: 1200px;
+                        margin: 0 auto;
+                        padding: 20px;
+                        color: #333;
+                    }
+                    h1, h2, h3 {
+                        color: #2c3e50;
+                    }
+                    h1 {
+                        border-bottom: 2px solid #3498db;
+                        padding-bottom: 10px;
+                    }
+                    h2 {
+                        margin-top: 30px;
+                        padding-top: 20px;
+                        border-top: 1px solid #eee;
+                    }
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        margin: 20px 0;
+                    }
+                    th, td {
+                        text-align: left;
+                        padding: 12px;
+                        border: 1px solid #ddd;
+                    }
+                    th {
+                        background-color: #f2f2f2;
+                    }
+                    tr:nth-child(even) {
+                        background-color: #f9f9f9;
+                    }
+                    .summary {
+                        background-color: #f8f9fa;
+                        padding: 15px;
+                        border-radius: 5px;
+                        margin: 20px 0;
+                        border-left: 5px solid #3498db;
+                    }
+                    .success {
+                        color: #2ecc71;
+                    }
+                    .warning {
+                        color: #f39c12;
+                    }
+                    .error {
+                        color: #e74c3c;
+                    }
+                    .progress-container {
+                        width: 100%;
+                        background-color: #f1f1f1;
+                        border-radius: 5px;
+                        margin: 10px 0;
+                    }
+                    .progress-bar {
+                        height: 30px;
+                        background-color: #4CAF50;
+                        border-radius: 5px;
+                        text-align: center;
+                        line-height: 30px;
+                        color: white;
+                    }
+                    .issues {
+                        background-color: #fff8e1;
+                        padding: 10px;
+                        border-left: 5px solid #ffc107;
+                        margin: 10px 0;
+                    }
+                </style>
+            </head>
+            <body>
+                <h1>Отчет о валидации базы данных</h1>
+                <p><strong>База данных:</strong> pc_accessories_2.db</p>
+                <p><strong>Дата проверки:</strong> 2025-05-18 15:52:27</p>
+
+                <h2>Сводка</h2>
+                <div class="summary">
+                    <p><strong>Всего таблиц:</strong> 17</p>
+                    <p><strong>Всего записей:</strong> 25320</p>
+                    <p><strong>Проведено проверок:</strong> 4</p>
+                    <p><strong>Успешных проверок:</strong> 4</p>
+                    <p><strong>Неудачных проверок:</strong> 0</p>
+                    <p><strong>Предупреждений:</strong> 0</p>
+
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 100.0%;">
+                            100.0%
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Результаты проверки внешних ключей</h2>
+                <p class="success">
+                    Проверка внешних ключей прошла успешно
+                </p>
+
+                <h2>Проверки по таблицам</h2>
+
+                <h3>Таблица: case_motherboard_compatibility</h3>
+                <p><strong>Количество записей:</strong> 34</p>
+
+                <table>
+                    <tr>
+                        <th>Столбец</th>
+                        <th>Тип</th>
+                        <th>Первичный ключ</th>
+                        <th>Not Null</th>
+                        <th>Проверки</th>
+                    </tr>
+
+                    <tr>
+                        <td>case_form_factor</td>
+                        <td>VARCHAR(50)</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>motherboard_form_factor</td>
+                        <td>VARCHAR(50)</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+                    </table>
+                    <h4>Диапазоны данных</h4>
+                    <table>
+                        <tr>
+                            <th>Столбец</th>
+                            <th>Тип</th>
+                            <th>Мин</th>
+                            <th>Макс</th>
+                            <th>Среднее</th>
+                            <th>Количество</th>
+                        </tr>
+                    </table>
+                <h3>Таблица: case-accessory</h3>
+                <p><strong>Количество записей:</strong> 8</p>
+
+                <table>
+                    <tr>
+                        <th>Столбец</th>
+                        <th>Тип</th>
+                        <th>Первичный ключ</th>
+                        <th>Not Null</th>
+                        <th>Проверки</th>
+                    </tr>
+
+                    <tr>
+                        <td>name</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>price</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>type</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>form_factor</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+                    </table>
+                    <h4>Диапазоны данных</h4>
+                    <table>
+                        <tr>
+                            <th>Столбец</th>
+                            <th>Тип</th>
+                            <th>Мин</th>
+                            <th>Макс</th>
+                            <th>Среднее</th>
+                            <th>Количество</th>
+                        </tr>
+
+                                <tr>
+                                    <td>name</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 8</td>
+                                    <td>Макс. длина: 27</td>
+                                    <td>Средняя длина: 15.00</td>
+                                    <td>8</td>
+                                </tr>
+
+                                <tr>
+                                    <td>price</td>
+                                    <td>FLOAT</td>
+                                    <td>24.99</td>
+                                    <td>29.95</td>
+                                    <td>27.47</td>
+                                    <td>2</td>
+                                </tr>
+
+                                <tr>
+                                    <td>type</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 11</td>
+                                    <td>Макс. длина: 14</td>
+                                    <td>Средняя длина: 12.12</td>
+                                    <td>8</td>
+                                </tr>
+
+                                <tr>
+                                    <td>form_factor</td>
+                                    <td>FLOAT</td>
+                                    <td>2.5</td>
+                                    <td>5.25</td>
+                                    <td>4.34</td>
+                                    <td>8</td>
+                                </tr>
+                                </table>
+                <h3>Таблица: cpu_ratings</h3>
+                <p><strong>Количество записей:</strong> 3410</p>
+
+                <table>
+                    <tr>
+                        <th>Столбец</th>
+                        <th>Тип</th>
+                        <th>Первичный ключ</th>
+                        <th>Not Null</th>
+                        <th>Проверки</th>
+                    </tr>
+
+                    <tr>
+                        <td>processor</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>processor_type</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>socket</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>rating</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>core/streams</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>year</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>power_consumption</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+                    </table>
+                    <h4>Диапазоны данных</h4>
+                    <table>
+                        <tr>
+                            <th>Столбец</th>
+                            <th>Тип</th>
+                            <th>Мин</th>
+                            <th>Макс</th>
+                            <th>Среднее</th>
+                            <th>Количество</th>
+                        </tr>
+
+                                <tr>
+                                    <td>processor</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 2</td>
+                                    <td>Макс. длина: 31</td>
+                                    <td>Средняя длина: 13.58</td>
+                                    <td>3410</td>
+                                </tr>
+
+                                <tr>
+                                    <td>processor_type</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 9</td>
+                                    <td>Макс. длина: 19</td>
+                                    <td>Средняя длина: 9.03</td>
+                                    <td>3410</td>
+                                </tr>
+
+                                <tr>
+                                    <td>socket</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 1</td>
+                                    <td>Макс. длина: 30</td>
+                                    <td>Средняя длина: 10.91</td>
+                                    <td>3260</td>
+                                </tr>
+
+                                <tr>
+                                    <td>rating</td>
+                                    <td>FLOAT</td>
+                                    <td>0.07</td>
+                                    <td>100.0</td>
+                                    <td>6.89</td>
+                                    <td>3410</td>
+                                </tr>
+
+                                <tr>
+                                    <td>core/streams</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 3</td>
+                                    <td>Макс. длина: 27</td>
+                                    <td>Средняя длина: 5.54</td>
+                                    <td>3338</td>
+                                </tr>
+
+                                <tr>
+                                    <td>year</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 1</td>
+                                    <td>Макс. длина: 4</td>
+                                    <td>Средняя длина: 3.90</td>
+                                    <td>3410</td>
+                                </tr>
+
+                                <tr>
+                                    <td>power_consumption</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 1</td>
+                                    <td>Макс. длина: 7</td>
+                                    <td>Средняя длина: 4.16</td>
+                                    <td>3410</td>
+                                </tr>
+                                </table>
+                <h3>Таблица: external-hard-drive</h3>
+                <p><strong>Количество записей:</strong> 470</p>
+
+                <table>
+                    <tr>
+                        <th>Столбец</th>
+                        <th>Тип</th>
+                        <th>Первичный ключ</th>
+                        <th>Not Null</th>
+                        <th>Проверки</th>
+                    </tr>
+
+                    <tr>
+                        <td>name</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>price</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>type</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>interface</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>capacity</td>
+                        <td>BIGINT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>price_per_gb</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>color</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+                    </table>
+                    <h4>Диапазоны данных</h4>
+                    <table>
+                        <tr>
+                            <th>Столбец</th>
+                            <th>Тип</th>
+                            <th>Мин</th>
+                            <th>Макс</th>
+                            <th>Среднее</th>
+                            <th>Количество</th>
+                        </tr>
+
+                                <tr>
+                                    <td>name</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 8</td>
+                                    <td>Макс. длина: 45</td>
+                                    <td>Средняя длина: 21.45</td>
+                                    <td>470</td>
+                                </tr>
+
+                                <tr>
+                                    <td>price</td>
+                                    <td>FLOAT</td>
+                                    <td>34.9</td>
+                                    <td>1049.99</td>
+                                    <td>176.35</td>
+                                    <td>199</td>
+                                </tr>
+
+                                <tr>
+                                    <td>type</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 7</td>
+                                    <td>Макс. длина: 8</td>
+                                    <td>Средняя длина: 7.66</td>
+                                    <td>470</td>
+                                </tr>
+
+                                <tr>
+                                    <td>interface</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 10</td>
+                                    <td>Макс. длина: 66</td>
+                                    <td>Средняя длина: 22.21</td>
+                                    <td>460</td>
+                                </tr>
+
+                                <tr>
+                                    <td>price_per_gb</td>
+                                    <td>FLOAT</td>
+                                    <td>0.016</td>
+                                    <td>3.788</td>
+                                    <td>0.11</td>
+                                    <td>199</td>
+                                </tr>
+
+                                <tr>
+                                    <td>color</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 3</td>
+                                    <td>Макс. длина: 15</td>
+                                    <td>Средняя длина: 5.74</td>
+                                    <td>192</td>
+                                </tr>
+                                </table>
+                <h3>Таблица: internal-hard-drive</h3>
+                <p><strong>Количество записей:</strong> 5473</p>
+
+                <table>
+                    <tr>
+                        <th>Столбец</th>
+                        <th>Тип</th>
+                        <th>Первичный ключ</th>
+                        <th>Not Null</th>
+                        <th>Проверки</th>
+                    </tr>
+
+                    <tr>
+                        <td>name</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>price</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>capacity</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>price_per_gb</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>type</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>cache</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>form_factor</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>interface</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+                    </table>
+                    <h4>Диапазоны данных</h4>
+                    <table>
+                        <tr>
+                            <th>Столбец</th>
+                            <th>Тип</th>
+                            <th>Мин</th>
+                            <th>Макс</th>
+                            <th>Среднее</th>
+                            <th>Количество</th>
+                        </tr>
+
+                                <tr>
+                                    <td>name</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 6</td>
+                                    <td>Макс. длина: 137</td>
+                                    <td>Средняя длина: 17.84</td>
+                                    <td>5473</td>
+                                </tr>
+
+                                <tr>
+                                    <td>price</td>
+                                    <td>FLOAT</td>
+                                    <td>11.49</td>
+                                    <td>4500.0</td>
+                                    <td>168.73</td>
+                                    <td>2126</td>
+                                </tr>
+
+                                <tr>
+                                    <td>capacity</td>
+                                    <td>FLOAT</td>
+                                    <td>8.0</td>
+                                    <td>22000.0</td>
+                                    <td>1685.69</td>
+                                    <td>5473</td>
+                                </tr>
+
+                                <tr>
+                                    <td>price_per_gb</td>
+                                    <td>FLOAT</td>
+                                    <td>0.01</td>
+                                    <td>6.493</td>
+                                    <td>0.21</td>
+                                    <td>2126</td>
+                                </tr>
+
+                                <tr>
+                                    <td>type</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 3</td>
+                                    <td>Макс. длина: 5</td>
+                                    <td>Средняя длина: 3.31</td>
+                                    <td>5443</td>
+                                </tr>
+
+                                <tr>
+                                    <td>cache</td>
+                                    <td>FLOAT</td>
+                                    <td>2.0</td>
+                                    <td>131072.0</td>
+                                    <td>342.92</td>
+                                    <td>1797</td>
+                                </tr>
+
+                                <tr>
+                                    <td>form_factor</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 3</td>
+                                    <td>Макс. длина: 9</td>
+                                    <td>Средняя длина: 4.46</td>
+                                    <td>5473</td>
+                                </tr>
+
+                                <tr>
+                                    <td>interface</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 3</td>
+                                    <td>Макс. длина: 15</td>
+                                    <td>Средняя длина: 12.90</td>
+                                    <td>5473</td>
+                                </tr>
+                                </table>
+                <h3>Таблица: ups</h3>
+                <p><strong>Количество записей:</strong> 678</p>
+
+                <table>
+                    <tr>
+                        <th>Столбец</th>
+                        <th>Тип</th>
+                        <th>Первичный ключ</th>
+                        <th>Not Null</th>
+                        <th>Проверки</th>
+                    </tr>
+
+                    <tr>
+                        <td>name</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>price</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>capacity_w</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>capacity_va</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+                    </table>
+                    <h4>Диапазоны данных</h4>
+                    <table>
+                        <tr>
+                            <th>Столбец</th>
+                            <th>Тип</th>
+                            <th>Мин</th>
+                            <th>Макс</th>
+                            <th>Среднее</th>
+                            <th>Количество</th>
+                        </tr>
+
+                                <tr>
+                                    <td>name</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 9</td>
+                                    <td>Макс. длина: 34</td>
+                                    <td>Средняя длина: 18.29</td>
+                                    <td>678</td>
+                                </tr>
+
+                                <tr>
+                                    <td>price</td>
+                                    <td>FLOAT</td>
+                                    <td>53.95</td>
+                                    <td>22186.17</td>
+                                    <td>1274.60</td>
+                                    <td>338</td>
+                                </tr>
+
+                                <tr>
+                                    <td>capacity_w</td>
+                                    <td>FLOAT</td>
+                                    <td>16.0</td>
+                                    <td>16000.0</td>
+                                    <td>1453.59</td>
+                                    <td>675</td>
+                                </tr>
+
+                                <tr>
+                                    <td>capacity_va</td>
+                                    <td>FLOAT</td>
+                                    <td>125.0</td>
+                                    <td>20000.0</td>
+                                    <td>1881.72</td>
+                                    <td>675</td>
+                                </tr>
+                                </table>
+                <h3>Таблица: socket_compatibility</h3>
+                <p><strong>Количество записей:</strong> 36</p>
+
+                <table>
+                    <tr>
+                        <th>Столбец</th>
+                        <th>Тип</th>
+                        <th>Первичный ключ</th>
+                        <th>Not Null</th>
+                        <th>Проверки</th>
+                    </tr>
+
+                    <tr>
+                        <td>id</td>
+                        <td>SERIAL</td>
+                        <td>Да</td>
+                        <td>Нет</td>
+                        <td><div class='success'>Проверка на дубликаты: Успешно</div></td>
+                    </tr>
+
+                    <tr>
+                        <td>processor_socket</td>
+                        <td>VARCHAR(50)</td>
+                        <td>Нет</td>
+                        <td>Да</td>
+                        <td><div class='success'>Проверка на NULL: Успешно</div></td>
+                    </tr>
+
+                    <tr>
+                        <td>motherboard_socket</td>
+                        <td>VARCHAR(50)</td>
+                        <td>Нет</td>
+                        <td>Да</td>
+                        <td><div class='success'>Проверка на NULL: Успешно</div></td>
+                    </tr>
+                    </table>
+                    <h4>Диапазоны данных</h4>
+                    <table>
+                        <tr>
+                            <th>Столбец</th>
+                            <th>Тип</th>
+                            <th>Мин</th>
+                            <th>Макс</th>
+                            <th>Среднее</th>
+                            <th>Количество</th>
+                        </tr>
+                    </table>
+                <h3>Таблица: case-fan</h3>
+                <p><strong>Количество записей:</strong> 2075</p>
+
+                <table>
+                    <tr>
+                        <th>Столбец</th>
+                        <th>Тип</th>
+                        <th>Первичный ключ</th>
+                        <th>Not Null</th>
+                        <th>Проверки</th>
+                    </tr>
+
+                    <tr>
+                        <td>name</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>price</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>size</td>
+                        <td>BIGINT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>color</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>rpm</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>airflow</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>noise_level</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>pwm</td>
+                        <td>BOOLEAN</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+                    </table>
+                    <h4>Диапазоны данных</h4>
+                    <table>
+                        <tr>
+                            <th>Столбец</th>
+                            <th>Тип</th>
+                            <th>Мин</th>
+                            <th>Макс</th>
+                            <th>Среднее</th>
+                            <th>Количество</th>
+                        </tr>
+
+                                <tr>
+                                    <td>name</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 7</td>
+                                    <td>Макс. длина: 124</td>
+                                    <td>Средняя длина: 20.83</td>
+                                    <td>2075</td>
+                                </tr>
+
+                                <tr>
+                                    <td>price</td>
+                                    <td>FLOAT</td>
+                                    <td>4.69</td>
+                                    <td>396.0</td>
+                                    <td>31.87</td>
+                                    <td>862</td>
+                                </tr>
+
+                                <tr>
+                                    <td>color</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 3</td>
+                                    <td>Макс. длина: 25</td>
+                                    <td>Средняя длина: 7.59</td>
+                                    <td>2054</td>
+                                </tr>
+
+                                <tr>
+                                    <td>rpm</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 3</td>
+                                    <td>Макс. длина: 13</td>
+                                    <td>Средняя длина: 7.40</td>
+                                    <td>2017</td>
+                                </tr>
+
+                                <tr>
+                                    <td>airflow</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 1</td>
+                                    <td>Макс. длина: 15</td>
+                                    <td>Средняя длина: 5.57</td>
+                                    <td>1984</td>
+                                </tr>
+
+                                <tr>
+                                    <td>noise_level</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 1</td>
+                                    <td>Макс. длина: 14</td>
+                                    <td>Средняя длина: 5.34</td>
+                                    <td>1949</td>
+                                </tr>
+                                </table>
+                <h3>Таблица: corpus</h3>
+                <p><strong>Количество записей:</strong> 1014</p>
+
+                <table>
+                    <tr>
+                        <th>Столбец</th>
+                        <th>Тип</th>
+                        <th>Первичный ключ</th>
+                        <th>Not Null</th>
+                        <th>Проверки</th>
+                    </tr>
+
+                    <tr>
+                        <td>name</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>price</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>type</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>color</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>psu</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>side_panel</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>external_525_bays</td>
+                        <td>BIGINT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>internal_35_bays</td>
+                        <td>BIGINT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+                    </table>
+                    <h4>Диапазоны данных</h4>
+                    <table>
+                        <tr>
+                            <th>Столбец</th>
+                            <th>Тип</th>
+                            <th>Мин</th>
+                            <th>Макс</th>
+                            <th>Среднее</th>
+                            <th>Количество</th>
+                        </tr>
+
+                                <tr>
+                                    <td>name</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 7</td>
+                                    <td>Макс. длина: 54</td>
+                                    <td>Средняя длина: 21.39</td>
+                                    <td>1014</td>
+                                </tr>
+
+                                <tr>
+                                    <td>price</td>
+                                    <td>FLOAT</td>
+                                    <td>2999.0</td>
+                                    <td>89999.0</td>
+                                    <td>15233.60</td>
+                                    <td>1014</td>
+                                </tr>
+
+                                <tr>
+                                    <td>type</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 4</td>
+                                    <td>Макс. длина: 19</td>
+                                    <td>Средняя длина: 13.99</td>
+                                    <td>1014</td>
+                                </tr>
+
+                                <tr>
+                                    <td>color</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 3</td>
+                                    <td>Макс. длина: 17</td>
+                                    <td>Средняя длина: 6.30</td>
+                                    <td>999</td>
+                                </tr>
+
+                                <tr>
+                                    <td>psu</td>
+                                    <td>FLOAT</td>
+                                    <td>120.0</td>
+                                    <td>750.0</td>
+                                    <td>324.23</td>
+                                    <td>26</td>
+                                </tr>
+
+                                <tr>
+                                    <td>side_panel</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 4</td>
+                                    <td>Макс. длина: 21</td>
+                                    <td>Средняя длина: 13.34</td>
+                                    <td>830</td>
+                                </tr>
+                                </table>
+                <h3>Таблица: cpu-cooler</h3>
+                <p><strong>Количество записей:</strong> 1967</p>
+
+                <table>
+                    <tr>
+                        <th>Столбец</th>
+                        <th>Тип</th>
+                        <th>Первичный ключ</th>
+                        <th>Not Null</th>
+                        <th>Проверки</th>
+                    </tr>
+
+                    <tr>
+                        <td>name</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>price</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>rpm</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>noise_level</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>color</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>size</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+                    </table>
+                    <h4>Диапазоны данных</h4>
+                    <table>
+                        <tr>
+                            <th>Столбец</th>
+                            <th>Тип</th>
+                            <th>Мин</th>
+                            <th>Макс</th>
+                            <th>Среднее</th>
+                            <th>Количество</th>
+                        </tr>
+
+                                <tr>
+                                    <td>name</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 8</td>
+                                    <td>Макс. длина: 62</td>
+                                    <td>Средняя длина: 22.63</td>
+                                    <td>1967</td>
+                                </tr>
+
+                                <tr>
+                                    <td>price</td>
+                                    <td>FLOAT</td>
+                                    <td>4.99</td>
+                                    <td>715.0</td>
+                                    <td>107.95</td>
+                                    <td>695</td>
+                                </tr>
+
+                                <tr>
+                                    <td>rpm</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 3</td>
+                                    <td>Макс. длина: 12</td>
+                                    <td>Средняя длина: 9.92</td>
+                                    <td>1863</td>
+                                </tr>
+
+                                <tr>
+                                    <td>noise_level</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 1</td>
+                                    <td>Макс. длина: 14</td>
+                                    <td>Средняя длина: 7.08</td>
+                                    <td>1776</td>
+                                </tr>
+
+                                <tr>
+                                    <td>color</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 4</td>
+                                    <td>Макс. длина: 25</td>
+                                    <td>Средняя длина: 7.63</td>
+                                    <td>1053</td>
+                                </tr>
+
+                                <tr>
+                                    <td>size</td>
+                                    <td>FLOAT</td>
+                                    <td>120.0</td>
+                                    <td>420.0</td>
+                                    <td>253.81</td>
+                                    <td>743</td>
+                                </tr>
+                                </table>
+                <h3>Таблица: cpu_merged</h3>
+                <p><strong>Количество записей:</strong> 1795</p>
+
+                <table>
+                    <tr>
+                        <th>Столбец</th>
+                        <th>Тип</th>
+                        <th>Первичный ключ</th>
+                        <th>Not Null</th>
+                        <th>Проверки</th>
+                    </tr>
+
+                    <tr>
+                        <td>processor</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>price</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>core_count</td>
+                        <td>BIGINT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>core_clock</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>boost_clock</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>tdp</td>
+                        <td>BIGINT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>graphics</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>smt</td>
+                        <td>BOOLEAN</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>socket</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>rating</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>core/streams</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>year</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>power_consumption</td>
+                        <td>BIGINT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+                    </table>
+                    <h4>Диапазоны данных</h4>
+                    <table>
+                        <tr>
+                            <th>Столбец</th>
+                            <th>Тип</th>
+                            <th>Мин</th>
+                            <th>Макс</th>
+                            <th>Среднее</th>
+                            <th>Количество</th>
+                        </tr>
+
+                                <tr>
+                                    <td>processor</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 12</td>
+                                    <td>Макс. длина: 35</td>
+                                    <td>Средняя длина: 19.32</td>
+                                    <td>1795</td>
+                                </tr>
+
+                                <tr>
+                                    <td>price</td>
+                                    <td>FLOAT</td>
+                                    <td>2299.0</td>
+                                    <td>448300.0</td>
+                                    <td>29703.47</td>
+                                    <td>731</td>
+                                </tr>
+
+                                <tr>
+                                    <td>core_clock</td>
+                                    <td>FLOAT</td>
+                                    <td>1.1</td>
+                                    <td>4.7</td>
+                                    <td>3.12</td>
+                                    <td>1795</td>
+                                </tr>
+
+                                <tr>
+                                    <td>boost_clock</td>
+                                    <td>FLOAT</td>
+                                    <td>2.3</td>
+                                    <td>6.0</td>
+                                    <td>4.15</td>
+                                    <td>830</td>
+                                </tr>
+
+                                <tr>
+                                    <td>graphics</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 6</td>
+                                    <td>Макс. длина: 22</td>
+                                    <td>Средняя длина: 20.12</td>
+                                    <td>784</td>
+                                </tr>
+
+                                <tr>
+                                    <td>socket</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 2</td>
+                                    <td>Макс. длина: 19</td>
+                                    <td>Средняя длина: 7.22</td>
+                                    <td>1736</td>
+                                </tr>
+
+                                <tr>
+                                    <td>rating</td>
+                                    <td>FLOAT</td>
+                                    <td>0.26</td>
+                                    <td>49.88</td>
+                                    <td>4.67</td>
+                                    <td>1795</td>
+                                </tr>
+
+                                <tr>
+                                    <td>core/streams</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 3</td>
+                                    <td>Макс. длина: 8</td>
+                                    <td>Средняя длина: 5.31</td>
+                                    <td>1778</td>
+                                </tr>
+
+                                <tr>
+                                    <td>year</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 1</td>
+                                    <td>Макс. длина: 4</td>
+                                    <td>Средняя длина: 3.89</td>
+                                    <td>1795</td>
+                                </tr>
+                                </table>
+                <h3>Таблица: cpu_servers</h3>
+                <p><strong>Количество записей:</strong> 456</p>
+
+                <table>
+                    <tr>
+                        <th>Столбец</th>
+                        <th>Тип</th>
+                        <th>Первичный ключ</th>
+                        <th>Not Null</th>
+                        <th>Проверки</th>
+                    </tr>
+
+                    <tr>
+                        <td>processor</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>processor_type</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>socket</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>rating</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>core/streams</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>year</td>
+                        <td>BIGINT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>power_consumption</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+                    </table>
+                    <h4>Диапазоны данных</h4>
+                    <table>
+                        <tr>
+                            <th>Столбец</th>
+                            <th>Тип</th>
+                            <th>Мин</th>
+                            <th>Макс</th>
+                            <th>Среднее</th>
+                            <th>Количество</th>
+                        </tr>
+
+                                <tr>
+                                    <td>processor</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 9</td>
+                                    <td>Макс. длина: 29</td>
+                                    <td>Средняя длина: 13.32</td>
+                                    <td>456</td>
+                                </tr>
+
+                                <tr>
+                                    <td>processor_type</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 9</td>
+                                    <td>Макс. длина: 19</td>
+                                    <td>Средняя длина: 9.02</td>
+                                    <td>456</td>
+                                </tr>
+
+                                <tr>
+                                    <td>socket</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 3</td>
+                                    <td>Макс. длина: 17</td>
+                                    <td>Средняя длина: 10.61</td>
+                                    <td>453</td>
+                                </tr>
+
+                                <tr>
+                                    <td>rating</td>
+                                    <td>FLOAT</td>
+                                    <td>0.64</td>
+                                    <td>100.0</td>
+                                    <td>21.51</td>
+                                    <td>456</td>
+                                </tr>
+
+                                <tr>
+                                    <td>core/streams</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 5</td>
+                                    <td>Макс. длина: 9</td>
+                                    <td>Средняя длина: 6.59</td>
+                                    <td>456</td>
+                                </tr>
+
+                                <tr>
+                                    <td>power_consumption</td>
+                                    <td>FLOAT</td>
+                                    <td>9.0</td>
+                                    <td>400.0</td>
+                                    <td>157.19</td>
+                                    <td>456</td>
+                                </tr>
+                                </table>
+                <h3>Таблица: gpu_full_info</h3>
+                <p><strong>Количество записей:</strong> 3448</p>
+
+                <table>
+                    <tr>
+                        <th>Столбец</th>
+                        <th>Тип</th>
+                        <th>Первичный ключ</th>
+                        <th>Not Null</th>
+                        <th>Проверки</th>
+                    </tr>
+
+                    <tr>
+                        <td>gpu</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>memory</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>core_clock</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>boost_clock</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>boost_clock.1</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>length</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>rating</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>architecture</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>year</td>
+                        <td>BIGINT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>power_consumption</td>
+                        <td>BIGINT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>average_price</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+                    </table>
+                    <h4>Диапазоны данных</h4>
+                    <table>
+                        <tr>
+                            <th>Столбец</th>
+                            <th>Тип</th>
+                            <th>Мин</th>
+                            <th>Макс</th>
+                            <th>Среднее</th>
+                            <th>Количество</th>
+                        </tr>
+
+                                <tr>
+                                    <td>gpu</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 4</td>
+                                    <td>Макс. длина: 27</td>
+                                    <td>Средняя длина: 15.43</td>
+                                    <td>3448</td>
+                                </tr>
+
+                                <tr>
+                                    <td>memory</td>
+                                    <td>FLOAT</td>
+                                    <td>0.125</td>
+                                    <td>48.0</td>
+                                    <td>5.57</td>
+                                    <td>3448</td>
+                                </tr>
+
+                                <tr>
+                                    <td>core_clock</td>
+                                    <td>FLOAT</td>
+                                    <td>400.0</td>
+                                    <td>2593.0</td>
+                                    <td>1230.46</td>
+                                    <td>3368</td>
+                                </tr>
+
+                                <tr>
+                                    <td>boost_clock</td>
+                                    <td>FLOAT</td>
+                                    <td>720.0</td>
+                                    <td>2855.0</td>
+                                    <td>1693.81</td>
+                                    <td>1909</td>
+                                </tr>
+
+                                <tr>
+                                    <td>boost_clock.1</td>
+                                    <td>FLOAT</td>
+                                    <td>720.0</td>
+                                    <td>2855.0</td>
+                                    <td>1693.81</td>
+                                    <td>1909</td>
+                                </tr>
+
+                                <tr>
+                                    <td>length</td>
+                                    <td>FLOAT</td>
+                                    <td>69.0</td>
+                                    <td>360.0</td>
+                                    <td>247.57</td>
+                                    <td>3123</td>
+                                </tr>
+
+                                <tr>
+                                    <td>rating</td>
+                                    <td>FLOAT</td>
+                                    <td>0.17</td>
+                                    <td>100.0</td>
+                                    <td>25.86</td>
+                                    <td>3448</td>
+                                </tr>
+
+                                <tr>
+                                    <td>architecture</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 5</td>
+                                    <td>Макс. длина: 15</td>
+                                    <td>Средняя длина: 7.63</td>
+                                    <td>3448</td>
+                                </tr>
+
+                                <tr>
+                                    <td>average_price</td>
+                                    <td>FLOAT</td>
+                                    <td>8020.285714285715</td>
+                                    <td>532625.3333333334</td>
+                                    <td>60427.17</td>
+                                    <td>1503</td>
+                                </tr>
+                                </table>
+                <h3>Таблица: gpu_hierarchy</h3>
+                <p><strong>Количество записей:</strong> 86</p>
+
+                <table>
+                    <tr>
+                        <th>Столбец</th>
+                        <th>Тип</th>
+                        <th>Первичный ключ</th>
+                        <th>Not Null</th>
+                        <th>Проверки</th>
+                    </tr>
+
+                    <tr>
+                        <td>gpu</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>1080p Ultra</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>1080p Medium</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>1440p Ultra</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>4K Ultra</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>Specifications (Links to Review)</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+                    </table>
+                    <h4>Диапазоны данных</h4>
+                    <table>
+                        <tr>
+                            <th>Столбец</th>
+                            <th>Тип</th>
+                            <th>Мин</th>
+                            <th>Макс</th>
+                            <th>Среднее</th>
+                            <th>Количество</th>
+                        </tr>
+
+                                <tr>
+                                    <td>gpu</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 9</td>
+                                    <td>Макс. длина: 25</td>
+                                    <td>Средняя длина: 17.36</td>
+                                    <td>86</td>
+                                </tr>
+
+                                <tr>
+                                    <td>1080p Ultra</td>
+                                    <td>FLOAT</td>
+                                    <td>0.0</td>
+                                    <td>154.1</td>
+                                    <td>74.27</td>
+                                    <td>86</td>
+                                </tr>
+
+                                <tr>
+                                    <td>1080p Medium</td>
+                                    <td>FLOAT</td>
+                                    <td>14.6</td>
+                                    <td>195.7</td>
+                                    <td>116.55</td>
+                                    <td>86</td>
+                                </tr>
+
+                                <tr>
+                                    <td>1440p Ultra</td>
+                                    <td>FLOAT</td>
+                                    <td>0.0</td>
+                                    <td>146.1</td>
+                                    <td>56.04</td>
+                                    <td>86</td>
+                                </tr>
+
+                                <tr>
+                                    <td>4K Ultra</td>
+                                    <td>FLOAT</td>
+                                    <td>0.0</td>
+                                    <td>114.5</td>
+                                    <td>26.37</td>
+                                    <td>86</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Specifications (Links to Review)</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 7</td>
+                                    <td>Макс. длина: 158</td>
+                                    <td>Средняя длина: 75.22</td>
+                                    <td>86</td>
+                                </tr>
+                                </table>
+                <h3>Таблица: memory</h3>
+                <p><strong>Количество записей:</strong> 3034</p>
+
+                <table>
+                    <tr>
+                        <th>Столбец</th>
+                        <th>Тип</th>
+                        <th>Первичный ключ</th>
+                        <th>Not Null</th>
+                        <th>Проверки</th>
+                    </tr>
+
+                    <tr>
+                        <td>name</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>price</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>price_per_gb</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>color</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>first_word_latency</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>cas_latency</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>speed_num</td>
+                        <td>BIGINT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>speed_value</td>
+                        <td>BIGINT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>modules_num</td>
+                        <td>BIGINT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>modules_value</td>
+                        <td>BIGINT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+                    </table>
+                    <h4>Диапазоны данных</h4>
+                    <table>
+                        <tr>
+                            <th>Столбец</th>
+                            <th>Тип</th>
+                            <th>Мин</th>
+                            <th>Макс</th>
+                            <th>Среднее</th>
+                            <th>Количество</th>
+                        </tr>
+
+                                <tr>
+                                    <td>name</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 12</td>
+                                    <td>Макс. длина: 163</td>
+                                    <td>Средняя длина: 26.93</td>
+                                    <td>3034</td>
+                                </tr>
+
+                                <tr>
+                                    <td>price</td>
+                                    <td>FLOAT</td>
+                                    <td>500.0</td>
+                                    <td>193768.0</td>
+                                    <td>12802.66</td>
+                                    <td>3034</td>
+                                </tr>
+
+                                <tr>
+                                    <td>price_per_gb</td>
+                                    <td>FLOAT</td>
+                                    <td>90.6</td>
+                                    <td>9100.0</td>
+                                    <td>519.32</td>
+                                    <td>3034</td>
+                                </tr>
+
+                                <tr>
+                                    <td>color</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 3</td>
+                                    <td>Макс. длина: 14</td>
+                                    <td>Средняя длина: 7.81</td>
+                                    <td>2868</td>
+                                </tr>
+
+                                <tr>
+                                    <td>first_word_latency</td>
+                                    <td>FLOAT</td>
+                                    <td>7.0</td>
+                                    <td>19.167</td>
+                                    <td>11.82</td>
+                                    <td>3034</td>
+                                </tr>
+
+                                <tr>
+                                    <td>cas_latency</td>
+                                    <td>FLOAT</td>
+                                    <td>3.0</td>
+                                    <td>48.0</td>
+                                    <td>20.02</td>
+                                    <td>3034</td>
+                                </tr>
+                                </table>
+                <h3>Таблица: motherboard</h3>
+                <p><strong>Количество записей:</strong> 725</p>
+
+                <table>
+                    <tr>
+                        <th>Столбец</th>
+                        <th>Тип</th>
+                        <th>Первичный ключ</th>
+                        <th>Not Null</th>
+                        <th>Проверки</th>
+                    </tr>
+
+                    <tr>
+                        <td>name</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>price</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>socket</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>form_factor</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>max_memory</td>
+                        <td>BIGINT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>memory_slots</td>
+                        <td>BIGINT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>color</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+                    </table>
+                    <h4>Диапазоны данных</h4>
+                    <table>
+                        <tr>
+                            <th>Столбец</th>
+                            <th>Тип</th>
+                            <th>Мин</th>
+                            <th>Макс</th>
+                            <th>Среднее</th>
+                            <th>Количество</th>
+                        </tr>
+
+                                <tr>
+                                    <td>name</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 11</td>
+                                    <td>Макс. длина: 47</td>
+                                    <td>Средняя длина: 23.63</td>
+                                    <td>725</td>
+                                </tr>
+
+                                <tr>
+                                    <td>price</td>
+                                    <td>FLOAT</td>
+                                    <td>6399.0</td>
+                                    <td>259177.0</td>
+                                    <td>28021.02</td>
+                                    <td>725</td>
+                                </tr>
+
+                                <tr>
+                                    <td>socket</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 3</td>
+                                    <td>Макс. длина: 21</td>
+                                    <td>Средняя длина: 5.60</td>
+                                    <td>725</td>
+                                </tr>
+
+                                <tr>
+                                    <td>form_factor</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 3</td>
+                                    <td>Макс. длина: 9</td>
+                                    <td>Средняя длина: 5.55</td>
+                                    <td>725</td>
+                                </tr>
+
+                                <tr>
+                                    <td>color</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 5</td>
+                                    <td>Макс. длина: 14</td>
+                                    <td>Средняя длина: 10.61</td>
+                                    <td>719</td>
+                                </tr>
+                                </table>
+                <h3>Таблица: power-supply</h3>
+                <p><strong>Количество записей:</strong> 611</p>
+
+                <table>
+                    <tr>
+                        <th>Столбец</th>
+                        <th>Тип</th>
+                        <th>Первичный ключ</th>
+                        <th>Not Null</th>
+                        <th>Проверки</th>
+                    </tr>
+
+                    <tr>
+                        <td>Unnamed: 0</td>
+                        <td>BIGINT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>name</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>price</td>
+                        <td>FLOAT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>type</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>efficiency</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>wattage</td>
+                        <td>BIGINT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>modular</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td>color</td>
+                        <td>TEXT</td>
+                        <td>Нет</td>
+                        <td>Нет</td>
+                        <td></td>
+                    </tr>
+                    </table>
+                    <h4>Диапазоны данных</h4>
+                    <table>
+                        <tr>
+                            <th>Столбец</th>
+                            <th>Тип</th>
+                            <th>Мин</th>
+                            <th>Макс</th>
+                            <th>Среднее</th>
+                            <th>Количество</th>
+                        </tr>
+
+                                <tr>
+                                    <td>name</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 6</td>
+                                    <td>Макс. длина: 44</td>
+                                    <td>Средняя длина: 20.32</td>
+                                    <td>611</td>
+                                </tr>
+
+                                <tr>
+                                    <td>price</td>
+                                    <td>FLOAT</td>
+                                    <td>1698.0</td>
+                                    <td>79999.0</td>
+                                    <td>18789.49</td>
+                                    <td>611</td>
+                                </tr>
+
+                                <tr>
+                                    <td>type</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 3</td>
+                                    <td>Макс. длина: 8</td>
+                                    <td>Средняя длина: 3.07</td>
+                                    <td>611</td>
+                                </tr>
+
+                                <tr>
+                                    <td>efficiency</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 4</td>
+                                    <td>Макс. длина: 8</td>
+                                    <td>Средняя длина: 5.32</td>
+                                    <td>580</td>
+                                </tr>
+
+                                <tr>
+                                    <td>modular</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 4</td>
+                                    <td>Макс. длина: 5</td>
+                                    <td>Средняя длина: 4.27</td>
+                                    <td>611</td>
+                                </tr>
+
+                                <tr>
+                                    <td>color</td>
+                                    <td>TEXT</td>
+                                    <td>Мин. длина: 4</td>
+                                    <td>Макс. длина: 14</td>
+                                    <td>Средняя длина: 6.61</td>
+                                    <td>407</td>
+                                </tr>
+                                </table>
+            </body>
+            </html>

@@ -45,8 +45,6 @@ Advanced multi-agent application designed to automate and optimize the process o
    Измените `config/config.yml` если нужно.
 
 
-
-
 7. **Примеры запросов**
 
 - Привет, что ты умеешь?
@@ -57,7 +55,93 @@ Advanced multi-agent application designed to automate and optimize the process o
 - Хорошо, найди мне тогда актуальные цены на данную систему.
 
 
+## Система тестирования и сравнения языковых моделей
 
+Проект содержит инструменты для тестирования производительности и эффективности различных языковых моделей.
+Эти инструменты позволяют оценить скорость ответа, использование токенов и качество ответов для разных моделей.
+
+### Основные инструменты
+
+1. **Тестирование моделей** (model_evaluator.py):
+   ```bash
+   python src/model_evaluator.py --models gpt-4o-mini gpt-4o gpt-3.5-turbo
+   ```
+   Запускает тестирование указанных моделей на стандартном наборе вопросов, измеряет время ответа и
+   сохраняет результаты для дальнейшего анализа.
+
+2. **Анализ использования токенов** (token_counter.py):
+   ```bash
+   python src/token_counter.py --results-file path/to/evaluation_results.yml
+   ```
+   Анализирует использование токенов различными моделями и рассчитывает метрики эффективности,
+   такие как токены в секунду и соотношение входных/выходных токенов.
+
+3. **Визуализация результатов** (visualization.py):
+   ```bash
+   python src/visualization.py --results-file path/to/evaluation_results.yml
+   ```
+   Создает наглядные визуализации результатов тестирования, включая графики времени ответа,
+   и генерирует базовый HTML-отчет.
+
+4. **Полные отчеты сравнения** (generate_report.py):
+   ```bash
+   # Запуск тестирования и генерация полного отчета
+   python src/generate_report.py --run-tests --models gpt-4o-mini gpt-4o gpt-3.5-turbo
+
+   # Генерация отчета из существующих результатов
+   python src/generate_report.py
+   ```
+   Комбинирует данные из всех инструментов и создает комплексный HTML-отчет с рекомендациями по выбору оптимальной модели.
+
+5. **Единый скрипт для полного цикла тестирования** (run_complete_test.py):
+   ```bash
+   python src/run_complete_test.py --models gpt-4o-mini gpt-4o gpt-3.5-turbo
+   ```
+   Выполняет полный цикл тестирования в один запуск — последовательно запускает тестирование моделей,
+   анализ токенов и генерацию отчета с мониторингом выполнения каждого этапа.
+
+6. **Валидация баз данных под контролем DVC** (db_validator.py):
+   ```bash
+   # Проверка целостности базы данных с генерацией полного отчета
+   python src/db_validator.py --db-path data/databases/pc_accessories_2.db --detailed
+
+   # Базовая проверка с выводом только в JSON формате
+   python src/db_validator.py --format json
+   ```
+   Проверяет целостность и качество данных в базе данных, контролируемой DVC:
+   - Анализирует структуру таблиц и столбцов
+   - Проверяет ограничения primary key и not null
+   - Выявляет дубликаты и пропущенные значения
+   - Анализирует диапазоны данных и статистику по каждому столбцу
+   - Проверяет согласованность с версией в DVC
+
+### Возможности отчетов
+
+Сгенерированные отчеты содержат:
+- Сравнительные таблицы производительности моделей
+- Графики скорости ответа и эффективности использования токенов
+- Подробные рекомендации по выбору модели для разных задач
+- Детальный анализ ответов на каждый тестовый вопрос
+- Статистику по использованию токенов и времени ответа
+
+### Пример использования
+
+```bash
+# Простой запуск полного цикла тестирования с параметрами по умолчанию:
+python src/run_complete_test.py
+
+# Чтобы протестировать только конкретные модели:
+python src/run_complete_test.py --models gpt-4o-mini gpt-4o
+
+# Чтобы указать нестандартные пути к конфигурации и результатам:
+python src/run_complete_test.py --config configs/custom_config.yml --results-dir custom_results --output-dir reports
+
+# Проверка целостности базы данных и её статуса в DVC:
+python src/db_validator.py --db-path data/databases/pc_accessories_2.db --detailed
+```
+
+Результаты тестирования и отчеты сохраняются в директории `evaluation_results/`.
+Результаты валидации баз данных сохраняются в директории `validation_results/`.
 
 **Агентный граф:**
 
@@ -275,3 +359,40 @@ git add data/новый_файл.csv.dvc
 git commit -m "Добавлен новый файл данных"
 dvc push
 ```
+
+## Интеграция MLflow
+
+### Установка зависимостей
+
+```bash
+poetry add mlflow dvc pandas matplotlib
+```
+
+### Настройка и запуск MLflow Tracking Server
+
+```bash
+mlflow ui --backend-store-uri ./mlruns --port 5000
+# Откройте http://localhost:5000 в браузере
+```
+
+### Получение данных из DVC
+
+```bash
+dvc pull
+```
+
+### Проведение экспериментов
+
+```bash
+poetry run python src/mlflow_experiments.py
+```
+
+### Сравнение результатов
+
+```bash
+poetry run python src/compare_models.py
+```
+
+### Отчет
+
+Отчет по сравнению находится в файле `reports/comparison_report.md`. Таблица метрик сохранена в `reports/metrics_summary.csv`, а график времени инференса — в `reports/duration_comparison.png`.

@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Erik/Documents/VSCode/pc_build_ml_ops/mlruns/447070135491903799/bd952ea80e8540989811f17fef3b47b5/artifacts
+end_time: 1749417953135
+entry_point_name: ''
+experiment_id: '447070135491903799'
+lifecycle_stage: active
+run_id: bd952ea80e8540989811f17fef3b47b5
+run_name: gpt-3.5-turbo
+run_uuid: bd952ea80e8540989811f17fef3b47b5
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1749417818405
+status: 3
+tags: []
+user_id: Erik

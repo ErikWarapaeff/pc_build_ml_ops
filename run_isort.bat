@@ -20,4 +20,4 @@ python -m isort src/agent_shema/build_system_prompts.py
 python -m isort src/agent_shema/complete_or_escalate.py
 python -m isort src/utils/ui_settings.py
 python -m isort src/utils/utilities.py
-python -m isort src/utils/app_utils.py 
+python -m isort src/utils/app_utils.py

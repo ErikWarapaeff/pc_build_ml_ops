@@ -396,3 +396,5 @@ poetry run python src/compare_models.py
 ### Отчет
 
 Отчет по сравнению находится в файле `reports/comparison_report.md`. Таблица метрик сохранена в `reports/metrics_summary.csv`, а график времени инференса — в `reports/duration_comparison.png`.
+Вот график вывода моделей:
+!['mlflow']('Работа моделей.png')

@@ -1,3 +1,5 @@
+# type: ignore
+
 import time
 from typing import Any
 

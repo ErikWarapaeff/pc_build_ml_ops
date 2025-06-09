@@ -1,0 +1,1796 @@
+database: pc_accessories_2.db
+dvc_status: под контролем DVC
+foreign_keys_check: passed
+summary:
+  failed_checks: 0
+  passed_checks: 4
+  total_checks: 4
+  total_records: 25320
+  total_tables: 17
+  warnings: 0
+tables:
+- columns:
+  - checks: []
+    name: case_form_factor
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      column: case_form_factor
+      count: 0
+      max: null
+      min: null
+      table: case_motherboard_compatibility
+      type: VARCHAR(50)
+    type: VARCHAR(50)
+  - checks: []
+    name: motherboard_form_factor
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      column: motherboard_form_factor
+      count: 0
+      max: null
+      min: null
+      table: case_motherboard_compatibility
+      type: VARCHAR(50)
+    type: VARCHAR(50)
+  issues: []
+  name: case_motherboard_compatibility
+  record_count: 34
+- columns:
+  - checks: []
+    name: name
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 15.0
+      column: name
+      count: 8
+      max: null
+      max_length: 27
+      min: null
+      min_length: 8
+      table: case-accessory
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: price
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 27.47
+      column: price
+      count: 2
+      max: 29.95
+      min: 24.99
+      table: case-accessory
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: type
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 12.125
+      column: type
+      count: 8
+      max: null
+      max_length: 14
+      min: null
+      min_length: 11
+      table: case-accessory
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: form_factor
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 4.34375
+      column: form_factor
+      count: 8
+      max: 5.25
+      min: 2.5
+      table: case-accessory
+      type: FLOAT
+    type: FLOAT
+  issues: []
+  name: case-accessory
+  record_count: 8
+- columns:
+  - checks: []
+    name: processor
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 13.580351906158358
+      column: processor
+      count: 3410
+      max: null
+      max_length: 31
+      min: null
+      min_length: 2
+      table: cpu_ratings
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: processor_type
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 9.026392961876834
+      column: processor_type
+      count: 3410
+      max: null
+      max_length: 19
+      min: null
+      min_length: 9
+      table: cpu_ratings
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: socket
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 10.91319018404908
+      column: socket
+      count: 3260
+      max: null
+      max_length: 30
+      min: null
+      min_length: 1
+      table: cpu_ratings
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: rating
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 6.888475073313787
+      column: rating
+      count: 3410
+      max: 100.0
+      min: 0.07
+      table: cpu_ratings
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: core/streams
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 5.538945476333134
+      column: core/streams
+      count: 3338
+      max: null
+      max_length: 27
+      min: null
+      min_length: 3
+      table: cpu_ratings
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: year
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 3.901466275659824
+      column: year
+      count: 3410
+      max: null
+      max_length: 4
+      min: null
+      min_length: 1
+      table: cpu_ratings
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: power_consumption
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 4.163636363636364
+      column: power_consumption
+      count: 3410
+      max: null
+      max_length: 7
+      min: null
+      min_length: 1
+      table: cpu_ratings
+      type: TEXT
+    type: TEXT
+  issues: []
+  name: cpu_ratings
+  record_count: 3410
+- columns:
+  - checks: []
+    name: name
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 21.451063829787234
+      column: name
+      count: 470
+      max: null
+      max_length: 45
+      min: null
+      min_length: 8
+      table: external-hard-drive
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: price
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 176.3490954773872
+      column: price
+      count: 199
+      max: 1049.99
+      min: 34.9
+      table: external-hard-drive
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: type
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 7.6617021276595745
+      column: type
+      count: 470
+      max: null
+      max_length: 8
+      min: null
+      min_length: 7
+      table: external-hard-drive
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: interface
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 22.208695652173912
+      column: interface
+      count: 460
+      max: null
+      max_length: 66
+      min: null
+      min_length: 10
+      table: external-hard-drive
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: capacity
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      column: capacity
+      count: 0
+      max: null
+      min: null
+      table: external-hard-drive
+      type: BIGINT
+    type: BIGINT
+  - checks: []
+    name: price_per_gb
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 0.11176381909547739
+      column: price_per_gb
+      count: 199
+      max: 3.788
+      min: 0.016
+      table: external-hard-drive
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: color
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 5.744791666666667
+      column: color
+      count: 192
+      max: null
+      max_length: 15
+      min: null
+      min_length: 3
+      table: external-hard-drive
+      type: TEXT
+    type: TEXT
+  issues: []
+  name: external-hard-drive
+  record_count: 470
+- columns:
+  - checks: []
+    name: name
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 17.84213411291796
+      column: name
+      count: 5473
+      max: null
+      max_length: 137
+      min: null
+      min_length: 6
+      table: internal-hard-drive
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: price
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 168.73292568203104
+      column: price
+      count: 2126
+      max: 4500.0
+      min: 11.49
+      table: internal-hard-drive
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: capacity
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 1685.6902612826605
+      column: capacity
+      count: 5473
+      max: 22000.0
+      min: 8.0
+      table: internal-hard-drive
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: price_per_gb
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 0.2140959548447792
+      column: price_per_gb
+      count: 2126
+      max: 6.493
+      min: 0.01
+      table: internal-hard-drive
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: type
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 3.311225427154143
+      column: type
+      count: 5443
+      max: null
+      max_length: 5
+      min: null
+      min_length: 3
+      table: internal-hard-drive
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: cache
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 342.92153589315524
+      column: cache
+      count: 1797
+      max: 131072.0
+      min: 2.0
+      table: internal-hard-drive
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: form_factor
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 4.462634752420976
+      column: form_factor
+      count: 5473
+      max: null
+      max_length: 9
+      min: null
+      min_length: 3
+      table: internal-hard-drive
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: interface
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 12.895852366161154
+      column: interface
+      count: 5473
+      max: null
+      max_length: 15
+      min: null
+      min_length: 3
+      table: internal-hard-drive
+      type: TEXT
+    type: TEXT
+  issues: []
+  name: internal-hard-drive
+  record_count: 5473
+- columns:
+  - checks: []
+    name: name
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 18.293510324483776
+      column: name
+      count: 678
+      max: null
+      max_length: 34
+      min: null
+      min_length: 9
+      table: ups
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: price
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 1274.6025147928985
+      column: price
+      count: 338
+      max: 22186.17
+      min: 53.95
+      table: ups
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: capacity_w
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 1453.5896296296296
+      column: capacity_w
+      count: 675
+      max: 16000.0
+      min: 16.0
+      table: ups
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: capacity_va
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 1881.7185185185185
+      column: capacity_va
+      count: 675
+      max: 20000.0
+      min: 125.0
+      table: ups
+      type: FLOAT
+    type: FLOAT
+  issues: []
+  name: ups
+  record_count: 678
+- columns:
+  - checks:
+    - status: passed
+      type: duplicate_check
+    name: id
+    not_null: false
+    primary_key: true
+    range_data:
+      avg: null
+      column: id
+      count: 0
+      max: null
+      min: null
+      table: socket_compatibility
+      type: SERIAL
+    type: SERIAL
+  - checks:
+    - status: passed
+      type: null_check
+    name: processor_socket
+    not_null: true
+    primary_key: false
+    range_data:
+      avg: null
+      column: processor_socket
+      count: 0
+      max: null
+      min: null
+      table: socket_compatibility
+      type: VARCHAR(50)
+    type: VARCHAR(50)
+  - checks:
+    - status: passed
+      type: null_check
+    name: motherboard_socket
+    not_null: true
+    primary_key: false
+    range_data:
+      avg: null
+      column: motherboard_socket
+      count: 0
+      max: null
+      min: null
+      table: socket_compatibility
+      type: VARCHAR(50)
+    type: VARCHAR(50)
+  issues: []
+  name: socket_compatibility
+  record_count: 36
+- columns:
+  - checks: []
+    name: name
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 20.829397590361445
+      column: name
+      count: 2075
+      max: null
+      max_length: 124
+      min: null
+      min_length: 7
+      table: case-fan
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: price
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 31.867308584687027
+      column: price
+      count: 862
+      max: 396.0
+      min: 4.69
+      table: case-fan
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: size
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      column: size
+      count: 0
+      max: null
+      min: null
+      table: case-fan
+      type: BIGINT
+    type: BIGINT
+  - checks: []
+    name: color
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 7.588120740019474
+      column: color
+      count: 2054
+      max: null
+      max_length: 25
+      min: null
+      min_length: 3
+      table: case-fan
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: rpm
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 7.403569657907783
+      column: rpm
+      count: 2017
+      max: null
+      max_length: 13
+      min: null
+      min_length: 3
+      table: case-fan
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: airflow
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 5.573084677419355
+      column: airflow
+      count: 1984
+      max: null
+      max_length: 15
+      min: null
+      min_length: 1
+      table: case-fan
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: noise_level
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 5.337095946639303
+      column: noise_level
+      count: 1949
+      max: null
+      max_length: 14
+      min: null
+      min_length: 1
+      table: case-fan
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: pwm
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      column: pwm
+      count: 0
+      max: null
+      min: null
+      table: case-fan
+      type: BOOLEAN
+    type: BOOLEAN
+  issues: []
+  name: case-fan
+  record_count: 2075
+- columns:
+  - checks: []
+    name: name
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 21.391518737672584
+      column: name
+      count: 1014
+      max: null
+      max_length: 54
+      min: null
+      min_length: 7
+      table: corpus
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: price
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 15233.598619329388
+      column: price
+      count: 1014
+      max: 89999.0
+      min: 2999.0
+      table: corpus
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: type
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 13.994082840236686
+      column: type
+      count: 1014
+      max: null
+      max_length: 19
+      min: null
+      min_length: 4
+      table: corpus
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: color
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 6.303303303303303
+      column: color
+      count: 999
+      max: null
+      max_length: 17
+      min: null
+      min_length: 3
+      table: corpus
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: psu
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 324.2307692307692
+      column: psu
+      count: 26
+      max: 750.0
+      min: 120.0
+      table: corpus
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: side_panel
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 13.337349397590362
+      column: side_panel
+      count: 830
+      max: null
+      max_length: 21
+      min: null
+      min_length: 4
+      table: corpus
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: external_525_bays
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      column: external_525_bays
+      count: 0
+      max: null
+      min: null
+      table: corpus
+      type: BIGINT
+    type: BIGINT
+  - checks: []
+    name: internal_35_bays
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      column: internal_35_bays
+      count: 0
+      max: null
+      min: null
+      table: corpus
+      type: BIGINT
+    type: BIGINT
+  issues: []
+  name: corpus
+  record_count: 1014
+- columns:
+  - checks: []
+    name: name
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 22.630401626842907
+      column: name
+      count: 1967
+      max: null
+      max_length: 62
+      min: null
+      min_length: 8
+      table: cpu-cooler
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: price
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 107.95493525179863
+      column: price
+      count: 695
+      max: 715.0
+      min: 4.99
+      table: cpu-cooler
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: rpm
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 9.92109500805153
+      column: rpm
+      count: 1863
+      max: null
+      max_length: 12
+      min: null
+      min_length: 3
+      table: cpu-cooler
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: noise_level
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 7.0816441441441444
+      column: noise_level
+      count: 1776
+      max: null
+      max_length: 14
+      min: null
+      min_length: 1
+      table: cpu-cooler
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: color
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 7.630579297245964
+      column: color
+      count: 1053
+      max: null
+      max_length: 25
+      min: null
+      min_length: 4
+      table: cpu-cooler
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: size
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 253.80888290713324
+      column: size
+      count: 743
+      max: 420.0
+      min: 120.0
+      table: cpu-cooler
+      type: FLOAT
+    type: FLOAT
+  issues: []
+  name: cpu-cooler
+  record_count: 1967
+- columns:
+  - checks: []
+    name: processor
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 19.32033426183844
+      column: processor
+      count: 1795
+      max: null
+      max_length: 35
+      min: null
+      min_length: 12
+      table: cpu_merged
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: price
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 29703.46922024624
+      column: price
+      count: 731
+      max: 448300.0
+      min: 2299.0
+      table: cpu_merged
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: core_count
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      column: core_count
+      count: 0
+      max: null
+      min: null
+      table: cpu_merged
+      type: BIGINT
+    type: BIGINT
+  - checks: []
+    name: core_clock
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 3.121826183844007
+      column: core_clock
+      count: 1795
+      max: 4.7
+      min: 1.1
+      table: cpu_merged
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: boost_clock
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 4.146024096385552
+      column: boost_clock
+      count: 830
+      max: 6.0
+      min: 2.3
+      table: cpu_merged
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: tdp
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      column: tdp
+      count: 0
+      max: null
+      min: null
+      table: cpu_merged
+      type: BIGINT
+    type: BIGINT
+  - checks: []
+    name: graphics
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 20.117346938775512
+      column: graphics
+      count: 784
+      max: null
+      max_length: 22
+      min: null
+      min_length: 6
+      table: cpu_merged
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: smt
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      column: smt
+      count: 0
+      max: null
+      min: null
+      table: cpu_merged
+      type: BOOLEAN
+    type: BOOLEAN
+  - checks: []
+    name: socket
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 7.217741935483871
+      column: socket
+      count: 1736
+      max: null
+      max_length: 19
+      min: null
+      min_length: 2
+      table: cpu_merged
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: rating
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 4.670139275766021
+      column: rating
+      count: 1795
+      max: 49.88
+      min: 0.26
+      table: cpu_merged
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: core/streams
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 5.3143982002249714
+      column: core/streams
+      count: 1778
+      max: null
+      max_length: 8
+      min: null
+      min_length: 3
+      table: cpu_merged
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: year
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 3.894707520891365
+      column: year
+      count: 1795
+      max: null
+      max_length: 4
+      min: null
+      min_length: 1
+      table: cpu_merged
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: power_consumption
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      column: power_consumption
+      count: 0
+      max: null
+      min: null
+      table: cpu_merged
+      type: BIGINT
+    type: BIGINT
+  issues: []
+  name: cpu_merged
+  record_count: 1795
+- columns:
+  - checks: []
+    name: processor
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 13.317982456140351
+      column: processor
+      count: 456
+      max: null
+      max_length: 29
+      min: null
+      min_length: 9
+      table: cpu_servers
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: processor_type
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 9.021929824561404
+      column: processor_type
+      count: 456
+      max: null
+      max_length: 19
+      min: null
+      min_length: 9
+      table: cpu_servers
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: socket
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 10.609271523178808
+      column: socket
+      count: 453
+      max: null
+      max_length: 17
+      min: null
+      min_length: 3
+      table: cpu_servers
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: rating
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 21.509605263157898
+      column: rating
+      count: 456
+      max: 100.0
+      min: 0.64
+      table: cpu_servers
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: core/streams
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 6.589912280701754
+      column: core/streams
+      count: 456
+      max: null
+      max_length: 9
+      min: null
+      min_length: 5
+      table: cpu_servers
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: year
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      column: year
+      count: 0
+      max: null
+      min: null
+      table: cpu_servers
+      type: BIGINT
+    type: BIGINT
+  - checks: []
+    name: power_consumption
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 157.19353070175438
+      column: power_consumption
+      count: 456
+      max: 400.0
+      min: 9.0
+      table: cpu_servers
+      type: FLOAT
+    type: FLOAT
+  issues: []
+  name: cpu_servers
+  record_count: 456
+- columns:
+  - checks: []
+    name: gpu
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 15.433294663573086
+      column: gpu
+      count: 3448
+      max: null
+      max_length: 27
+      min: null
+      min_length: 4
+      table: gpu_full_info
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: memory
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 5.567829176334107
+      column: memory
+      count: 3448
+      max: 48.0
+      min: 0.125
+      table: gpu_full_info
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: core_clock
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 1230.4622921615203
+      column: core_clock
+      count: 3368
+      max: 2593.0
+      min: 400.0
+      table: gpu_full_info
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: boost_clock
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 1693.8135149292823
+      column: boost_clock
+      count: 1909
+      max: 2855.0
+      min: 720.0
+      table: gpu_full_info
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: boost_clock.1
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 1693.8135149292823
+      column: boost_clock.1
+      count: 1909
+      max: 2855.0
+      min: 720.0
+      table: gpu_full_info
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: length
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 247.57092539225104
+      column: length
+      count: 3123
+      max: 360.0
+      min: 69.0
+      table: gpu_full_info
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: rating
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 25.86037703016219
+      column: rating
+      count: 3448
+      max: 100.0
+      min: 0.17
+      table: gpu_full_info
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: architecture
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 7.625580046403712
+      column: architecture
+      count: 3448
+      max: null
+      max_length: 15
+      min: null
+      min_length: 5
+      table: gpu_full_info
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: year
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      column: year
+      count: 0
+      max: null
+      min: null
+      table: gpu_full_info
+      type: BIGINT
+    type: BIGINT
+  - checks: []
+    name: power_consumption
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      column: power_consumption
+      count: 0
+      max: null
+      min: null
+      table: gpu_full_info
+      type: BIGINT
+    type: BIGINT
+  - checks: []
+    name: average_price
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 60427.17148102929
+      column: average_price
+      count: 1503
+      max: 532625.3333333334
+      min: 8020.285714285715
+      table: gpu_full_info
+      type: FLOAT
+    type: FLOAT
+  issues: []
+  name: gpu_full_info
+  record_count: 3448
+- columns:
+  - checks: []
+    name: gpu
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 17.36046511627907
+      column: gpu
+      count: 86
+      max: null
+      max_length: 25
+      min: null
+      min_length: 9
+      table: gpu_hierarchy
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: 1080p Ultra
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 74.26976744186048
+      column: 1080p Ultra
+      count: 86
+      max: 154.1
+      min: 0.0
+      table: gpu_hierarchy
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: 1080p Medium
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 116.55232558139537
+      column: 1080p Medium
+      count: 86
+      max: 195.7
+      min: 14.6
+      table: gpu_hierarchy
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: 1440p Ultra
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 56.04186046511627
+      column: 1440p Ultra
+      count: 86
+      max: 146.1
+      min: 0.0
+      table: gpu_hierarchy
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: 4K Ultra
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 26.369767441860468
+      column: 4K Ultra
+      count: 86
+      max: 114.5
+      min: 0.0
+      table: gpu_hierarchy
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: Specifications (Links to Review)
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 75.22093023255815
+      column: Specifications (Links to Review)
+      count: 86
+      max: null
+      max_length: 158
+      min: null
+      min_length: 7
+      table: gpu_hierarchy
+      type: TEXT
+    type: TEXT
+  issues: []
+  name: gpu_hierarchy
+  record_count: 86
+- columns:
+  - checks: []
+    name: name
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 26.930784442979565
+      column: name
+      count: 3034
+      max: null
+      max_length: 163
+      min: null
+      min_length: 12
+      table: memory
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: price
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 12802.662491760053
+      column: price
+      count: 3034
+      max: 193768.0
+      min: 500.0
+      table: memory
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: price_per_gb
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 519.3186222808147
+      column: price_per_gb
+      count: 3034
+      max: 9100.0
+      min: 90.6
+      table: memory
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: color
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 7.805439330543933
+      column: color
+      count: 2868
+      max: null
+      max_length: 14
+      min: null
+      min_length: 3
+      table: memory
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: first_word_latency
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 11.817610085695437
+      column: first_word_latency
+      count: 3034
+      max: 19.167
+      min: 7.0
+      table: memory
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: cas_latency
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 20.021094264996705
+      column: cas_latency
+      count: 3034
+      max: 48.0
+      min: 3.0
+      table: memory
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: speed_num
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      column: speed_num
+      count: 0
+      max: null
+      min: null
+      table: memory
+      type: BIGINT
+    type: BIGINT
+  - checks: []
+    name: speed_value
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      column: speed_value
+      count: 0
+      max: null
+      min: null
+      table: memory
+      type: BIGINT
+    type: BIGINT
+  - checks: []
+    name: modules_num
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      column: modules_num
+      count: 0
+      max: null
+      min: null
+      table: memory
+      type: BIGINT
+    type: BIGINT
+  - checks: []
+    name: modules_value
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      column: modules_value
+      count: 0
+      max: null
+      min: null
+      table: memory
+      type: BIGINT
+    type: BIGINT
+  issues: []
+  name: memory
+  record_count: 3034
+- columns:
+  - checks: []
+    name: name
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 23.630344827586207
+      column: name
+      count: 725
+      max: null
+      max_length: 47
+      min: null
+      min_length: 11
+      table: motherboard
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: price
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 28021.01931034483
+      column: price
+      count: 725
+      max: 259177.0
+      min: 6399.0
+      table: motherboard
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: socket
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 5.597241379310345
+      column: socket
+      count: 725
+      max: null
+      max_length: 21
+      min: null
+      min_length: 3
+      table: motherboard
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: form_factor
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 5.551724137931035
+      column: form_factor
+      count: 725
+      max: null
+      max_length: 9
+      min: null
+      min_length: 3
+      table: motherboard
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: max_memory
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      column: max_memory
+      count: 0
+      max: null
+      min: null
+      table: motherboard
+      type: BIGINT
+    type: BIGINT
+  - checks: []
+    name: memory_slots
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      column: memory_slots
+      count: 0
+      max: null
+      min: null
+      table: motherboard
+      type: BIGINT
+    type: BIGINT
+  - checks: []
+    name: color
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 10.613351877607789
+      column: color
+      count: 719
+      max: null
+      max_length: 14
+      min: null
+      min_length: 5
+      table: motherboard
+      type: TEXT
+    type: TEXT
+  issues: []
+  name: motherboard
+  record_count: 725
+- columns:
+  - checks: []
+    name: 'Unnamed: 0'
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      column: 'Unnamed: 0'
+      count: 0
+      max: null
+      min: null
+      table: power-supply
+      type: BIGINT
+    type: BIGINT
+  - checks: []
+    name: name
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 20.319148936170212
+      column: name
+      count: 611
+      max: null
+      max_length: 44
+      min: null
+      min_length: 6
+      table: power-supply
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: price
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: 18789.489361702126
+      column: price
+      count: 611
+      max: 79999.0
+      min: 1698.0
+      table: power-supply
+      type: FLOAT
+    type: FLOAT
+  - checks: []
+    name: type
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 3.0736497545008183
+      column: type
+      count: 611
+      max: null
+      max_length: 8
+      min: null
+      min_length: 3
+      table: power-supply
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: efficiency
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 5.317241379310345
+      column: efficiency
+      count: 580
+      max: null
+      max_length: 8
+      min: null
+      min_length: 4
+      table: power-supply
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: wattage
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      column: wattage
+      count: 0
+      max: null
+      min: null
+      table: power-supply
+      type: BIGINT
+    type: BIGINT
+  - checks: []
+    name: modular
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 4.266775777414075
+      column: modular
+      count: 611
+      max: null
+      max_length: 5
+      min: null
+      min_length: 4
+      table: power-supply
+      type: TEXT
+    type: TEXT
+  - checks: []
+    name: color
+    not_null: false
+    primary_key: false
+    range_data:
+      avg: null
+      avg_length: 6.614250614250614
+      column: color
+      count: 407
+      max: null
+      max_length: 14
+      min: null
+      min_length: 4
+      table: power-supply
+      type: TEXT
+    type: TEXT
+  issues: []
+  name: power-supply
+  record_count: 611
+timestamp: '2025-05-18 15:52:27'
+validation_time: 0.05364871025085449

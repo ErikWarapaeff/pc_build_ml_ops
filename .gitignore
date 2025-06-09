@@ -61,3 +61,13 @@ logs/
 # OS specific
 .DS_Store
 Thumbs.db
+
+# Custom ignores for generated and bulky directories
+.venv_new/
+mlruns/
+evaluation_results/
+validation_results/
+model_comparison/
+.dvc_storage/
+# Ignore artifacts directory in reports
+reports/artifacts/

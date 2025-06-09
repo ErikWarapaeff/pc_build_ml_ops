@@ -1,0 +1,159 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Отчет о сравнении языковых моделей</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    line-height: 1.6;
+                    max-width: 1200px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    color: #333;
+                }
+                h1, h2, h3 {
+                    color: #2c3e50;
+                }
+                h1 {
+                    border-bottom: 2px solid #3498db;
+                    padding-bottom: 10px;
+                }
+                h2 {
+                    margin-top: 30px;
+                    padding-top: 20px;
+                    border-top: 1px solid #eee;
+                }
+                .data-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin: 20px 0;
+                }
+                .data-table th, .data-table td {
+                    border: 1px solid #ddd;
+                    padding: 8px;
+                    text-align: left;
+                }
+                .data-table th {
+                    background-color: #f2f2f2;
+                }
+                .data-table tr:nth-child(even) {
+                    background-color: #f9f9f9;
+                }
+                .recommendations {
+                    background-color: #e8f4f8;
+                    padding: 15px;
+                    border-radius: 5px;
+                    margin: 20px 0;
+                }
+                .charts-container {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                }
+                .chart {
+                    flex: 0 1 48%;
+                    margin-bottom: 20px;
+                    text-align: center;
+                }
+                .chart img {
+                    max-width: 100%;
+                    height: auto;
+                }
+                .model-section {
+                    margin-bottom: 30px;
+                    padding: 15px;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                }
+                .qa-pair {
+                    margin-bottom: 20px;
+                    padding-bottom: 15px;
+                    border-bottom: 1px dashed #ddd;
+                }
+                .question, .answer, .time, .tokens {
+                    margin-bottom: 5px;
+                }
+                .answer {
+                    white-space: pre-wrap;
+                    background-color: #f8f9fa;
+                    padding: 10px;
+                    border-radius: 5px;
+                }
+            </style>
+        </head>
+        <body>
+            <h1>Отчет о сравнении языковых моделей</h1>
+            <p><strong>Дата создания отчета:</strong> 2025-05-18 22:16:24</p>
+
+            <h2>Обзор результатов</h2>
+            <table border="1" class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>model</th>
+      <th>avg_response_time</th>
+      <th>total_time</th>
+      <th>input_tokens</th>
+      <th>output_tokens</th>
+      <th>token_efficiency</th>
+      <th>tokens_per_second</th>
+      <th>norm_time</th>
+      <th>norm_efficiency</th>
+      <th>overall_score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>gpt-3.5-turbo</td>
+      <td>26.880</td>
+      <td>161.280</td>
+      <td>148</td>
+      <td>108</td>
+      <td>0.422</td>
+      <td>0.670</td>
+      <td>0.000</td>
+      <td>1</td>
+      <td>0.500</td>
+    </tr>
+    <tr>
+      <td>gpt-4o-mini</td>
+      <td>24.598</td>
+      <td>147.590</td>
+      <td>148</td>
+      <td>108</td>
+      <td>0.422</td>
+      <td>0.732</td>
+      <td>0.589</td>
+      <td>1</td>
+      <td>0.795</td>
+    </tr>
+    <tr>
+      <td>gpt-4.1-mini</td>
+      <td>23.008</td>
+      <td>138.052</td>
+      <td>148</td>
+      <td>108</td>
+      <td>0.422</td>
+      <td>0.782</td>
+      <td>1.000</td>
+      <td>1</td>
+      <td>1.000</td>
+    </tr>
+  </tbody>
+</table>
+
+            <h2>Рекомендации</h2>
+            <div class="recommendations">
+                <ul><li><strong>Самая быстрая модель:</strong> gpt-4.1-mini</li><li><strong>Наиболее эффективная модель по использованию токенов:</strong> gpt-3.5-turbo</li><li><strong>Наиболее производительная модель (токенов в секунду):</strong> gpt-4.1-mini</li><li><strong>Лучшая модель по соотношению скорость/эффективность:</strong> gpt-4.1-mini</li></ul>
+            </div>
+
+            <h2>Визуализация результатов</h2>
+            <div class="charts-container">
+                <div class="chart"><img src="response_time_comparison.png" alt="response_time"></div><div class="chart"><img src="token_efficiency_comparison.png" alt="token_efficiency"></div><div class="chart"><img src="performance_comparison.png" alt="performance"></div>
+            </div>
+
+            <h2>Детальные результаты</h2>
+            <div class="model-section"><h3>Модель: gpt-3.5-turbo</h3><div class="responses"><div class="qa-pair"><div class="question"><strong>Вопрос 1:</strong> Привет, что ты умеешь?</div><div class="answer"><strong>Ответ:</strong> ОШИБКА: too many values to unpack (expected 2)</div><div class="time"><strong>Время ответа:</strong> 2.63 сек.</div><div class="tokens"><strong>Токены запроса:</strong> 13</div><div class="tokens"><strong>Токены ответа:</strong> 18</div><div class="tokens"><strong>Токенов в секунду:</strong> 6.84</div></div><div class="qa-pair"><div class="question"><strong>Вопрос 2:</strong> А какая средняя цена на видеокарты с поддержкой 4к?</div><div class="answer"><strong>Ответ:</strong> ОШИБКА: too many values to unpack (expected 2)</div><div class="time"><strong>Время ответа:</strong> 17.40 сек.</div><div class="tokens"><strong>Токены запроса:</strong> 25</div><div class="tokens"><strong>Токены ответа:</strong> 18</div><div class="tokens"><strong>Токенов в секунду:</strong> 1.03</div></div><div class="qa-pair"><div class="question"><strong>Вопрос 3:</strong> Мне нужен игровой ПК чтобы видеокарта поддерживала 4к, мой бюджет 200к</div><div class="answer"><strong>Ответ:</strong> ОШИБКА: too many values to unpack (expected 2)</div><div class="time"><strong>Время ответа:</strong> 38.83 сек.</div><div class="tokens"><strong>Токены запроса:</strong> 34</div><div class="tokens"><strong>Токены ответа:</strong> 18</div><div class="tokens"><strong>Токенов в секунду:</strong> 0.46</div></div><div class="qa-pair"><div class="question"><strong>Вопрос 4:</strong> А насколько в данной системе процессор раскрывает видеокарту?</div><div class="answer"><strong>Ответ:</strong> ОШИБКА: too many values to unpack (expected 2)</div><div class="time"><strong>Время ответа:</strong> 91.29 сек.</div><div class="tokens"><strong>Токены запроса:</strong> 24</div><div class="tokens"><strong>Токены ответа:</strong> 18</div><div class="tokens"><strong>Токенов в секунду:</strong> 0.20</div></div><div class="qa-pair"><div class="question"><strong>Вопрос 5:</strong> Хорошо, а пойдет ли на данной системе игра Cyberpunk 2077?</div><div class="answer"><strong>Ответ:</strong> ОШИБКА: too many values to unpack (expected 2)</div><div class="time"><strong>Время ответа:</strong> 1.89 сек.</div><div class="tokens"><strong>Токены запроса:</strong> 26</div><div class="tokens"><strong>Токены ответа:</strong> 18</div><div class="tokens"><strong>Токенов в секунду:</strong> 9.52</div></div><div class="qa-pair"><div class="question"><strong>Вопрос 6:</strong> Хорошо, найди мне тогда актуальные цены на данную систему.</div><div class="answer"><strong>Ответ:</strong> ОШИБКА: too many values to unpack (expected 2)</div><div class="time"><strong>Время ответа:</strong> 9.25 сек.</div><div class="tokens"><strong>Токены запроса:</strong> 26</div><div class="tokens"><strong>Токены ответа:</strong> 18</div><div class="tokens"><strong>Токенов в секунду:</strong> 1.95</div></div></div></div><div class="model-section"><h3>Модель: gpt-4o-mini</h3><div class="responses"><div class="qa-pair"><div class="question"><strong>Вопрос 1:</strong> Привет, что ты умеешь?</div><div class="answer"><strong>Ответ:</strong> ОШИБКА: too many values to unpack (expected 2)</div><div class="time"><strong>Время ответа:</strong> 3.02 сек.</div><div class="tokens"><strong>Токены запроса:</strong> 13</div><div class="tokens"><strong>Токены ответа:</strong> 18</div><div class="tokens"><strong>Токенов в секунду:</strong> 5.96</div></div><div class="qa-pair"><div class="question"><strong>Вопрос 2:</strong> А какая средняя цена на видеокарты с поддержкой 4к?</div><div class="answer"><strong>Ответ:</strong> ОШИБКА: too many values to unpack (expected 2)</div><div class="time"><strong>Время ответа:</strong> 6.58 сек.</div><div class="tokens"><strong>Токены запроса:</strong> 25</div><div class="tokens"><strong>Токены ответа:</strong> 18</div><div class="tokens"><strong>Токенов в секунду:</strong> 2.74</div></div><div class="qa-pair"><div class="question"><strong>Вопрос 3:</strong> Мне нужен игровой ПК чтобы видеокарта поддерживала 4к, мой бюджет 200к</div><div class="answer"><strong>Ответ:</strong> ОШИБКА: too many values to unpack (expected 2)</div><div class="time"><strong>Время ответа:</strong> 36.62 сек.</div><div class="tokens"><strong>Токены запроса:</strong> 34</div><div class="tokens"><strong>Токены ответа:</strong> 18</div><div class="tokens"><strong>Токенов в секунду:</strong> 0.49</div></div><div class="qa-pair"><div class="question"><strong>Вопрос 4:</strong> А насколько в данной системе процессор раскрывает видеокарту?</div><div class="answer"><strong>Ответ:</strong> ОШИБКА: too many values to unpack (expected 2)</div><div class="time"><strong>Время ответа:</strong> 91.95 сек.</div><div class="tokens"><strong>Токены запроса:</strong> 24</div><div class="tokens"><strong>Токены ответа:</strong> 18</div><div class="tokens"><strong>Токенов в секунду:</strong> 0.20</div></div><div class="qa-pair"><div class="question"><strong>Вопрос 5:</strong> Хорошо, а пойдет ли на данной системе игра Cyberpunk 2077?</div><div class="answer"><strong>Ответ:</strong> ОШИБКА: too many values to unpack (expected 2)</div><div class="time"><strong>Время ответа:</strong> 1.72 сек.</div><div class="tokens"><strong>Токены запроса:</strong> 26</div><div class="tokens"><strong>Токены ответа:</strong> 18</div><div class="tokens"><strong>Токенов в секунду:</strong> 10.46</div></div><div class="qa-pair"><div class="question"><strong>Вопрос 6:</strong> Хорошо, найди мне тогда актуальные цены на данную систему.</div><div class="answer"><strong>Ответ:</strong> ОШИБКА: too many values to unpack (expected 2)</div><div class="time"><strong>Время ответа:</strong> 7.71 сек.</div><div class="tokens"><strong>Токены запроса:</strong> 26</div><div class="tokens"><strong>Токены ответа:</strong> 18</div><div class="tokens"><strong>Токенов в секунду:</strong> 2.34</div></div></div></div><div class="model-section"><h3>Модель: gpt-4.1-mini</h3><div class="responses"><div class="qa-pair"><div class="question"><strong>Вопрос 1:</strong> Привет, что ты умеешь?</div><div class="answer"><strong>Ответ:</strong> ОШИБКА: too many values to unpack (expected 2)</div><div class="time"><strong>Время ответа:</strong> 3.62 сек.</div><div class="tokens"><strong>Токены запроса:</strong> 13</div><div class="tokens"><strong>Токены ответа:</strong> 18</div><div class="tokens"><strong>Токенов в секунду:</strong> 4.97</div></div><div class="qa-pair"><div class="question"><strong>Вопрос 2:</strong> А какая средняя цена на видеокарты с поддержкой 4к?</div><div class="answer"><strong>Ответ:</strong> ОШИБКА: too many values to unpack (expected 2)</div><div class="time"><strong>Время ответа:</strong> 6.68 сек.</div><div class="tokens"><strong>Токены запроса:</strong> 25</div><div class="tokens"><strong>Токены ответа:</strong> 18</div><div class="tokens"><strong>Токенов в секунду:</strong> 2.69</div></div><div class="qa-pair"><div class="question"><strong>Вопрос 3:</strong> Мне нужен игровой ПК чтобы видеокарта поддерживала 4к, мой бюджет 200к</div><div class="answer"><strong>Ответ:</strong> ОШИБКА: too many values to unpack (expected 2)</div><div class="time"><strong>Время ответа:</strong> 53.22 сек.</div><div class="tokens"><strong>Токены запроса:</strong> 34</div><div class="tokens"><strong>Токены ответа:</strong> 18</div><div class="tokens"><strong>Токенов в секунду:</strong> 0.34</div></div><div class="qa-pair"><div class="question"><strong>Вопрос 4:</strong> А насколько в данной системе процессор раскрывает видеокарту?</div><div class="answer"><strong>Ответ:</strong> ОШИБКА: too many values to unpack (expected 2)</div><div class="time"><strong>Время ответа:</strong> 29.74 сек.</div><div class="tokens"><strong>Токены запроса:</strong> 24</div><div class="tokens"><strong>Токены ответа:</strong> 18</div><div class="tokens"><strong>Токенов в секунду:</strong> 0.61</div></div><div class="qa-pair"><div class="question"><strong>Вопрос 5:</strong> Хорошо, а пойдет ли на данной системе игра Cyberpunk 2077?</div><div class="answer"><strong>Ответ:</strong> ОШИБКА: too many values to unpack (expected 2)</div><div class="time"><strong>Время ответа:</strong> 35.85 сек.</div><div class="tokens"><strong>Токены запроса:</strong> 26</div><div class="tokens"><strong>Токены ответа:</strong> 18</div><div class="tokens"><strong>Токенов в секунду:</strong> 0.50</div></div><div class="qa-pair"><div class="question"><strong>Вопрос 6:</strong> Хорошо, найди мне тогда актуальные цены на данную систему.</div><div class="answer"><strong>Ответ:</strong> ОШИБКА: too many values to unpack (expected 2)</div><div class="time"><strong>Время ответа:</strong> 8.94 сек.</div><div class="tokens"><strong>Токены запроса:</strong> 26</div><div class="tokens"><strong>Токены ответа:</strong> 18</div><div class="tokens"><strong>Токенов в секунду:</strong> 2.01</div></div></div></div>
+        </body>
+        </html>

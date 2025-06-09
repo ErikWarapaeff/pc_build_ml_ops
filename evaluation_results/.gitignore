@@ -1,0 +1,9 @@
+# Игнорировать все HTML-отчеты в директории reports, кроме добавленных вручную
+reports/*.html
+!reports/model_comparison_report_20250518_221624.html
+
+# Игнорировать изображения
+reports/*.png
+
+# Временные файлы
+*.tmp

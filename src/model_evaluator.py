@@ -265,7 +265,7 @@ def main() -> None:
         logger.error(f"Конфигурационный файл не найден: {args.config}")
         sys.exit(1)
 
-    # Инициализация оценщика моделей
+    # Инициализация оценщиpка моделей
     evaluator = ModelEvaluator(args.config)
 
     # Запуск оценки моделей

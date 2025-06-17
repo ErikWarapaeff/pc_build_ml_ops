@@ -28,6 +28,7 @@ python-dotenv = "*"
 typing-extensions = "*"
 pyprojroot = "*"
 gradio = "*"
+thefuzz = "*"
 
 [tool.poetry.group.dev.dependencies]
 black = {version = "23.12.1", extras = ["jupyter"]}

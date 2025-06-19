@@ -108,7 +108,8 @@ class CompareResponse(BaseModel):
 def _create_llm(model_name: str, temperature: float, max_tokens: int) -> ChatOpenAI:  # type: ignore[name-defined]
     """Создаёт (и кэширует) объект LLM для выбранной модели."""
 
-    return ChatOpenAI(
+    # Параметр "max_tokens" пока отсутствует в типовых stubs langchain, поэтому игнорируем предупреждение
+    return ChatOpenAI(  # type: ignore[call-arg]
         model=model_name,
         temperature=temperature,
         max_tokens=max_tokens,

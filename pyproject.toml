@@ -30,6 +30,11 @@ pyprojroot = "*"
 gradio = "*"
 pandas = "^2.3.0"
 dvc = "^3.60.0"
+fastapi = "*"
+uvicorn = {version = "*", extras = ["standard"]}
+starlette = "*"
+requests = "*"
+thefuzz = "*"
 
 [tool.poetry.group.dev.dependencies]
 black = {version = "23.12.1", extras = ["jupyter"]}

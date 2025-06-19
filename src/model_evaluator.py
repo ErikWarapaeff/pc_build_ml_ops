@@ -8,6 +8,7 @@
 
 import os
 import sys
+from pathlib import Path
 
 # Настройка пути для импорта других модулей проекта
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -34,22 +35,59 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# ---------------------------------------------------------------------------
+# Вспомогательная функция: вставляет/обновляет секцию результатов в README.md
+# ---------------------------------------------------------------------------
+
+
+def _update_readme_with_summary(table_md: str) -> None:  # pragma: no cover
+    """Обновляет или вставляет секцию с результатами бенчмарка в README.md.
+
+    Используются маркеры <!-- EVAL_RESULTS_START --> и <!-- EVAL_RESULTS_END -->.
+    """
+    readme = Path("README.md")
+    if not readme.exists():
+        return
+
+    start_marker = "<!-- EVAL_RESULTS_START -->"
+    end_marker = "<!-- EVAL_RESULTS_END -->"
+
+    content = readme.read_text(encoding="utf-8")
+    section = (
+        f"{start_marker}\n\n"
+        f"## 📊 Последние результаты оценки моделей (обновлено {time.strftime('%Y-%m-%d %H:%M:%S')})\n\n"
+        f"{table_md}\n\n"
+        f"{end_marker}"
+    )
+
+    if start_marker in content and end_marker in content:
+        pre = content.split(start_marker)[0]
+        post = content.split(end_marker)[-1]
+        new_content = pre + section + post
+    else:
+        new_content = content.rstrip() + "\n\n" + section + "\n"
+
+    readme.write_text(new_content, encoding="utf-8")
+
 
 class ModelEvaluator:
     """Класс для тестирования и оценки различных моделей в мультиагентной системе"""
 
-    def __init__(self, config_path: str):
+    def __init__(self, config_path: str, use_api: bool = False):
         """
         Инициализация оценщика моделей
 
         Args:
             config_path: Путь к конфигурационному файлу
+            use_api: Флаг использования HTTP-API для опроса моделей
         """
         self.config_path = config_path
         self.original_config = self._load_config()
         self.test_questions = self._prepare_test_questions()
-        # Подтягиваем данные из DVC перед тестированием
-        Repo().pull()
+        self.use_api = use_api  # True → опрашиваем модель через HTTP-API
+        # Подтягиваем данные из DVC перед тестированием (если работаем локально)
+        if not self.use_api:
+            Repo().pull()
 
     def _load_config(self) -> dict[str, Any]:
         """Загрузка конфигурации из файла"""
@@ -87,6 +125,36 @@ class ModelEvaluator:
             "Хорошо, найди мне тогда актуальные цены на данную систему.",
         ]
 
+    # --- Новый блок: запрос к модели через HTTP-API ---
+    MODEL_API_PORTS: dict[str, int] = {
+        "gpt-3.5-turbo": 8001,
+        "gpt-4o": 8002,
+        "gpt-4o-mini": 8003,
+    }
+
+    def _predict_via_api(self, model_name: str, prompt: str) -> tuple[str, float]:
+        """Отправляет запрос к контейнеру модели и возвращает (ответ, время)."""
+
+        import requests  # локальный импорт, чтобы не добавлять зависимость при оффлайн-режиме
+
+        port = self.MODEL_API_PORTS.get(model_name)
+        if port is None:
+            raise ValueError(f"Неизвестный порт для модели {model_name}")
+
+        url = f"http://localhost:{port}/predict"
+        start = time.time()
+        resp = requests.post(url, json={"prompt": prompt})
+        duration = time.time() - start
+
+        if resp.status_code != 200:
+            raise RuntimeError(f"API {model_name} вернул {resp.status_code}: {resp.text[:200]}")
+
+        try:
+            answer = resp.json().get("answer", "")
+        except ValueError:
+            answer = resp.text
+        return answer, duration
+
     def test_model(self, model_name: str) -> dict[str, Any]:
         """
         Тестирование одной модели на тестовых вопросах
@@ -97,18 +165,16 @@ class ModelEvaluator:
         Returns:
             Словарь с результатами тестирования
         """
-        # Меняем модель в конфигурации
-        config = self.original_config.copy()
-        config["openai_models"]["model"] = model_name
-
-        # Сохраняем новую конфигурацию
-        self._save_config(config)
-
-        # Перезагружаем конфигурацию в системе
-        LoadConfig()
-
-        # Инициализируем чат-бота
-        chatbot = ChatBot()
+        if not self.use_api:
+            # Меняем модель в конфигурации
+            config = self.original_config.copy()
+            config["openai_models"]["model"] = model_name
+            # Сохраняем новую конфигурацию и перезагружаем
+            self._save_config(config)
+            LoadConfig()
+            chatbot: ChatBot | None = ChatBot()
+        else:
+            chatbot = None  # noqa: E501
 
         # Результаты тестирования
         results: dict[str, Any] = {
@@ -133,19 +199,21 @@ class ModelEvaluator:
 
             # Получаем ответ от бота
             try:
-                # `respond` возвращает три значения: игнорируем первый и третий
-                _, chat_history_new, _ = chatbot.respond(chat_history, question)
-                chat_history = chat_history_new
-                # Извлекаем текст последнего ответа из поля 'content'
-                bot_response = (
-                    chat_history[-1].get("content") if isinstance(chat_history[-1], dict) else None
-                ) or "Нет ответа"
+                if self.use_api:
+                    bot_response, response_time = self._predict_via_api(model_name, question)
+                else:
+                    _, chat_history_new, _ = chatbot.respond(chat_history, question)
+                    chat_history = chat_history_new
+                    bot_response = (
+                        chat_history[-1].get("content")
+                        if isinstance(chat_history[-1], dict)
+                        else None
+                    ) or "Нет ответа"
+                    response_time = time.time() - start_time
             except Exception as e:
                 logger.error(f"Ошибка при получении ответа: {str(e)}")
                 bot_response = f"ОШИБКА: {str(e)}"
-
-            end_time = time.time()
-            response_time = end_time - start_time
+                response_time = time.time() - start_time
 
             # Записываем результаты
             if isinstance(results["responses"], list):
@@ -163,6 +231,11 @@ class ModelEvaluator:
         results["total_time"] = total_time
 
         logger.info(f"Тестирование модели {model_name} завершено за {total_time:.2f} секунд")
+
+        if not self.use_api:
+            # Возвращаем оригинальную конфигурацию
+            self._save_config(self.original_config)
+            LoadConfig()
 
         return results
 
@@ -203,25 +276,28 @@ class ModelEvaluator:
             if isinstance(evaluation_results["models"], list):
                 evaluation_results["models"].append(model_results)
 
-            # Возвращаем оригинальную конфигурацию между тестами моделей
-            self._save_config(self.original_config)
-            from src.load_config import LoadConfig
+            if not self.use_api:
+                # Возвращаем оригинальную конфигурацию между тестами моделей
+                self._save_config(self.original_config)
+                from src.load_config import LoadConfig
 
-            LoadConfig()
+                LoadConfig()
 
             logger.info(f"Завершено тестирование модели: {model_name}")
 
             # Небольшая пауза между тестированием моделей
             time.sleep(1)
 
-        # Восстанавливаем исходную конфигурацию в конце тестирования
-        self._save_config(self.original_config)
-        from src.load_config import LoadConfig
+        if not self.use_api:
+            # Восстанавливаем исходную конфигурацию в конце тестирования
+            self._save_config(self.original_config)
+            from src.load_config import LoadConfig
 
-        LoadConfig()
+            LoadConfig()
 
         # Сохраняем результаты
         self._save_evaluation_results(evaluation_results)
+        self._save_summary(evaluation_results)
 
         return evaluation_results
 
@@ -242,6 +318,67 @@ class ModelEvaluator:
             logger.info(f"Результаты тестирования сохранены в: {results_path}")
         except Exception as e:
             logger.error(f"Ошибка при сохранении результатов: {str(e)}")
+
+    def _save_summary(self, evaluation_results: dict[str, Any]) -> None:
+        """Формирует краткое резюме по среднему/общему времени и сохраняет CSV и Markdown."""
+
+        import pandas as pd  # локальный импорт
+
+        models_data = evaluation_results.get("models", [])
+        if not isinstance(models_data, list):
+            return
+
+        rows: list[dict[str, Any]] = []
+        for m in models_data:
+            timings = m.get("timings", [])
+            if not timings:
+                continue
+
+            # --- Новая метрика: средняя длина ответа (в словах) ---
+            responses = m.get("responses", [])
+            lengths = [
+                len(str(r.get("response", "")).split()) for r in responses if isinstance(r, dict)
+            ]
+            avg_len = sum(lengths) / len(lengths) if lengths else 0
+
+            rows.append(
+                {
+                    "model": m.get("model"),
+                    "avg_time_s": sum(timings) / len(timings),
+                    "total_time_s": m.get("total_time", 0),
+                    "avg_length_words": avg_len,
+                }
+            )
+
+        if not rows:
+            return
+
+        df = pd.DataFrame(rows).sort_values("avg_time_s")
+
+        ts = time.strftime("%Y%m%d_%H%M%S")
+        out_dir = Path(__file__).resolve().parent.parent / "evaluation_results"
+        out_dir.mkdir(exist_ok=True, parents=True)
+
+        csv_path = out_dir / f"evaluation_summary_{ts}.csv"
+        md_path = out_dir / f"evaluation_summary_{ts}.md"
+
+        df.to_csv(csv_path, index=False, float_format="%.3f")
+
+        md = (
+            "| Модель | Ср. время (с) | Общее время (с) | Ср. длина ответа (слов) |\n"
+            "|-------|--------------|----------------|------------------------|\n"
+        )
+        for _, row in df.iterrows():
+            md += (
+                f"| {row['model']} | {row['avg_time_s']:.2f} | "
+                f"{row['total_time_s']:.2f} | {row['avg_length_words']:.1f} |\n"
+            )
+        md_path.write_text(md, encoding="utf-8")
+
+        logger.info("Сводный файл сохранён: %s", csv_path)
+
+        # Обновляем README.md актуальными результатами
+        _update_readme_with_summary(md)
 
 
 def main() -> None:
@@ -273,6 +410,11 @@ def main() -> None:
         choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
         help="Уровень логирования (по умолчанию: INFO)",
     )
+    parser.add_argument(
+        "--use-api",
+        action="store_true",
+        help="Запрашивать модели по HTTP-API вместо прямого вызова ChatBot",
+    )
 
     args = parser.parse_args()
 
@@ -290,7 +432,7 @@ def main() -> None:
         sys.exit(1)
 
     # Инициализация оценщика моделей
-    evaluator = ModelEvaluator(args.config)
+    evaluator = ModelEvaluator(args.config, use_api=args.use_api)
 
     # Запуск оценки моделей
     logger.info(f"Начало тестирования моделей: {', '.join(args.models)}")

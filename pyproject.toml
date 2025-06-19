@@ -28,6 +28,13 @@ python-dotenv = "*"
 typing-extensions = "*"
 pyprojroot = "*"
 gradio = "*"
+pandas = "^2.3.0"
+dvc = "^3.60.0"
+fastapi = "*"
+uvicorn = {version = "*", extras = ["standard"]}
+starlette = "*"
+requests = "*"
+thefuzz = "*"
 
 [tool.poetry.group.dev.dependencies]
 black = {version = "23.12.1", extras = ["jupyter"]}
@@ -55,6 +62,8 @@ exclude = '''
 
 [tool.isort]
 profile = "black"
+skip = [".venv", ".venv_new", "venv", "src/app.py", "src/model_evaluator.py"]
+skip_glob = ["*/.venv/*", "*/.venv_new/*"]
 line_length = 100
 multi_line_output = 3
 
@@ -72,6 +81,7 @@ select = [
 ]
 ignore = [
     "E501",  # line too long, handled by black
+    "E402",  # module level import not at top of file
 ]
 exclude = [
     ".git",

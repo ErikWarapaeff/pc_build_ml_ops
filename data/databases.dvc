@@ -1,0 +1,5 @@
+outs:
+- md5: d577c6fdae9129f891ee138341c23282.dir
+  nfiles: 2
+  hash: md5
+  path: databases

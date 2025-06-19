@@ -1,38 +1,23 @@
-FROM python:3.12-slim as builder
+# syntax=docker/dockerfile:1
+FROM python:3.12-slim AS base
 
-WORKDIR /app
+ENV PYTHONUNBUFFERED=1 \
+    POETRY_VERSION=1.8.2
 
 # Установка Poetry
-ENV POETRY_HOME=/opt/poetry
-ENV POETRY_VIRTUALENVS_IN_PROJECT=true
-ENV PATH="$POETRY_HOME/bin:$PATH"
-RUN python -m pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir poetry
-
-# Копирование только файлов, необходимых для установки зависимостей
-COPY pyproject.toml poetry.lock* ./
-
-# Установка зависимостей
-RUN poetry install --without dev --no-interaction --no-ansi
-
-# Второй этап для создания минимального образа
-FROM python:3.12-slim
+RUN pip install --no-cache-dir "poetry==${POETRY_VERSION}" && poetry config virtualenvs.create false
 
 WORKDIR /app
 
-# Копирование установленного виртуального окружения из предыдущего этапа
-COPY --from=builder /app/.venv /app/.venv
-ENV PATH="/app/.venv/bin:$PATH"
+# Копируем файлы управления зависимостями
+COPY pyproject.toml poetry.lock* ./
 
-# Копирование кода приложения
+# Устанавливаем зависимости
+RUN poetry install --no-root --only main
+
+# Копируем исходный код проекта
 COPY . .
 
-# Установка переменных окружения для запуска
-ENV PYTHONPATH=/app
-ENV PYTHONUNBUFFERED=1
+EXPOSE 8000
 
-# Порт, который будет использовать приложение
-EXPOSE 7860
-
-# Запуск приложения
-CMD ["python", "src/app.py"]
+CMD ["uvicorn", "src.api_service:app", "--host", "0.0.0.0", "--port", "8000"]

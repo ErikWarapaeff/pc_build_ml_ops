@@ -1,0 +1,6 @@
+outs:
+- md5: d0375bd97703d75403c089f73bf371b4.dir
+  size: 1071549
+  nfiles: 10
+  hash: md5
+  path: csv_files

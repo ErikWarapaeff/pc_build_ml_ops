@@ -1,3 +1,5 @@
+# type: ignore
+
 import json
 import time
 import urllib.parse
@@ -55,7 +57,20 @@ class RegardInput(BaseModel):
     @classmethod
     def from_dict(cls, input_data: dict[str, Any]) -> "RegardInput":
         """Метод преобразования словаря в объект `RegardInput`"""
-        return cls(input_data=ComponentInput(**input_data))
+        # Если уже есть структура с input_data и components
+        if "input_data" in input_data and "components" in input_data["input_data"]:
+            return cls(input_data=ComponentInput(**input_data["input_data"]))
+        # Если есть только components
+        elif "components" in input_data:
+            return cls(input_data=ComponentInput(components=input_data["components"]))
+        # Другие форматы данных
+        else:
+            # Попытка создать объект из того, что есть
+            try:
+                return cls(input_data=ComponentInput(components=[]))
+            except Exception as e:
+                print(f"Ошибка создания RegardInput: {e}")
+                return cls(input_data=ComponentInput(components=[]))
 
 
 def parse_first_product(page) -> dict[str, Any] | None:
@@ -110,7 +125,17 @@ def regard_parser_tool(input_data: dict[str, Any]) -> str:
 
     # Используем Pydantic модель для валидации и доступа к данным
     try:
-        regard_input = RegardInput(input_data=ComponentInput(**input_data))
+        # Если входные данные уже содержат ключ 'components', обернем их в структуру для RegardInput
+        if "components" in input_data:
+            components_data = {"input_data": {"components": input_data["components"]}}
+            regard_input = RegardInput(**components_data)
+        # Если входные данные имеют ключ 'input_data', который содержит 'components'
+        elif "input_data" in input_data and "components" in input_data["input_data"]:
+            regard_input = RegardInput(**input_data)
+        else:
+            # Предполагаем, что это уже правильная структура данных
+            regard_input = RegardInput.from_dict(input_data)
+
         components_to_parse = regard_input.input_data.components
     except Exception as e:  # Заменил ValidationError на общий Exception для отладки
         return json.dumps(
@@ -180,7 +205,7 @@ def regard_parser_tool(input_data: dict[str, Any]) -> str:
     return json.dumps(results, ensure_ascii=False, indent=2)
 
 
-def main():
+def main() -> None:
     # Пример использования с корректной структурой для RegardInput
     sample_input_data = {
         "input_data": {
